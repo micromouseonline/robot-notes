@@ -1,4 +1,8 @@
 remote_theme: pmarsceill/just-the-docs
 
+# Enable MathJax
+enable_jekyll_pages: true
+mermaid: true
+
 title: My Robot Notes Site
 description: Micromouse and line follower robot notes

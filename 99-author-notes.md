@@ -1,13 +1,9 @@
 ---
 layout: default
 title: Author Notes
-nav_order: 999 # always put it at the top
-# nav_exclude: true
-# has_children: true
+nav_order: 999 
 has_toc: true
 mermaid: true
-# heading_anchor_links: true | false
-# You can optionally add "permalink: /section-title" if you want a cleaner URL
 ---
 
 # ✍️ Authors Guide
