@@ -1,15 +1,17 @@
 ---
-layout: default
-title: Robot Building notes
-# nav_order: 1
+layout: home
+title: Robot Building Notes
+nav_order: 0 # always put it at the top
 # has_children: true
 # You can optionally add "permalink: /section-title" if you want a cleaner URL
 ---
 
 Some notes about micromouse and line follower robots.
 
+This is the main index page. It should be the default landing page.
+
 In time, this  may become a reference source for designers and builders of these, and similar, robots.
 
-### Constant Current Emitter Drivers
+### Emitter Drivers
 
-  [lklkj](Sensors/constant-current-drive.md)
+  [Constant Current](Sensors/constant-current-drive.md)
