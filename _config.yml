@@ -1,8 +1,11 @@
 remote_theme: pmarsceill/just-the-docs
 
-# Enable MathJax
-enable_jekyll_pages: true
+# 1. Ensure the base features are enabled (use all three settings for safety)
+search_enabled: true 
 mermaid: true
+
+# 2. Explicitly enable MathJax rendering
+enable_math: true
 
 title: My Robot Notes Site
 description: Micromouse and line follower robot notes

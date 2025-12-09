@@ -10,7 +10,6 @@ mermaid: true
 
 This guide provides an overview of the key formatting tools and features available to authors contributing to this documentation site.
 
----
 
 ## 1. Basic Markdown Features
 
