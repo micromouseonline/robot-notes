@@ -6,6 +6,7 @@ mermaid: true
 
 # 2. Explicitly enable MathJax rendering
 enable_math: true
+math: mathjax
 
 title: My Robot Notes Site
 description: Micromouse and line follower robot notes
