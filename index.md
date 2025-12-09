@@ -1,7 +1,9 @@
 ---
 layout: default
-title: My Project Documentation
+title: [SECTION TITLE HERE]
 nav_order: 1
+# has_children: true
+# You can optionally add "permalink: /section-title" if you want a cleaner URL
 ---
 
 Some notes about micromouse and line follower robots.
