@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Motors
+title: Sensors
 nav_order: 20
 has_children: true
 ---

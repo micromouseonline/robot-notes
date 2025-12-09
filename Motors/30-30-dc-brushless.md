@@ -2,7 +2,7 @@
 layout: default
 title: Brushless DC (BLDC)
 parent: Motors
-nav_order: 3
+nav_order: 30
 ---
 
 # Brushless DC (BLDC)
