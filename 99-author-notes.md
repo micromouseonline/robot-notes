@@ -46,11 +46,17 @@ Use the hash symbol (`#`) to create headings, which automatically generate the p
     * Item 1
     * Item 2
     ```
+    * Item 1
+    * Item 2
+  
 * **Ordered Lists:** Use numbers followed by a period (`.`).
     ```markdown
     1. First Step
     2. Second Step
     ```
+    1. First Step
+    2. Second Step
+    3. 
 * **Links:** Always use **relative links** for internal pages, excluding the `.md` extension.
     ```markdown
     [Link Text](../getting-started/installation)
@@ -78,7 +84,9 @@ To display a large, complex equation on its own line, centered, enclose it in do
     $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
     ```
 * **Appearance:**
-    $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+    $$
+    x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+    $$
 
 ---
 
