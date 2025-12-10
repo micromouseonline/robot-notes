@@ -11,9 +11,12 @@ $$
 y=3/4
 $$
 
-$\pi$ is 3.14159 or so.
-what is \(\pi\) ?
+\$\pi\$ is 3.14159 or so.
+
+what is \\(\pi\\) ?
+
 $$\pi$$ is 3.14159 or so.
+
 
 When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
 
