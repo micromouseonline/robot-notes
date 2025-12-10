@@ -16,7 +16,18 @@ This is the main index page. It should be the default landing page.
 
 In time, this  may become a reference source for designers and builders of these, and similar, robots.
 
+$$
+y=3/4
+$$
+
+$\pi$ is 3.14159 or so.
+
+- kjdhsk
+- ladhjfgldhf
+- ladjfhgla
+
+
 
 ### Emitter Drivers
 
-  [Constant Current](Sensors/constant-current-drive.md)
+  [Constant Current](Sensors/20-30-constant-current-drive.md)
