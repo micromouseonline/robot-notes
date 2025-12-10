@@ -3,7 +3,8 @@ site_name: Robot Builders Notes
 # In mkdocs.yml, confirm this setting is correct:
 docs_dir: 'docs'
 
-theme: readthedocs
+# theme: readthedocs
+theme: material
 
 # override what is found with specific files
 nav:
@@ -31,7 +32,7 @@ nav:
     - DC Brushless: Motors/30-30-dc-brushless.md
     - Stepper:  Motors/30-40-steppers.md
     
-  - User Guide:
+  - Author Guide:
     - Writing your docs: Authors/writing-your-docs.md
     - Styling your docs: Authors/styling-your-docs.md
     - Maths Rendering: Authors/mathjax.md
@@ -43,6 +44,12 @@ nav:
 extra_javascript: 
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     - mathjaxhelper.js
+# markdown_extensions:
+#     - toc:
+#         permalink: true
+#     - extra
+#     - tables
+#     - fenced_code 
 
 markdown_extensions:
     - toc:
@@ -50,3 +57,7 @@ markdown_extensions:
     - extra
     - tables
     - fenced_code 
+    
+    # CRITICAL FIX: Add the MathJax extension 💥
+    # - pymdownx.arithmatex:
+    #     generic: true
