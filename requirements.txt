@@ -1,0 +1,4 @@
+mkdocs
+mkdocs-rtd-theme
+# Optional: Extension for MathJax support
+pymdown-extensions

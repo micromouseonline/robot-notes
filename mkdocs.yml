@@ -1,0 +1,26 @@
+site_name: My Robot Notes Documentation
+site_url: https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
+site_author: Robot Team
+
+# Use the official Read the Docs theme (or 'material' for another good one)
+theme: readthedocs
+
+# -----------------
+# NAVIGATION (Hierarchy)
+# Define your entire hierarchical structure here.
+# New pages only require adding a line here.
+nav:
+    - Home: 'index.md'
+    - Sections:
+        - Motors: '00-30-motors.md'
+        - Sensors: '00-20-sensors.md'
+    - Advanced Math: '99-author-notes.md'
+
+# -----------------
+# EXTENSIONS (MathJax, TOC, Code Highlighting)
+# Extensions replace Jekyll plugins and are much more reliable.
+markdown_extensions:
+    - toc:
+        permalink: true # Adds anchor links to headings (TOC feature)
+    - pymdownx.arithmatex:
+        generic: true # Enables LaTeX/MathJax support
