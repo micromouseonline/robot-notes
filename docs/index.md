@@ -20,7 +20,6 @@ $$
 y=3/4
 $$
 
-$\pi$ is 3.14159 or so.
 
 - kjdhsk
 - ladhjfgldhf
