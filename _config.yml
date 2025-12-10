@@ -1,12 +1,8 @@
-remote_theme: pmarsceill/just-the-docs
+title: Just the Docs Template
+description: A starter template for a Jeykll site using the Just the Docs theme!
+theme: just-the-docs
 
-# 1. Ensure the base features are enabled (use all three settings for safety)
-search_enabled: true 
-mermaid: true
+url: https://just-the-docs.github.io
 
-# 2. Explicitly enable MathJax rendering
-enable_math: true
-math: mathjax
-
-title: My Robot Notes Site
-description: Micromouse and line follower robot notes
+aux_links:
+  Template Repository: https://github.com/just-the-docs/just-the-docs-template
