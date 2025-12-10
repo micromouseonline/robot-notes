@@ -7,5 +7,11 @@ nav_order: 20
 ---
 
 
+$$
+y=3/4
+$$
+
+$\pi$ is 3.14159 or so.
+
 ... Your content ...
 # Constant Current Emitter Driver
