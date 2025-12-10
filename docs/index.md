@@ -6,9 +6,6 @@ This is the main index page. It should be the default landing page.
 In time, this  may become a reference source for designers and builders of these, and similar, robots.
 
 
-### Emitter Drivers
-
-  [Constant Current](Sensors/20-30-constant-current-drive.md)
 
 # Welcome to MkDocs
 

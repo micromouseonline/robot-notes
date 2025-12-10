@@ -53,6 +53,7 @@ $$
 \dot{z} & = -\beta z + xy \\\
 \end{align}
 $$    
+
 ```
 becomes
 $$
@@ -80,17 +81,17 @@ $$
 
 ### Fractions: 
 
- - `\\frac{a}{b}` -> $\\frac{a}{b}$
- - `\\dfrac{a}{b}` -> $\\dfrac{a}{b}$
+ - `\frac{a}{b}` -> $\frac{a}{b}$
+ - `\dfrac{a}{b}` -> $\dfrac{a}{b}$
  - `$y = {x+1 \over x+2}$` -> $y = {x+1 \over x+2}$
- - `$y = \frac{x+1}{x+2}$$` -> $y = \frac{x+1}{x+2}$
+ - `$y = \frac{x+1}{x+2}$` -> $y = \frac{x+1}{x+2}$
 
 ### Fonts
 
- - bold: `\\mathbf{x}` -> $\\mathbf{x}$
- - blackboard: `\\mathbb{R} ` -> $\\mathbb{RECTANGLE} $
- - calligraphic `\\mathcal{C} ` -> $\\mathcal{Calligraphic} $
- - Fractur: `\\mathfrak{g} ` -> $\\mathfrak{g} $
+ - bold: `\mathbf{x}` -> $\mathbf{x}$
+ - blackboard: `\mathbb{R} ` -> $\mathbb{RECTANGLE}$
+ - calligraphic `\mathcal{C} ` -> $\mathcal{Calligraphic}$
+ - Fractur: `\mathfrak{g} ` -> $\mathfrak{g}$
 
 
 ### Matrices
@@ -101,18 +102,21 @@ $$
      3 & 4 \\\
    \end{pmatrix}
 $$
+
 $$
    \begin{bmatrix}
      1 & 2 \\\
      3 & 4 \\\
    \end{bmatrix}
 $$
+
 $$
    \begin{Bmatrix}
      1 & 2 \\\
      3 & 4 \\\
    \end{Bmatrix}
 $$
+
 $$
    \begin{vmatrix}
      1 & 2 \\\
@@ -139,13 +143,23 @@ $$
 \end{align}
 $$
 
-All these: $
+Inline collected equations: 
+  $\begin{cases}
+     2x	+	y	−	2z  &=	3   \\\
+     x	−	y	−	z    &=	0   \\\
+     x	+	y	+	3z   &=	12
+  \end{cases}$
+
+And centred with everything else
+  $$
   \begin{cases}
      2x	+	y	−	2z  &=	3   \\\
      x	−	y	−	z    &=	0   \\\
      x	+	y	+	3z   &=	12
   \end{cases}
-$
+  $$
+
+  
 
 $$  f(n) =
 \begin{cases}
@@ -158,10 +172,15 @@ $$
 ### Vectors
 
 $$ \vec{u} + \vec{v} = \vec{w} $$
+
 $$ \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC} $$
 
 ### Decorations
 $$ \vec{i} \hat{i} \bar{i} \dot{x} \ddot{x} \dddot{x} $$
+
+### Other constructs
 $$ \lim \limits_{ x \to 2^+ } { \dfrac{x+1}{x-2} } $$
+
 $$ \sum_{n=1}^\infty \frac{1}{n^2} $$
+
 $$ \int_o^\infty e^x dx $$
