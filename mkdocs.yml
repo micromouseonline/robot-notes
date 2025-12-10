@@ -1,26 +1,52 @@
-site_name: My Robot Notes Documentation
-site_url: https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/
-site_author: Robot Team
+site_name: Robot Builders Notes
 
-# Use the official Read the Docs theme (or 'material' for another good one)
+# In mkdocs.yml, confirm this setting is correct:
+docs_dir: 'docs'
+
 theme: readthedocs
 
-# -----------------
-# NAVIGATION (Hierarchy)
-# Define your entire hierarchical structure here.
-# New pages only require adding a line here.
+# override what is found with specific files
 nav:
-    - Home: 'index.md'
-    - Sections:
-        - Motors: '00-30-motors.md'
-        - Sensors: '00-20-sensors.md'
-    - Advanced Math: '99-author-notes.md'
+  - Home: index.md
+  
+  - Sensors:
+    - Overview: Sensors/00-sensors-overview.md
+    - Micromouse:
+      - Emitters: Sensors/20-10-sensors.md
+      - Detectors: Sensors/20-10-sensors.md
+      - Constant Current Drive: Sensors/20-30-constant-current-drive.md
+    - Line Followers:
+       - Line Sensing: Sensors/30-10-line-followers.md
+       - Marker Sensing: Sensors/30-10-line-followers.md
+    - Encoders:
+      - Overview: Authors/template.md
+      - Implementation: Authors/template.md # Changed 'Encoders' to 'Implementation' for clarity
+    - IMUs:
+      - Overview: Sensors/30-30-imus.md
+      - Implementation: Authors/template.md # Changed 'IMUs' to 'Implementation' for clarity
 
-# -----------------
-# EXTENSIONS (MathJax, TOC, Code Highlighting)
-# Extensions replace Jekyll plugins and are much more reliable.
+  - Motors: # Included the commented-out section for completeness
+    - Overview: Motors/30-00-motors.md
+    - DC Brush: Motors/30-20-dc-brushed.md
+    - DC Brushless: Motors/30-30-dc-brushless.md
+    - Stepper:  Motors/30-40-steppers.md
+    
+  - User Guide:
+    - Writing your docs: Authors/writing-your-docs.md
+    - Styling your docs: Authors/styling-your-docs.md
+    - Maths Rendering: Authors/mathjax.md
+
+  - About:
+    - License: license.md
+    - Release Notes: release-notes.md
+
+extra_javascript: 
+    - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
+    - mathjaxhelper.js
+
 markdown_extensions:
     - toc:
-        permalink: true # Adds anchor links to headings (TOC feature)
-    - pymdownx.arithmatex:
-        generic: true # Enables LaTeX/MathJax support
+        permalink: true
+    - extra
+    - tables
+    - fenced_code 
