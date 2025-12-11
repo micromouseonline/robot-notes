@@ -24,67 +24,69 @@ To insert an expression *within a line of text*, enclose it in single dollar sig
 
 * **Markdown:** ```The equation is $E = mc^2$ for any mass $m$.```
 * **Appearance:** The equation is $E = mc^2$ for any mass $m$.
-* Complex equation can be put inline if you want: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+* More complex equations can be put inline if you want: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
 
-**NOTE**: you may need to escape the dollar symbol, $34.67,  to use it outside of maths if it appears in a pair
+**NOTE**: you may need to escape the dollar symbol, $34.67,  to use it outside of maths if it appears in a pair.
+
 
 
 ### Display Equations
 
 To display a large, complex equation on its own line, centered, enclose it in double dollar signs (`$$`).
 
-* **Markdown:**
 
-```
-$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
-```
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+  $$
+  ```
+  </div>
 
-* **Appearance:**
-    $$
-    x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
-    $$
-
-You can have multile equations aligned on, typically, the $=$ sign. Note that you need to explicitly mark the line breaks. For example, Lorenz Equations:
-```
-$$
-\begin{align}
-\dot{x} & = \sigma(y-x) \\\
-\dot{y} & = \rho x - y - xz \\\
-\dot{z} & = -\beta z + xy \\\
-\end{align}
-$$    
-
-```
-becomes
-$$
-\begin{align}
-\dot{x} & = \sigma(y-x) \\\
-\dot{y} & = \rho x - y - xz \\\
-\dot{z} & = -\beta z + xy \\\
-\end{align}
-$$    
-
+  <div>
+  $$
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+  $$
+  </div>
+</div>
 
 ### Numbered equations
-Equations will need to be manually tagged because the mathjax support seems limited.
+If you want equations to be tagged with a reference, that will need to be done manually because 
+the mathjax support seems limited.
 Tags are not automatically sequenced. On the other hand, you can choose whatever you like:
-$$
-   x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}   \tag{1}
-$$
+
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$
+     d = \sqrt{b^2 - 4ac}   \tag{1}
+  $$
+  ```
+  </div>
+
+  <div>
+  $$
+     d = \sqrt{b^2 - 4ac}   \tag{1}
+  $$
+  </div>
+</div>
+
 
 ### Subscripts/Superscripts: 
 
- `x_i`      -> $x_{i}$     
- `x^2`      -> $x^2$       
- `x_{i+1}`  -> $x_{i+1}$   
- `x^{y}`    -> $x^{y}$     
+  - `x_i`      -> $x_{i}$     
+  - `x^2`      -> $x^2$       
+  - `x_{i+1}`  -> $x_{i+1}$   
+  - `x^{y}`    -> $x^{y}$     
+
 
 ### Fractions: 
 
  - `\frac{a}{b}` -> $\frac{a}{b}$
  - `\dfrac{a}{b}` -> $\dfrac{a}{b}$
- - `$y = {x+1 \over x+2}$` -> $y = {x+1 \over x+2}$
- - `$y = \frac{x+1}{x+2}$` -> $y = \frac{x+1}{x+2}$
+ - `y = {x+1 \over x+2}` -> $y = {x+1 \over x+2}$
+ - `y = \frac{x+1}{x+2}` -> $y = \frac{x+1}{x+2}$
 
 ### Fonts
 
@@ -96,91 +98,296 @@ $$
 
 ### Matrices
 
-$$
-   \begin{pmatrix}
-     1 & 2 \\\
-     3 & 4 \\\
-   \end{pmatrix}
-$$
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+    $$
+       \begin{pmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{pmatrix}
+    $$
+  ```
+  </div>
 
-$$
-   \begin{bmatrix}
-     1 & 2 \\\
-     3 & 4 \\\
-   \end{bmatrix}
-$$
+  <div>
+    $$
+       \begin{pmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{pmatrix}
+    $$
+  </div>
+</div>
 
-$$
-   \begin{Bmatrix}
-     1 & 2 \\\
-     3 & 4 \\\
-   \end{Bmatrix}
-$$
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+    $$
+       \begin{bmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{bmatrix}
+    $$
+  ```
+  </div>
 
-$$
-   \begin{vmatrix}
-     1 & 2 \\\
-     3 & 4 \\\
-   \end{vmatrix}
-$$
+  <div>
+    $$
+       \begin{bmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{bmatrix}
+    $$
+  </div>
+</div>
 
-$$
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+    $$
+       \begin{Bmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{Bmatrix}
+    $$
+  ```
+  </div>
+
+  <div>
+    $$
+       \begin{Bmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{Bmatrix}
+    $$
+  </div>
+</div>
+
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+    $$
+       \begin{vmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{vmatrix}
+    $$
+  ```
+  </div>
+
+  <div>
+    $$
+       \begin{vmatrix}
+         1 & 2 \\\
+         3 & 4 
+       \end{vmatrix}
+    $$
+  </div>
+</div>
+
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+    $$
+     \begin{pmatrix}
+       1      & a_1    & \cdots & a_n    \\\
+       1      & b_1    & \cdots & b_n    \\\
+       \vdots & \vdots & \ddots & \vdots \\\
+       1      & z_1    & \cdots & z_n    \\\
+     \end{pmatrix}
+    $$
+  ```
+  </div>
+
+  <div>
+    $$
    \begin{pmatrix}
      1      & a_1    & \cdots & a_n    \\\
      1      & b_1    & \cdots & b_n    \\\
      \vdots & \vdots & \ddots & \vdots \\\
      1      & z_1    & \cdots & z_n    \\\
    \end{pmatrix}
-$$
+    $$
+  </div>
+</div>
 
 ### Align and group
 
-$$
-\begin{align}
-  f(x)   &= \frac{x+1}{x-2} \\\
-  f'(x)  &= \frac{(x-2) - (x+1)}{(x-2)^2} \\\
-         &= - \frac{3}{x^2 - 4x + 4}
-\end{align}
-$$
-
-Inline collected equations: 
-  $\begin{cases}
-     2x	+	y	−	2z  &=	3   \\\
-     x	−	y	−	z    &=	0   \\\
-     x	+	y	+	3z   &=	12
-  \end{cases}$
-
-And centred with everything else
+#### Aligned on $=$
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;" markdown>
+  <div>
+  ``` { .markdown .no-copy .no-select }
   $$
-  \begin{cases}
-     2x	+	y	−	2z  &=	3   \\\
-     x	−	y	−	z    &=	0   \\\
-     x	+	y	+	3z   &=	12
-  \end{cases}
+  \begin{align}
+    f(x)   &= \frac{x+1}{x-2} \\\
+    f'(x)  &= \frac{(x-2) - (x+1)}{(x-2)^2} \\\
+           &= - \frac{3}{x^2 - 4x + 4}
+  \end{align}
   $$
+  ```
+  </div>
 
+  <div>
+  $$
+  \begin{align}
+    f(x)   &= \frac{x+1}{x-2} \\\
+    f'(x)  &= \frac{(x-2) - (x+1)}{(x-2)^2} \\\
+           &= - \frac{3}{x^2 - 4x + 4}
+  \end{align}
+  $$
+  </div>
+</div>
+
+#### collected equations: 
+
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+    $$
+    \begin{cases}
+       2x	+	y	−	2z  &=	3   \\\
+       x	−	y	−	z    &=	0   \\\
+       x	+	y	+	3z   &=	12
+    \end{cases}
+  $$
+  ```
+  </div>
+
+  <div>
+    $$
+    \begin{cases}
+       2x	+	y	−	2z  &=	3   \\\
+       x	−	y	−	z    &=	0   \\\
+       x	+	y	+	3z   &=	12
+    \end{cases}
+    $$
+  </div>
+</div>
   
 
-$$  f(n) =
-\begin{cases}
-  \dfrac{n+1}{2} & \text{if n is even} \\\ \\\
-  \dfrac{n}{2}   & \text{if n is odd}
-\end{cases}
-\qquad \forall n \in \mathbb N
-$$
+<div class="grid grid-2" style="grid-template-columns: 60% 40%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$  f(n) =
+  \begin{cases}
+    \dfrac{n+1}{2} & \text{if n is even} \\\ \\\
+    \dfrac{n}{2}   & \text{if n is odd}
+  \end{cases}
+  $$
+  ```
+  </div>
+
+  <div>
+  $$  f(n) =
+   \begin{cases}
+     \dfrac{n+1}{2} & \text{if n is even} \\\ \\\
+     \dfrac{n}{2}   & \text{if n is odd}
+   \end{cases}
+   $$
+  </div>
+</div>
+
+
+
 
 ### Vectors
 
-$$ \vec{u} + \vec{v} = \vec{w} $$
+<div class="grid grid-2" style="grid-template-columns: 70% 30%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$ \vec{u} + \vec{v} = \vec{w} $$
+  ```
+  </div>
 
-$$ \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC} $$
+  <div>
+  $$ \vec{u} + \vec{v} = \vec{w} $$
+  </div>
+</div>
+
+
+<div class="grid grid-2" style="grid-template-columns: 70% 30%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$ \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC} $$
+  ```
+  </div>
+
+  <div>
+  $$ \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC} $$
+  </div>
+</div>
 
 ### Decorations
-$$ \vec{i} \hat{i} \bar{i} \dot{x} \ddot{x} \dddot{x} $$
+
+<div class="grid grid-2" style="grid-template-columns: 70% 30%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$ 
+  \vec{i} 
+  \hat{i} 
+  \bar{i} 
+  \dot{x} 
+  \ddot{x} 
+  \dddot{x} 
+  $$
+  ```
+  </div>
+
+  <div>
+  $$ 
+  \vec{i} \\\
+  \hat{i} \\\
+  \bar{i} \\\
+  \dot{x} \\\
+  \ddot{x} \\\
+  \dddot{x} $$
+  </div>
+</div>
+
 
 ### Other constructs
-$$ \lim \limits_{ x \to 2^+ } { \dfrac{x+1}{x-2} } $$
 
-$$ \sum_{n=1}^\infty \frac{1}{n^2} $$
 
-$$ \int_o^\infty e^x dx $$
+<div class="grid grid-2" style="grid-template-columns: 70% 30%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$ \lim \limits_{ x \to 2^+ } { \dfrac{x+1}{x-2} } $$
+  ```
+  </div>
+
+  <div>
+  $$ \lim \limits_{ x \to 2^+ } { \dfrac{x+1}{x-2} } $$
+  </div>
+</div>
+
+
+
+<div class="grid grid-2" style="grid-template-columns: 70% 30%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$ \sum_{n=1}^\infty \frac{1}{n^2} $$
+  ```
+  </div>
+
+  <div>
+  $$ \sum_{n=1}^\infty \frac{1}{n^2} $$
+  </div>
+</div>
+
+
+<div class="grid grid-2" style="grid-template-columns: 70% 30%;">
+  <div>
+  ``` { .markdown .no-copy .no-select }
+  $$
+  \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+  $$
+  ```
+  </div>
+
+  <div>
+  $$
+  \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+  $$
+  </div>
+</div>
