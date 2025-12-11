@@ -37,7 +37,7 @@ theme:
       - search.share
       - search.suggest
       - toc.follow
-      - toc.integrate
+      # - toc.integrate # commented out to place it on page
     palette:
       - media: "(prefers-color-scheme)"
         toggle:
