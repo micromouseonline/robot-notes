@@ -129,15 +129,27 @@ by nesting tabs in other blocks:
     2. Donec vitae suscipit est
     3. Nulla tempor lobortis orci
 
+=== "Equation"
+
+     $\begin{align}
+     2x	+	y	−	2z  &=	3   \\\
+     x	−	y	−	z    &=	0   \\\
+     x	+	y	+	3z   &=	12
+     \end{align}$
+
+=== "Image"
+
+     ![llk](../assets/pie-chart-thumbnail.png)
+
+
 </div>
 
 ### Embedded content
 
-When [SuperFences] is enabled, content tabs can contain arbitrary nested
-content, including further content tabs, and can be nested in other blocks like
-[admonitions] or blockquotes:
+Content tabs can contain arbitrary nested content, including further content tabs,
+ and can be nested in other blocks like [admonitions] or blockquotes:
 
-``` title="Content tabs in admonition"
+``` title="Content tabs in an admonition block"
 !!! example
 
     === "Unordered List"
@@ -178,26 +190,4 @@ content, including further content tabs, and can be nested in other blocks like
         ```
 
 </div>
-
-
-### Anchor links
-
-<!-- md:version 9.5.0 -->
-<!-- md:flag experimental -->
-
-In order to link to content tabs and share them more easily, an anchor link is
-automatically added to each content tab, which you can copy via right click or
-open in a new tab:
-
-=== "Open me in a new tab ..."
-    Hey - Howdy!
-
-=== "... or me ..."
-    This is nice.
-
-=== "... or even me"
-    This too!
-
-You can copy the link of the tab and create a link on the same or any other
-page. For example, you can [jump to the third tab above this paragraph](#anchor-links--or-even-me).
 
