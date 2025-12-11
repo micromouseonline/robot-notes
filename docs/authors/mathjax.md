@@ -309,12 +309,12 @@ Tags are not automatically sequenced. On the other hand, you can choose whatever
 <div class="grid grid-2" style="grid-template-columns: 70% 30%;">
   <div>
   ``` { .markdown .no-copy .no-select }
-  $$ \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC} $$
+  $$ \overrightarrow{AB} \ge \overrightarrow{AC} $$
   ```
   </div>
 
   <div>
-  $$ \overrightarrow{AB} + \overrightarrow{BC} = \overrightarrow{AC} $$
+  $$ \overrightarrow{AB} \ge \overrightarrow{AC} $$
   </div>
 </div>
 
