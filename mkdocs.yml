@@ -92,7 +92,7 @@ extra:
       link: https://micromouseonline.com
     - icon: fontawesome/brands/github
       link: https://github.com/micromouseonline
-    - icon: fontawesome/solid/paw
+    - icon: material/rodent #fontawesome/solid/paw
       link: https://UKMARS.org
 
 
@@ -126,11 +126,12 @@ nav:
     - authors/index.md
     - Writing your docs: authors/writing-your-docs.md
     - Styling your docs: authors/styling-your-docs.md
-    - Maths Rendering: authors/mathjax.md
     - Diagrams: authors/diagrams.md
-    - Template Page: authors/template.md
+    - Tables: authors/tables.md
+    - Maths Rendering: authors/mathjax.md
     - Code Blocks: authors/code-blocks.md
     - Content Tabs: authors/content-tabs.md
+    - Template Page: authors/template.md
 
   - About:
     - License: license.md
