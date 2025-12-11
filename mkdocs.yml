@@ -39,27 +39,26 @@ theme:
       - toc.follow
       # - toc.integrate # commented out to place it on page
     palette:
-      - media: "(prefers-color-scheme)"
-        toggle:
-          icon: material/link
-          name: Switch to light mode
-      - media: "(prefers-color-scheme: light)"
-        scheme: default
-        primary: indigo
-        accent: indigo
-        toggle:
-          icon: material/toggle-switch
-          name: Switch to dark mode
-      - media: "(prefers-color-scheme: dark)"
-        scheme: slate
-        primary: black
-        accent: indigo
-        toggle:
-          icon: material/toggle-switch-off
-          name: Switch to system preference
+        - scheme: default
+          primary: light blue
+          accent: orange
+          toggle:
+            icon: material/brightness-7 
+            name: Switch to dark mode
+        - scheme: slate
+          primary: teal
+          accent: yellow
+          toggle:
+            icon: material/brightness-4
+            name: Switch to light mode
+
+
+        # scheme: slate
     font:
-      text: Roboto
-      code: Roboto Mono
+      # text: Roboto
+      # text: Noto Sans
+      text: Inter
+      code: Google Sans Code
     favicon: assets/favicon.png 
     icon:
       logo: logo   
@@ -81,6 +80,21 @@ theme:
 extra:
   status:
     <identifier>: <description>      
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  social:
+    - icon: fontawesome/solid/globe 
+      link: https://micromouseonline.com
+    - icon: fontawesome/brands/github
+      link: https://github.com/micromouseonline
+    - icon: fontawesome/solid/paw
+      link: https://UKMARS.org
+
 
 # override what is found with specific files
 nav:
@@ -113,6 +127,7 @@ nav:
     - Writing your docs: authors/writing-your-docs.md
     - Styling your docs: authors/styling-your-docs.md
     - Maths Rendering: authors/mathjax.md
+    - Diagrams: authors/diagrams.md
     - Template Page: authors/template.md
     - Code Blocks: authors/code-blocks.md
     - Content Tabs: authors/content-tabs.md
@@ -133,8 +148,9 @@ markdown_extensions:
       - footnotes
       - md_in_html
       - fenced_code
-      - toc:
-          permalink: true
+      - tables
+      # - toc:
+      #     permalink: true
       - pymdownx.arithmatex:
           generic: true
       - pymdownx.betterem:
