@@ -1,6 +1,6 @@
 site_name: Robot Builders Notes
 site_description: >-
-  Robot Builders Notes
+  Notes for builders of micromouse, line foller and other small robots
 
 # Copyright
 copyright: Copyright &copy; 2025 - 2026 Peter Harrison
@@ -16,7 +16,7 @@ theme:
       - content.action.view
       - content.code.annotate
       - content.code.copy
-      # - content.code.select
+      - content.code.select
       # - content.footnote.tooltips
       # - content.tabs.link
       - content.tooltips
@@ -37,7 +37,7 @@ theme:
       - search.share
       - search.suggest
       - toc.follow
-      # - toc.integrate
+      - toc.integrate
     palette:
       - media: "(prefers-color-scheme)"
         toggle:
@@ -60,39 +60,60 @@ theme:
     font:
       text: Roboto
       code: Roboto Mono
-    favicon: assets/favicon.png
+    favicon: assets/favicon.png 
     icon:
-      logo: logo      
+      logo: logo   
+      admonition:
+        note: octicons/tag-16
+        abstract: octicons/checklist-16
+        info: octicons/info-16
+        tip: octicons/squirrel-16
+        success: octicons/check-16
+        question: octicons/question-16
+        warning: octicons/alert-16
+        failure: octicons/x-circle-16
+        danger: octicons/zap-16
+        bug: octicons/bug-16
+        example: octicons/beaker-16
+        quote: octicons/quote-16   
+      annotation: material/star-four-points-circle
+
+extra:
+  status:
+    <identifier>: <description>      
 
 # override what is found with specific files
 nav:
   - Home: index.md
   
   - Sensors:
-    - Sensors/00-sensors-overview.md
+    - sensors/00-sensors-overview.md
     - Micromouse:
-      - Emitters: Sensors/wall-sensor-emitters.md
-      - Detectors: Sensors/wall-sensor-detectors.md
-      - Constant Current Drive: Sensors/constant-current-drive.md
+      - Emitters: sensors/wall-sensor-emitters.md
+      - Detectors: sensors/wall-sensor-detectors.md
+      - Constant Current Drive: sensors/constant-current-drive.md
     - Line Followers:
-       - Line Sensing: Sensors/line-sensors.md
-       - Marker Sensing: Sensors/marker-sensors.md
-    - Encoders:
-      - Overview: Authors/template.md
-      
+       - sensors/index.md
+       - Line Sensing: sensors/line-sensors.md
+       - Marker Sensing: sensors/marker-sensors.md
+    - Encoders:        
+       - sensors/index.md
+       - Light Sensors:   sensors/encoders.md
     - IMUs:
-      - Overview: Sensors/imu-overview.md
+      - Overview: sensors/imu-overview.md
 
   - Motors: 
-    - Overview: Motors/30-00-motors.md
-    - DC Brush: Motors/30-20-dc-brushed.md
-    - DC Brushless: Motors/30-30-dc-brushless.md
-    - Stepper:  Motors/30-40-steppers.md
+    - Overview: motors/30-00-motors.md
+    - DC Brush: motors/30-20-dc-brushed.md
+    - DC Brushless: motors/30-30-dc-brushless.md
+    - Stepper:  motors/30-40-steppers.md
     
   - Author Guide:
-    - Writing your docs: Authors/writing-your-docs.md
-    - Styling your docs: Authors/styling-your-docs.md
-    - Maths Rendering: Authors/mathjax.md
+    - Writing your docs: authors/writing-your-docs.md
+    - Styling your docs: authors/styling-your-docs.md
+    - Maths Rendering: authors/mathjax.md
+    - Template Page: authors/template.md
+    - Code Blocks: authors/code-blocks.md
 
   - About:
     - License: license.md
