@@ -109,11 +109,13 @@ nav:
     - Stepper:  motors/30-40-steppers.md
     
   - Author Guide:
+    - authors/index.md
     - Writing your docs: authors/writing-your-docs.md
     - Styling your docs: authors/styling-your-docs.md
     - Maths Rendering: authors/mathjax.md
     - Template Page: authors/template.md
     - Code Blocks: authors/code-blocks.md
+    - Content Tabs: authors/content-tabs.md
 
   - About:
     - License: license.md
