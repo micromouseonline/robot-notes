@@ -6,17 +6,10 @@ subtitle: highlighting code
 # Code blocks
 
 Code blocks and examples are an essential part of technical project
-documentation. Material for MkDocs provides different ways to set up syntax
-highlighting for code blocks, either during build time using [Pygments] or
-during runtime using a JavaScript syntax highlighter.
+documentation. Material for MkDocs provides an easy method to provide
+syntax highlighted bolck of source during build time using [Pygments].
 
   [Pygments]: https://pygments.org
-
-
-The following sections discuss how to use different syntax highlighting features
-with [Pygments], the recommended highlighter, so they don't apply when using a
-JavaScript syntax highlighter.
-
 
 
 ## Usage
@@ -26,29 +19,80 @@ To add syntax highlighting to those blocks, add the language shortcode directly
 after the opening block. See the [list of available lexers] to find the
 shortcode for a given language:
 
-```` markdown title="Code block"
+```` markdown title="Page source for simple code block"
 ``` py
 import tensorflow as tf
 ```
 ````
-
+Is displayed as:
 <div class="result" markdown>
 
 ``` py
 import tensorflow as tf
 ```
-
 </div>
 
   [list of available lexers]: https://pygments.org/docs/lexers/
 
+### Providing alternatives
+
+You can place different language versions of your code in separate tabs to 
+provide choice for the reader without taking up excessive space on the page.
+
+Here are five code blocks that show how to output the integers from 0 to 100.
+
+=== "C"
+    ``` C
+    #include <stdio.h>
+
+    int main() {
+        for (int i = 0; i <= 100; i++) {
+            printf("%d\n", i);
+        }
+        return 0;
+    }
+    ```
+=== "C++"
+    ``` cpp
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        for (int i = 0; i <= 100; i++) {
+            cout << i << endl;
+        }
+        return 0;
+    }
+    ```
+
+===  "Python"
+    ``` python
+    for i in range(101):
+        print(i)
+    ```
+
+=== "Basic"
+    ``` basic
+    FOR I = 0 TO 100
+        PRINT I
+    NEXT I
+    ```
+
+=== "Forth"
+    ``` forth
+    101 0 DO
+      I .
+    LOOP
+    ```
+
+
 ### Adding a title
 
-In order to provide additional context, a custom title can be added to a code
+To provide additional context, a custom title can be added to a code
 block by using the `title="<custom title>"` option directly after the shortcode,
 e.g. to display the name of a file:
 
-```` markdown title="Code block with title"
+```` markdown title="Page source for code block with title"
 ``` py title="bubble_sort.py"
 def bubble_sort(items):
     for i in range(len(items)):
@@ -57,9 +101,8 @@ def bubble_sort(items):
                 items[j], items[j + 1] = items[j + 1], items[j]
 ```
 ````
-
+Is displayed as:
 <div class="result" markdown>
-
 ``` py title="bubble_sort.py"
 def bubble_sort(items):
     for i in range(len(items)):
@@ -67,7 +110,6 @@ def bubble_sort(items):
             if items[j] > items[j + 1]:
                 items[j], items[j + 1] = items[j + 1], items[j]
 ```
-
 </div>
 
 
@@ -78,7 +120,7 @@ option directly after the shortcode, whereas `<start>` represents the starting
 line number. A code block can start from a line number other than `1`, which
 allows to split large code blocks for readability:
 
-```` markdown title="Code block with line numbers"
+```` markdown title="Page source for code block with line numbers"
 ``` py linenums="1"
 def bubble_sort(items):
     for i in range(len(items)):
@@ -87,9 +129,8 @@ def bubble_sort(items):
                 items[j], items[j + 1] = items[j + 1], items[j]
 ```
 ````
-
+Is displayed as:
 <div class="result" markdown>
-
 ``` py linenums="1"
 def bubble_sort(items):
     for i in range(len(items)):
@@ -97,7 +138,6 @@ def bubble_sort(items):
             if items[j] > items[j + 1]:
                 items[j], items[j + 1] = items[j + 1], items[j]
 ```
-
 </div>
 
 ### Code copy and select buttons
@@ -140,12 +180,12 @@ use the `.text` language shortcode, which doesn't highlight anything.
 Specific lines can be highlighted by passing the line numbers to the `hl_lines`
 argument placed right after the language shortcode. Note that line counts start
 at `1`, regardless of the starting line number specified as part of
-[`linenums`][Adding line numbers]:
+[`linenums`][Adding line numbers]. You can highlight individual lines or a range of lines
 
 === "Lines"
 
     ```` markdown title="Code block with highlighted lines"
-    ``` py hl_lines="2 3"
+    ``` py hl_lines="3 5"
     def bubble_sort(items):
         for i in range(len(items)):
             for j in range(len(items) - 1 - i):
@@ -156,7 +196,7 @@ at `1`, regardless of the starting line number specified as part of
 
     <div class="result" markdown>
 
-    ``` py linenums="1" hl_lines="2 3"
+    ``` py linenums="1" hl_lines="3 5"
     def bubble_sort(items):
         for i in range(len(items)):
             for j in range(len(items) - 1 - i):
@@ -194,16 +234,14 @@ at `1`, regardless of the starting line number specified as part of
 
 ### Highlighting inline code blocks
 
-When [InlineHilite] is enabled, syntax highlighting can be applied to inline
+Syntax highlighting can be applied to inline
 code blocks by prefixing them with a shebang, i.e. `#!`, directly followed by
 the corresponding [language shortcode][list of available lexers].
 
-``` markdown title="Inline code block"
+``` markdown title="Page source for an inline code block"
 The `#!python range()` function is used to generate a sequence of numbers.
 ```
 
 <div class="result" markdown>
-
 The `#!python range()` function is used to generate a sequence of numbers.
-
 </div>
