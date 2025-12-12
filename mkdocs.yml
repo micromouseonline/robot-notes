@@ -126,11 +126,12 @@ nav:
     - authors/index.md
     - Writing your docs: authors/writing-your-docs.md
     - Styling your docs: authors/styling-your-docs.md
-    - Diagrams: authors/diagrams.md
+    - Images: authors/images.md
     - Tables: authors/tables.md
-    - Maths Rendering: authors/mathjax.md
     - Code Blocks: authors/code-blocks.md
+    - Maths Rendering: authors/mathjax.md
     - Content Tabs: authors/content-tabs.md
+    - Diagrams: authors/diagrams.md
     - Template Page: authors/template.md
 
   - About:
@@ -156,6 +157,7 @@ markdown_extensions:
           generic: true
       - pymdownx.betterem:
           smart_enable: all
+      - pymdownx.blocks.caption
       - pymdownx.caret
       - pymdownx.details
       - pymdownx.emoji:
