@@ -128,6 +128,7 @@ nav:
     - Styling your docs: authors/styling-your-docs.md
     - Images: authors/images.md
     - Tables: authors/tables.md
+    - Lists: authors/lists.md
     - Code Blocks: authors/code-blocks.md
     - Maths Rendering: authors/mathjax.md
     - Content Tabs: authors/content-tabs.md
@@ -159,13 +160,15 @@ markdown_extensions:
           smart_enable: all
       - pymdownx.blocks.caption
       - pymdownx.caret
+      - pymdownx.critic:
+          mode: accept 
       - pymdownx.details
       - pymdownx.emoji:
           emoji_generator: !!python/name:material.extensions.emoji.to_svg
           emoji_index: !!python/name:material.extensions.emoji.twemoji
       - pymdownx.highlight:
           anchor_linenums: true
-          line_spans: __span
+          line_spans: __span 
           pygments_lang_class: true
       - pymdownx.inlinehilite
       - pymdownx.keys

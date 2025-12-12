@@ -1,6 +1,6 @@
 ---
 icon: 
-subtitle: highlighting code 
+subtitle: 
 ---
 
 # Code blocks
