@@ -1,24 +1,24 @@
 ---
 icon: 
-subtitle: tabbed content in pages
+subtitle: 
 ---
 
 # Content tabs
 
 Sometimes, it's desirable to group alternative content under different tabs,
-e.g. when describing how to access an API from different languages or
-environments. Material for MkDocs allows for beautiful and functional tabs,
-grouping code blocks and other content.
+e.g. when illustrating some function written in different programming languages. 
+Material for MkDocs allows for beautiful and functional tabs, grouping code blocks 
+and other content.
 
 
 === "red" 
     This is red stuff. It must be indented by 4 spaces
 
 === "green" 
-    This is green stuff. It too must be indented by 4
+    This is green stuff. It too must be indented by 4 spaces
 
 === "blue" 
-    This is green stuff. It too must be indented by 4
+    This is blue stuff. Always indent the content by 4 spaces
 
 
 
@@ -33,19 +33,17 @@ The three tabs above were created with this markdown
     This is red stuff. It must be indented by 4 spaces
 
 === "green" 
-    This is green stuff. It too must be indented by 4
+    This is green stuff. It too must be indented by 4 spaces
 
 === "blue" 
-    This is green stuff. It too must be indented by 4
+    This is blue stuff. Always indent the content by 4 spaces
 ```
 
 ### Grouping code blocks
 
-Code blocks are one of the primary targets to be grouped, and can be considered
-a special case of content tabs, as tabs with a single code block are always
-rendered without horizontal spacing:
+Code blocks are one of the common targets to be grouped:
 
-``` title="Content tabs with code blocks"
+``` title="Markup for tabs with code blocks"
 === "C"
 
     ``` c
@@ -70,6 +68,7 @@ rendered without horizontal spacing:
 ```
 
 <div class="result" markdown>
+Produces
 
 === "C"
 
@@ -97,26 +96,10 @@ rendered without horizontal spacing:
 
 ### Grouping other content
 
-When a content tab contains more than one code block, it is rendered with
-horizontal spacing. Vertical spacing is never added, but can be achieved
-by nesting tabs in other blocks:
+Content tabs can contain arbitrary content. Just be sure to indent the 
+content by 4 spaces:
 
 ``` title="Content tabs"
-=== "Unordered list"
-
-    * Sed sagittis eleifend rutrum
-    * Donec vitae suscipit est
-    * Nulla tempor lobortis orci
-
-=== "Ordered list"
-
-    1. Sed sagittis eleifend rutrum
-    2. Donec vitae suscipit est
-    3. Nulla tempor lobortis orci
-```
-
-<div class="result" markdown>
-
 === "Unordered list"
 
     * Sed sagittis eleifend rutrum
@@ -139,15 +122,58 @@ by nesting tabs in other blocks:
 
 === "Image"
 
+     ![llk](../assets/pie-chart-thumbnail.png)    
+
+=== "Table"
+
+    | Method      | Description                          |
+    | ----------- | ------------------------------------ |
+    | `GET`       | :material-check:     Fetch resource  |
+    | `PUT`       | :material-check-all: Update resource |
+    | `DELETE`    | :material-close:     Delete resource |     
+```
+
+<div class="result" markdown>
+Produces
+=== "Unordered list"
+
+    * Sed sagittis eleifend rutrum
+    * Donec vitae suscipit est
+    * Nulla tempor lobortis orci
+
+=== "Ordered list"
+
+    1. Sed sagittis eleifend rutrum
+    2. Donec vitae suscipit est
+    3. Nulla tempor lobortis orci
+
+=== "Equations"
+
+     $\begin{align}
+     2x	+	y	−	2z  &=	3   \\\
+     x	−	y	−	z    &=	0   \\\
+     x	+	y	+	3z   &=	12
+     \end{align}$
+
+=== "Image"
+
      ![llk](../assets/pie-chart-thumbnail.png)
 
+=== "Table"
+
+    | Method      | Description                          |
+    | ----------- | ------------------------------------ |
+    | `GET`       | :material-check:     Fetch resource  |
+    | `PUT`       | :material-check-all: Update resource |
+    | `DELETE`    | :material-close:     Delete resource |
 
 </div>
 
 ### Embedded content
 
-Content tabs can contain arbitrary nested content, including further content tabs,
- and can be nested in other blocks like [admonitions] or blockquotes:
+Not only can content tabs can contain arbitrary nested content, 
+including further content tabs, they can be nested in other blocks 
+like [admonitions] or blockquotes:
 
 ``` title="Content tabs in an admonition block"
 !!! example
