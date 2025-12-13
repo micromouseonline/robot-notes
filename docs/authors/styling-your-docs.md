@@ -1,3 +1,13 @@
+---
+# 1. FRONT MATTER (REQUIRED)
+# The MkDocs title is automatically used for the navigation and the page heading.
+# title: Template
+subtitle: 
+description:
+icon:
+status:
+---
+
 # Styling Documents with Markdown
 
 Although quite simple, markdown documents have a range of basic options 
