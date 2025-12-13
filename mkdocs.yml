@@ -105,7 +105,7 @@ nav:
     - Micromouse:
       - Emitters: sensors/wall-sensor-emitters.md
       - Detectors: sensors/wall-sensor-detectors.md
-      - Constant Current Drive: sensors/constant-current-drive.md
+      - Constant Current Drive: sensors/basic-constant-current-drive.md
     - Line Followers:
        - sensors/index.md
        - Line Sensing: sensors/line-sensors.md
