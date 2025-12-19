@@ -70,7 +70,7 @@ For a visible light LED like the TLCR5800, that voltage drop can be much higher 
 
 #### Current Limit Resistor R8
 
-This resistor is used to limit the current that can flow through the LED. If the current is too high, or allowed to flow for too long, the LED can be damaged or destroyed. There is a power supply, $V_{LED}, that can provide the current needed. Assume for a moment that the transistor, Q2, can be turned fully on and the voltage between collector and emitter, $V_{CE}, is 0.2 Volts. It may be a little higher or lower, depending on the actual transistor type and the current we want through the LED.
+This resistor is used to limit the current that can flow through the LED. If the current is too high, or allowed to flow for too long, the LED can be damaged or destroyed. There is a power supply, $V_{LED}$, that can provide the current needed. Assume for a moment that the transistor, Q2, can be turned fully on and the voltage between collector and emitter, $V_{CE}$, is 0.2 Volts. It may be a little higher or lower, depending on the actual transistor type and the current we want through the LED.
 
 The LED and the transistor then may account for about 2.5 Volts and we should be able to have $V_{LED}$ as low as 3.3 Volts and still get the circuit to operate.
 
