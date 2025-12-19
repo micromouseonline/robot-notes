@@ -104,8 +104,9 @@ nav:
     - sensors/00-sensors-overview.md
     - Micromouse:
       - Emitters: sensors/wall-sensor-emitters.md
-      - Detectors: sensors/wall-sensor-detectors.md
+      - Switched Emitters: sensors/switched-emitter-drive.md
       - Constant Current Drive: sensors/basic-constant-current-drive.md
+      - Detectors: sensors/wall-sensor-detectors.md
     - Line Followers:
        - sensors/index.md
        - Line Sensing: sensors/line-sensors.md
