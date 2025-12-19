@@ -26,15 +26,15 @@ Depending on your detector circuit and software configuration, it can be possibl
 
 ### Extra Bright Illumination
 
-In normal, continuous illimination a sensor LED might only be able to handle a relatively low current without overheating. For the SFH4550 IR LED, for example, that limit is only about 100mA. However, the same device is able to handle currents as high as 1 Amp (10x bigger) for short periods up to about 100us. The light output is proportional to current so you can create very bright pulses of light but only for a short time. The detector and processor typically only need a few tens of microseconds at most to capture the resulting reflection. 
+In normal, continuous illumination a sensor LED might only be able to handle a relatively low current without overheating. For the SFH4550 IR LED, for example, that limit is only about 100mA. However, the same device is able to handle currents as high as 1 Amp (10x bigger) for short periods up to about 100us. The light output is proportional to current so you can create very bright pulses of light but only for a short time. The detector and processor typically only need a few tens of microseconds at most to capture the resulting reflection. 
 
-Pulsing the light like this reduces the average amount of current needed for each LED. If you were to turn each one on for just 25us out of every 1000us and provide a 250mA current pulse, the average current draw would be only 6mA and yet you are getting light pulses that are 2.5 times as bright as would be available for a continuous 100mA illumunation. The saving is huge - especially for half-size robots where the batteres are necessarily much smaller. Note that the duty cycle - that is, the proportion of time that the LED is lit - should be kept low so that the average current is not exceeded.
+Pulsing the light like this reduces the average amount of current needed for each LED. If you were to turn each one on for just 25us out of every 1000us and provide a 250mA current pulse, the average current draw would be only 6mA and yet you are getting light pulses that are 2.5 times as bright as would be available for a continuous 100mA illumination. The saving is huge - especially for half-size robots where the batteries are necessarily much smaller. Note that the duty cycle - that is, the proportion of time that the LED is lit - should be kept low so that the average current is not exceeded.
 
 ### Cancellation of Ambient Illumination
 
-It is all well and good to turn on the emitter LED and then measure the amount of light reflected by the walls. However, some of that light comes from the other sources of illumination in the area - the ambient illumination. By making only one measureent, it is not possible to work out anything about the ambient light levels. Remember, if you are using IR sensors, you are unable to see any of that anyway so you cannot make a judgement about it either.
+It is all well and good to turn on the emitter LED and then measure the amount of light reflected by the walls. However, some of that light comes from the other sources of illumination in the area - the ambient illumination. By making only one measurement, it is not possible to work out anything about the ambient light levels. Remember, if you are using IR sensors, you are unable to see any of that anyway so you cannot make a judgement about it either.
 
-The usual method for handling this is to read the detectors twice. First, take a reading with the LED off. This is the ambient light level. Then, turn on the LED, wait a few microseconds to make sure everything is stable and then take another reading. This rading, coming very soon after the ambient reading, should have the same ambient component plus whatever is purely the result of any nearby objects reflecting the LED light. Thus any changes in the ambient level, that happen relatively slowly, will be cancelled out. Note that modern LED lighting may not contain much of an IR component but may be flashing quite rapidly - perhaps hundreds of times per second.
+The usual method for handling this is to read the detectors twice. First, take a reading with the LED off. This is the ambient light level. Then, turn on the LED, wait a few microseconds to make sure everything is stable and then take another reading. This reading, coming very soon after the ambient reading, should have the same ambient component plus whatever is purely the result of any nearby objects reflecting the LED light. Thus any changes in the ambient level, that happen relatively slowly, will be cancelled out. Note that modern LED lighting may not contain much of an IR component but may be flashing quite rapidly - perhaps hundreds of times per second.
 
 Now you can just subtract the ambient reading from the 'lit' reading to get the raw, reflected intensity reading:
 
@@ -55,11 +55,11 @@ This is one of the simplest choices. All you need is a suitable bipolar transist
 
 ![single transistor](../assets/sensors/single-switching-transistor.png)
 
-The circuit has some fairly arbitrary values so thet's take them in turn and look at how to choose your own values.
+The circuit has some fairly arbitrary values so that's take them in turn and look at how to choose your own values.
 
 #### The LED
 
-Arguably the most important component. You may choose Infra Red (IR) or visible light devices. Aside from any optical properties, all LEDs will result in a forward voltage drop when current flows through them. For a typical IR LED - the SFH4550 - this will be about 2.0 Volts at 500mA, rising to 2.5 Volts at 1 Amp. This voltage will need to be taken into account when calulating the current limit resistor R8.
+Arguably the most important component. You may choose Infra Red (IR) or visible light devices. Aside from any optical properties, all LEDs will result in a forward voltage drop when current flows through them. For a typical IR LED - the SFH4550 - this will be about 2.0 Volts at 500mA, rising to 2.5 Volts at 1 Amp. This voltage will need to be taken into account when caclulating the current limit resistor R8.
 
 For a visible light LED like the TLCR5800, that voltage drop can be much higher and might approach 3.5 Volts at 500mA, rising to 4.7 Volts at 1 Amp.
 
@@ -67,7 +67,7 @@ For a visible light LED like the TLCR5800, that voltage drop can be much higher 
 
 This resistor is used to limit the current that can flow through the LED. If the current is too high, or allowed to flow for too long, the LED can be damaged or destroyed. There is a power supply, $V_{LED}, that can provide the current needed. Assume for a moment that the transistor, Q2, can be turned fully on and the voltage between collector and emitter, $V_{CE}, is 0.2 Volts. It may be a little higher or lower, depending on the actual transistor type and the current we want through the LED.
 
-The LED and the transistor then may account for about 2.5 Volts and we should be able to have $V_{LED}$ as low as 3.3 Volts and stil get the circuit to operate.
+The LED and the transistor then may account for about 2.5 Volts and we should be able to have $V_{LED}$ as low as 3.3 Volts and still get the circuit to operate.
 
 Suppose $V_{LED}$ is 3.3 Volts. There is $3.3 - 2.5 = 0.8 Volts$ across R8 and, if we want 500mA to flow, R8 must have the value $0.8/0.5 = 1.6\Omega$
 
@@ -119,15 +119,15 @@ For switching circuits like these it is rather more common to find an N-channel 
 
 MOSFETs can bring distinct advantages in this application. Driving the gate of a MOSFET consumes almost no current so the load on the processor's GPIO pin is negligible. There is still a small resistor between the IO pin and the gate though. This is needed to limit the brief current spike when the MOSFET is initially turned on. A few hundred ohms is sufficient. More than that will slightly slow down the current pulse rise time.
 
-You will also see an additional resistor of 10kOhm from the gate to ground. This is a safety precaution to ensure reliable operation of the device. During processor startup following a reset, or in the case of a poorly configured output pin, the gate may be left floating. That is, it might have no connection to any other part of the circuit. In that state, because it takes only very tiny gate currents to operate a MOSFET, you may find the device being turned on by stray signals. For exampl, simply touching the board may provide enough current to turn on the LED. The resistor between gate and ground, R10, ensures that the transistor is always turned off unless the processor explicitly turns it on.
+You will also see an additional resistor of 10kOhm from the gate to ground. This is a safety precaution to ensure reliable operation of the device. During processor startup following a reset, or in the case of a poorly configured output pin, the gate may be left floating. That is, it might have no connection to any other part of the circuit. In that state, because it takes only very tiny gate currents to operate a MOSFET, you may find the device being turned on by stray signals. For example, simply touching the board may provide enough current to turn on the LED. The resistor between gate and ground, R10, ensures that the transistor is always turned off unless the processor explicitly turns it on.
 
-Selection of a suitabl MOSFET is not terribly simple. Common parts for through-hole use may need surprisingly high voltages between the gate and ground ($V_{gs}) before they fully turn on. Even then they may not be able to pass the design current. Parts like the ZVN4306A are useful only if your processor can provide 5 Volts on its output pins. 
+Selection of a suitable MOSFET is not terribly simple. Common parts for through-hole use may need surprisingly high voltages between the gate and ground ($V_{gs}) before they fully turn on. Even then they may not be able to pass the design current. Parts like the ZVN4306A are useful only if your processor can provide 5 Volts on its output pins. 
 
 Many surface mount parts, like the DMG3202U, are much better suited to the task and can easily pass 1 Amp with only 3 Volts at the gate .
 
 #### Calculating Current with R8
 
-Just like the bipolar version, the amount of current throughthe LED will depend upon the supply voltage, $V_{LED}$ and the value of the resistor R8. The better MOSFETs, like DMG3202U, have on-state resistances ($R_{DS(ON)}$) of only a few tens of milliOhms and so they can be ignored for this purpose. Even with a current of 1 Amp, the MOSFET might only have a voltage drop of around 20 milliVolts. It is only necessary to consider the LED forward voltage drop. For example, with a supply voltage of 3.3 Volts an IR LED like SFH4550 could operate at 500 mA with a value for R8 of
+Just like the bipolar version, the amount of current through the LED will depend upon the supply voltage, $V_{LED}$ and the value of the resistor R8. The better MOSFETs, like DMG3202U, have on-state resistances ($R_{DS(ON)}$) of only a few tens of milliOhms and so they can be ignored for this purpose. Even with a current of 1 Amp, the MOSFET might only have a voltage drop of around 20 milliVolts. It is only necessary to consider the LED forward voltage drop. For example, with a supply voltage of 3.3 Volts an IR LED like SFH4550 could operate at 500 mA with a value for R8 of
 
 $$
 R8 = \frac{3.3 - 2.0}{0.5} = 2.6\Omega
@@ -135,7 +135,7 @@ $$
 
 ### Choosing a MOSFET
 
-Thisis a simple switching circuit. When searhing for a suitable MOSFET, you should look for **logic-level** devices. That is, devices designed to turn fully on with only about 3 Volts at the gate. Always check. Do not be misled by a low threshold voltage ($V_{GS(th)}$). This is just the gate-source voltage at which the MOSFET only just starts to conduct and will typically be quite small.
+This is a simple switching circuit. When searching for a suitable MOSFET, you should look for **logic-level** devices. That is, devices designed to turn fully on with only about 3 Volts at the gate. Always check. Do not be misled by a low threshold voltage ($V_{GS(th)}$). This is just the gate-source voltage at which the MOSFET only just starts to conduct and will typically be quite small.
 
 ## Circuit Safety
 
