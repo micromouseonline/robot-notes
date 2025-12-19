@@ -193,7 +193,7 @@ C = \frac{I . \Delta t}{\Delta V}
  = 50 \mu F
  $$
 
-So you might pick a standard value like 100$\mu$F
+So you might pick a standard value like 100$\mu$F to be on the safe side.
 
 ---
 
