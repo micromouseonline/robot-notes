@@ -40,6 +40,8 @@ Now you can just subtract the ambient reading from the 'lit' reading to get the 
 
 $$ I_{RAW} = I_{LIT} - I_{AMB} $$
 
+---
+
 
 ## Switching Options
 
@@ -54,6 +56,9 @@ It seems unlikely that you would want to use anything mechanical so the usual ch
 This is one of the simplest choices. All you need is a suitable bipolar transistor and a couple of resistors to build your circuit:
 
 ![single transistor](../assets/sensors/single-switching-transistor.png)
+/// caption
+A simple transistor switch
+///
 
 The circuit has some fairly arbitrary values so that's take them in turn and look at how to choose your own values.
 
@@ -100,6 +105,9 @@ One possible concern with the basic transistor circuit is the current needed fro
 To try and address this issue, some builders have used a driver chip that contains a number of Darlington pair transistors. A fairly common choice used to be something like the ULN2003 - a seven channel Darlington  transistor array. Internally, each channel looks like this:
 
 ![ULN2003 Channel](../assets/sensors/ULN2003-channel.png)
+/// caption
+Using a Darlington Transistor Array
+///
 
 A pair of transistors are connected together in such a way as to greatly increase the current gain. the other components ensure that the output transistor is turned hard on with an input voltage of at least 3.0 Volts. Perfect for modern processors with output voltages of 3.3 Volts. These chips were originally intended to drive things like stepper motors and relays so they include additional protection circuitry that does not really concern us here.
 
@@ -116,6 +124,9 @@ If you have a 5 Volt rail and fancy the convenience of a single IC, this may be 
 For switching circuits like these it is rather more common to find an N-channel MOSFET used in place of the bipolar device in the first circuit. Compared to bipolar transistors, MOSFETs often provide lower losses, need almost no  drive current and can switch faster.
 
 ![MOSFET Switch](../assets/sensors/single-mosfet-driver.png)
+/// caption
+Using a MOSFET
+///
 
 MOSFETs can bring distinct advantages in this application. Driving the gate of a MOSFET consumes almost no current so the load on the processor's GPIO pin is negligible. There is still a small resistor between the IO pin and the gate though. This is needed to limit the brief current spike when the MOSFET is initially turned on. A few hundred ohms is sufficient. More than that will slightly slow down the current pulse rise time.
 
@@ -148,6 +159,9 @@ A simple modification to the circuit can provide protection in such a case while
 To limit the possible current to some safe value, a series resistor, here it is R11, can be placed in series with the LED supply voltage. Clearly, this would also limit the current during the illumination time so a reservoir capacitor, C3, is added in parallel with the LED, its current limit resistor and the transistor, to provide the main illuminating current.
 
 ![LED Protection](../assets/sensors/led-protection.png)
+/// caption
+Protecting the LED
+///
 
 The addition of these components will change the other calculations a little. First, though, the value of R11 should be set to a value that will guarantee no harm to the LED should the transistor be turned fully on. In this circuit, if we assume a 5 Volt supply, it is simplest to ignore the other components as having a small effect and just consider the LED connected in series with the protection resistor. At its maximum safe current of 50mA, the SFH4550 would drop about 1.5 Volts. Therefore we need R11 to drop 3.5 Volts at 50mA. A resistor of 70 Ohms would do the trick and for a bit of extra margin, a 100 Ohm resistor has been selected.
 
@@ -161,7 +175,7 @@ If there is only a 3.3 Volt supply available this is a problem because you have 
 
 The size of the capacitor will determine the ability of the LED to maintain a constant output during the illumination pulse. If the capacitor is too small, its charge will be depleted quickly causing the LED current, and so its light output, to rapidly drop. Choosing a larger capacitor will ensure that there is sufficient charge for even high current pulses though it will take a little longer for the circuit to reach some kind of equilibrium after the sensors are powered up.  This is because the capacitor must be charged through R11 from the power supply. This would normally only happen after the entire robot is powered on and should be complete within a few hundred milliseconds at most.
 
-In this circuit, as current is supplied by the capacitor, the voltage across it will inevitably drop. It is possible to calculate the capacitance required if you make assumptions about the permitted voltage drop. A longer pulse length or a higher current will cause a greater voltage droop. That in turn will cause a reduction in current. If you do not have much of a voltage overhead in the system then the current drop may become significant.
+In this circuit, as current is supplied by the capacitor, the voltage across it will inevitably drop. It is possible to calculate the capacitance required if you make assumptions about the permitted voltage drop. A longer pulse length or a higher current will cause a greater voltage drop. That in turn will cause a reduction in current. If you do not have much of a voltage overhead in the system then the current drop may become significant.
 
 For now, assume the same 500mA pulse, operating over 25us and that you can manage with a 0.25 Volt droop in the capacitor voltage.
 
@@ -180,3 +194,13 @@ C = \frac{I . \Delta t}{\Delta V}
  $$
 
 So you might pick a standard value like 100$\mu$F
+
+---
+
+## Real-World Cases 
+
+In the preceding sections, examples are given for circuits with quite large LED currents. You should not assume large currents are essential. These examples represent relatively extreme cases used to illustrate some issues that arise. Your robot will have its own needs and typical, commonly used configurations might only need LED currents that are around 250mA for a classic micromouse and much less for a half-size micromouse when the detecting element is a phototransistor.
+
+Detectors built with photodiodes are faster and more linear but produce much smaller photocurrents and so they may benefit from significantly brighter illumination and/or an amplification stage on the detector side.
+
+Note also that the emitter configuration is only a part of the sensor design. See also the pages on geometry and detectors for a more complete picture.
