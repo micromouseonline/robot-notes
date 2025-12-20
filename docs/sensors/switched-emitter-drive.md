@@ -115,7 +115,7 @@ While convenient in many ways, the ULN2003 does have some limitations.
 
 First, they are only rated for a peak maximum current of 500mA per channel. If you feel a need for more, you can connect channels in parallel. The device as a whole can handle up to 2.5 Amps in total.
 
-Second, when fully turned on, the voltage drop between the output and ground may be as high as 1.6 Volts according to the data sheet. When you add that to the 2.1 - 2.3 Volts dropped by an IR LED, it is clear that these devices are only really useful in systems that can provide a 5 Volt supply. You still need to calculate an appropriate current limit resistor value though you no longer need to worry about the base resistor since only about 1mA is needed to fully turn on the output. With a high-brightness visible light LED like the TLCR5800, even operation at 5 Volts maybe difficult
+Second, when fully turned on, the voltage drop between the output and ground may be as high as 1.6 Volts according to the data sheet. When you add that to the 2.1 - 2.3 Volts dropped by an IR LED, it is clear that these devices are only really useful in systems that can provide a 5 Volt supply. You still need to calculate an appropriate current limit resistor value though you no longer need to worry about the base resistor since only about 1mA is needed to fully turn on the output. With a high-brightness visible light LED like the TLCR5800, even operation at 5 Volts maybe difficult with very high currents.
 
 If you have a 5 Volt rail and fancy the convenience of a single IC, this may be the device for you.
 
