@@ -195,6 +195,81 @@ C = \frac{I . \Delta t}{\Delta V}
 
 So you might pick a standard value like 100$\mu$F to be on the safe side.
 
+
+## Pulsed Bipolar Drive Example
+
+Consider now a switched emitter drive using a single bipolar transistor using some of the design decisions already discussed, using a 100 Ohm safety resistor, R11, a 100uF reservoir capacitor C3, and BC337-40 transistor:
+
+![Pulsed Bipolar Drive](../assets/sensors/pulsed-bipolar-drive.png)
+/// caption
+Pulsed Bipolar Drive
+///
+
+Goals:
+
+- LED: SFH4550
+- Pulse duration: 25us
+- Pulse repetition: 1000us
+- Pulse current: 300 mA
+- Supply Voltage: 5 Volts
+- GPIO output: 3.3 Volts
+
+
+### Average current:
+Assuming we can get a solid 300mA through the LED for the duration of the pulse, the average current through the LED will be 300mA * 25us/1000us = 7.5mA
+
+### Average voltage on the storage capacitor
+If the average current through R11 is 7.5mA, we can expect the average voltage drop across it to be 7.5mA * 100 Ohm = 0.75 Volts. Therefore, the capacitor average voltage is $V_{cap}$ = 5.0 - 0.75 = 4.25 Volts
+
+### Settling time for $V_{cap}$ after power up
+The time constant for the capacitor voltage is R*C = $100 * 100 * 10^{-6}$ = 10ms. It will take around 3 time constants to get close (95%) to the steady state so the circuit should be operating normally 30ms or so after power on.
+
+A SPICE simulation in KiCAD confirms the calculation
+
+![pulsed power on behaviour](../assets/sensors/pulsed-bipolar-power-on.png)
+/// caption
+Pulsed Bipolar Power On Behaviour
+///
+    
+#### Pulse current
+
+The design called for 300mA pulses of 25us duration. It looks like they are OK but zooming in on just one pulse reveals that the current is a bit high and that it quickly droops a little. The droop is just the capacitor discharging slightly during the pulse.
+
+![Pulsed Bipolar - single pulse](../assets/sensors/pulsed-bipolar-single-pulse.png)
+/// caption
+Pulsed Bipolar - Single Pulse
+///
+
+Since the droop is quite modest, let's pretend it is flat and recalculate the value of the current limit resistor, R8. The data sheet for the SFH4550 indicates that the forward voltage should be about 1.75 Volts at 300mA. The transistor is saturated and will have a voltage of about 0.2 Volts at the collector. The capacitor voltage has already been calculated at 4.25 Volts. Now, at 300mA, R8 must drop 4.25 - 0.2 - 1.75 = 2.3 Volts and so its resistance will be 2.3/0.3 = 7.66 Ohms. Choose a close standard value.  Make that 6.8 Ohms to try and meet, or slightly exceed, the required current. There is little point in being over-precise since there will be some variation in the characteristics of all the components. The aim is to get close enough. Besides, the values in this circuit interact. Changing R8 alters the current which changes the LED voltage drop, which changes the voltage across R8 and so on.
+
+After changing R8 to 6.8 Ohms, the pulse looks like this:
+
+![Pulsed Bipolar - Corrected Single Pulse](../assets/sensors/pulsed-bipolar-single-pulse-corrected.png)
+/// caption
+Pulsed Bipolar - Corrected Single Pulse
+///
+
+Which is pretty acceptable. The peak is close to the target, the droop is small and the shape is stable.
+
+### Limitations
+
+These calculations provide a perfectly acceptable current pulse through the LED for the conditions set out. However, consider how the circuit would behave if the supply voltage were only 3.3 Volts. The circuit can no longer operate correctly because it is not possible to push 300mA through the LED with such a low supply voltage. In fact, the best that can be managed is pulses of around 160mA. Even if the capacitor voltage got up to 3.3 Volts, the LED and transistor would need nearly 2 Volts, leaving only 1.3 Volts across R8 for a maximum of 1.3/6.8 = 190mA. The pulses settle out a little lower because the average current through the protection resistor, R11, will also act to reduce the capacitor voltage as before.
+
+This is a major limitation of the simple switched drive. The actual current as well as the available current is strongly dependent upon having a stable supply voltage that is high enough to exceed all the fixed voltage drops.
+
+Furthermore, increasing the current will increase the voltage drop across the LED and so even more headroom is needed from the supply. Worse still, if the SFH4550 is swapped out for something like the TLCR5800, the LED voltage drop may be so large that a 5 Volt supply is no longer adequate for any kind of high current use.
+
+Changing from a bipolar transistor to a MOSFET will not fix that. It will only reduce the demands on the GPIO pin and the already modest losses in the transistor.
+
+In short, this kind of circuit is fine for modest current pulses and LEDs with smaller forward voltages. If the design calls for large currents and/or high-intensity visible light LEDs, some other solution is needed.
+
+Unfortunately, the actual current through the LED is clearly dependent upon the supply voltage so it is not a simple matter of connecting the LED supply to the battery as that voltage will change as the robot runs, causing the LED current to vary and the sensor readings to change.
+
+The answer lies in a slightly different configuration that will guarantee a constant current through the LED during the pulse and which will work reliably across a range of supply voltages. 
+
+See the [Constant Current Drive Section](./basic-constant-current-drive.md) for some ways to manage that.
+
+
 ---
 
 ## Real-World Cases 
