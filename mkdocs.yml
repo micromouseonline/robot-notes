@@ -106,6 +106,7 @@ nav:
       - Emitters: sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/switched-emitter-drive.md
       - Constant Current Drive: sensors/basic-constant-current-drive.md
+      - Improved Current Regulation: sensors/improved-current-regulation.md
       - Detectors: sensors/wall-sensor-detectors.md
     - Line Followers:
        - template.md
