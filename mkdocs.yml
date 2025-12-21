@@ -108,14 +108,14 @@ nav:
       - Constant Current Drive: sensors/basic-constant-current-drive.md
       - Detectors: sensors/wall-sensor-detectors.md
     - Line Followers:
-       - sensors/index.md
-       - Line Sensing: sensors/line-sensors.md
-       - Marker Sensing: sensors/marker-sensors.md
+       - template.md
+       - Line Sensing: template.md
+       - Marker Sensing: template.md
     - Encoders:        
-       - sensors/index.md
-       - Light Sensors:   sensors/encoders.md
+       - template.md
+       - Light Sensors:   template.md
     - IMUs:
-      - Overview: sensors/imu-overview.md
+      - Overview: template.md
 
   - Motors: 
     - Overview: motors/30-00-motors.md
