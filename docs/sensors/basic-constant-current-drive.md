@@ -105,7 +105,8 @@ When choosing a transistor for Q5, several types will do the job. Aim for someth
 
 ## Circuit Protection
 
-The resistor R11 is there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. REplacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to 150 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to reach 6.5 Volts.
+The resistor R11 is there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. REplacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to at least 12150
+0 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to approach 6.5 Volts.
 
 ## Other LED types
 
