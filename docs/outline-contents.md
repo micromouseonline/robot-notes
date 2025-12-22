@@ -1,19 +1,14 @@
 ---
 # 1. FRONT MATTER (REQUIRED)
 # The MkDocs title is automatically used for the navigation and the page heading.
-# title: Template
+title: Outline and TOC
 subtitle: 
 description:
 icon:
 status:
 ---
 
-
 # Micromouse & Line‑Follower Robotics Guide
-
-!!! warning
-
-    This is a draft outline, generated originally by CoPilot, and should not be considered binding. As pages are available, the entries will become highlighted links to those pages. Entries may change or disappear. Do not bookmark links if you see this note on the index page.
 
 ## Part I — Foundations
 
@@ -75,9 +70,9 @@ status:
 - Transimpedance amplifiers
 
 ### Emitter Drive Circuits
-- [Simple switched drive](sensors/switched-emitter-drive.md)
-- [Constant‑current drive](sensors/basic-constant-current-drive.md)
-- [Improved Constant‑current drive](sensors/improved-current-regulation.md)
+- Simple switched drive
+- Reservoir‑capacitor‑assisted drive
+- Constant‑current drive (BJT and MOSFET)
 - Trade‑offs and limitations
 
 ### Geometry & Optical Design
@@ -228,4 +223,3 @@ status:
 - PID derivations
 - Kinematic equations
 - Flood‑fill math
-
