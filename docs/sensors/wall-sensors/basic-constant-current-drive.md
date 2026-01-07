@@ -99,7 +99,7 @@ Constant Current Driver Compliance Test Circuit
 ///
 
 
-Tests were run with a range of values for the emitter resistor, R6 to give currents between about 110mA and 480mA. This was done for both the SFH4550 and TLCR5800 LEDs. The current through the emitter resistor was measured for convenience. This will be close to the LED current so long as the transistor gain is high enough since the emitter current is the sum of the base and collector currents ($I_e = I_b + I_c$).
+Tests were run with a range of values for the emitter resistor, R9 to give currents between about 110mA and 480mA. This was done for both the SFH4550 and TLCR5800 LEDs. The current through the emitter resistor was measured for convenience. This will be close to the LED current so long as the transistor gain is high enough since the emitter current is the sum of the base and collector currents ($I_e = I_b + I_c$).
 
 ![Constant Current Compliance Results SFH4550](../../assets/sensors/current-regulation-SFH4550.png)
 /// caption
@@ -115,7 +115,7 @@ There are three important observations to be made in the data.
 
 - first, at lower currents, up to about 250mA, regulation for both LEDs is very good across a wide range of voltages - extending down to about 6 Volts.
 - second, it is apparent from the high current results that regulation is less good. This is largely a result of the normal behaviour of bipolar transistors. At higher currents the transistor’s gain falls, and the collector current becomes more sensitive to $V_{CE}$ due to the [Early effect](https://circuitcellar.com/resources/quickbits/early-effect/), which reduces the effectiveness of the current regulation.
-- third, as the LED forward voltage increases with current, the available headroom at lower supply voltages is reduces and regulation suffers.
+- third, as the LED forward voltage increases with current, the available headroom at lower supply voltages is reduced and regulation suffers.
 
 
 ### Sources of error
@@ -137,7 +137,7 @@ When choosing a transistor for Q5, several types will do the job. Aim for someth
 
 The resistor R11 is there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. REplacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to at least 150 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to approach 6.5 Volts.
 
-Even so, some practical experiments with two popular emitters - the SFH4550 and TLCR5800 - show that the circuit can produce very stable currents across a wide range of supply voltages even with a robust on-current protection setup. The circuit used for the tests is this:
+Even so, some practical experiments with two popular emitters - the SFH4550 and TLCR5800 - show that the circuit can produce very stable currents across a wide range of supply voltages even with a robust on-current protection setup. The circuit used for the tests is this. (NOTE that the protection resistor is R6 in this version, not R11 as before):
 
 ![Constant Current Compliance Test With Protection](../../assets/sensors/constant-current-compliance-circuit.png)
 /// caption
@@ -151,7 +151,11 @@ The actual current through the sense resistor was measured for a range of values
 Constant Current Driver Compliance Results With Protection
 /// 
 
-As you might expect from the preceding discussions, the higher forward voltage of the visible-light TLCR5800 requires a higher minimum voltage before the current is really stable.
+As you might expect from the preceding discussions, the higher forward voltage of the visible-light TLCR5800 requires a higher minimum voltage before the current is really stable. Aside from that, the LED current remains what was seen without the protection resistor once sufficient headroom has been achieved. For the lower current, the output is stable for both types of LED with a supply of 6 Volts or more. The SFH4550 needs a little more at the higher current but is pretty good from 6.5 Volts. 
+
+This higher forward voltage of the TLCR5800 means the regulation is poor below 8 Volts or so.
+
+Again, bear in mind that, for the most common application using a phototransistor detector, currents much above 200mA are unlikely to be necessary.
 
 
 ### Other LED types
