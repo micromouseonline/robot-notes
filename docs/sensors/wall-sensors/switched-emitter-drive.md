@@ -280,4 +280,4 @@ In the preceding sections, examples are given for circuits with quite large LED 
 
 Detectors built with photodiodes are faster and more linear but produce much smaller photocurrents and so they may benefit from significantly brighter illumination and/or an amplification stage on the detector side.
 
-Note also that the emitter configuration is only a part of the sensor design. See also the pages on geometry and detectors for a more complete picture.
+Note also that the emitter configuration is only a part of the sensor design. See also the pages on geometry and [detectors](./wall-sensor-detectors.md) for a more complete picture.
