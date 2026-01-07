@@ -93,7 +93,7 @@ Exactly as before, the pulses stabilise quickly at the same level and remain una
 A simple test with actual devices in a real circuit confirms the simulation results. The following circuit was used:
 
 
-![Constant Current Compliance Test](../assets/sensors/constant-current-compliance-basic-circuit.png)
+![Constant Current Compliance Test](../../assets/sensors/constant-current-compliance-basic-circuit.png)
 /// caption
 Constant Current Driver Compliance Test Circuit
 ///
@@ -101,12 +101,12 @@ Constant Current Driver Compliance Test Circuit
 
 Tests were run with a range of values for the emitter resistor, R6 to give currents between about 110mA and 480mA. This was done for both the SFH4550 and TLCR5800 LEDs. The current through the emitter resistor was measured for convenience. This will be close to the LED current so long as the transistor gain is high enough since the emitter current is the sum of the base and collector currents ($I_e = I_b + I_c$).
 
-![Constant Current Compliance Results SFH4550](../assets/sensors/current-regulation-SFH4550.png)
+![Constant Current Compliance Results SFH4550](../../assets/sensors/current-regulation-SFH4550.png)
 /// caption
 Compliance Test - SFH4550
 ///
 
-![Constant Current Compliance Results SFH4550](../assets/sensors/current-regulation-TLCR5800.png)
+![Constant Current Compliance Results SFH4550](../../assets/sensors/current-regulation-TLCR5800.png)
 /// caption
 Compliance Test - TLCR5800
 ///
@@ -139,14 +139,14 @@ The resistor R11 is there to ensure that the LED will not be destroyed if the em
 
 Even so, some practical experiments with two popular emitters - the SFH4550 and TLCR5800 - show that the circuit can produce very stable currents across a wide range of supply voltages even with a robust on-current protection setup. The circuit used for the tests is this:
 
-![Constant Current Compliance Test With Protection](../assets/sensors/constant-current-compliance-circuit.png)
+![Constant Current Compliance Test With Protection](../../assets/sensors/constant-current-compliance-circuit.png)
 /// caption
 Constant Current Driver Compliance Test Circuit With Protection
 ///
 
 The actual current through the sense resistor was measured for a range of values for $V_{CC}$ with two different LED types and with either 10 Ohms or 22 Ohms to set the current.
 
-![Constant Current Compliance Test With Protection](../assets/sensors/compliance-with-circuit-protection.png)
+![Constant Current Compliance Test With Protection](../../assets/sensors/compliance-with-circuit-protection.png)
 /// caption
 Constant Current Driver Compliance Results With Protection
 /// 

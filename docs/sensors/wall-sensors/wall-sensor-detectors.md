@@ -20,7 +20,7 @@ For the kinds of reflected-light sensors described her, there are two basic choi
 
 A phototransistor is a specially constructed bipolar transistor that exposes the base-collector junction to the outside world. Light falling on this junction generates a small current (the photocurrent) that flows into the base as it would any other bipolar transistor. The normal transistor action amplifies the current significantly, perhaps by a factor of 100 although different devices can vary greatly in the transistor gain. By connecting a load resistor between the emitter and ground, with the collector directly connected to the positive supply, you are able to measure a voltage at the emitter that is approximately linearly dependent on the illumination. 
 
-![Phototransistor Detector](../assets/sensors/phototransistor-detector.png)
+![Phototransistor Detector](../../assets/sensors/phototransistor-detector.png)
 /// caption
 Simple Phototransistor Detector in emitter-follower mode
 ///
@@ -34,7 +34,7 @@ The response of a phototransistor is slower than that of a photodiode though thi
 
 A photodiode is a specially constructed diode with the junction exposed to the outside world. In typical use as a sensor, the diode is *reverse-biased* with the cathode connected to the supply and the anode connected through a load resistor to ground. This is the **photoconductive** mode. (Photodiodes can also be used in photovoltaic mode with no bias, but that configuration is slower and produces lower output.) When exposed to light, a small current (the photocurrent) is generated at the junction and will flow to ground through the load resistor. Photocurrents in typical photodiodes used in these sensors may be no more than a few tens of microAmps. Because the photocurrents are very small, the load resistor will generally be much larger than that used with an emitter-follower phototransistor detector. The load resistor may need to be in the range 15kOhm to 100kOhm. 
 
-![Photodiode Detector](../assets/sensors/photodiode-detector.png)
+![Photodiode Detector](../../assets/sensors/photodiode-detector.png)
 /// caption
 Simple Photodiode Detector in photoconductive mode
 ///
