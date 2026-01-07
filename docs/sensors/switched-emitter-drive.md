@@ -2,8 +2,10 @@
 layout: default
 title: Switched Drivers
 parent: Sensors
-nav_order: 20
-# Leave has_children and permalink out
+# icon: octicons/dot-fill-16
+icon: octicons/dot-16
+# icon: octicons/dash-16
+# icon: octicons/chevron-right-12
 ---
 
 # Switched Emitter Driving
