@@ -86,9 +86,9 @@ status:
 - Transimpedance amplifiers
 
 ### Emitter Drive Circuits
-- [Simple switched drive](sensors/switched-emitter-drive.md)
-- [Constant‑current drive](sensors/basic-constant-current-drive.md)
-- [Improved Constant‑current drive](sensors/improved-current-regulation.md)
+- [Simple switched drive](sensors/wall-sensors/switched-emitter-drive.md)
+- [Constant‑current drive](sensors/wall-sensors/basic-constant-current-drive.md)
+- [Improved Constant‑current drive](sensors/wall-sensors/improved-current-regulation.md)
 - Trade‑offs and limitations
 
 

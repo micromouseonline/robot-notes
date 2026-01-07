@@ -4,8 +4,12 @@
 # title: Template
 subtitle: 
 description:
-icon: material/emoticon-happy
+# icon: octicons/dot-fill-16
+# icon: octicons/dot-16
+icon: octicons/dash-16
+# icon: octicons/chevron-right-12
 status:
 ---
 
-# Line Follower Marker Sensors
+
+# Wall Sensor Emitter Types

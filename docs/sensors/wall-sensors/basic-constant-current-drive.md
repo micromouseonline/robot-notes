@@ -1,18 +1,23 @@
 ---
-layout: default
-title: Constant Current Drivers
-parent: Sensors
-nav_order: 20
-# Leave has_children and permalink out
+# 1. FRONT MATTER (REQUIRED)
+# The MkDocs title is automatically used for the navigation and the page heading.
+# title: Template
+subtitle: 
+description:
+# icon: octicons/dot-fill-16
+# icon: octicons/dot-16
+icon: octicons/dash-16
+# icon: octicons/chevron-right-12
+status:
 ---
 
 # Basic Constant Current Drive for Sensor Emitters
 
-## Conventional drive
+## Conventional Switched drive
 
 In the section on [switched emitter driving](./switched-emitter-drive.md), one of the simplest working options looked like this:
 
-![conventional emitter drive](../assets/sensors/conventional-drive.png)
+![conventional emitter drive](../../assets/sensors/conventional-drive.png)
 /// caption
 Basic Bipolar Switched Emitter
 ///
@@ -29,7 +34,7 @@ There are many ways to create a constant current drive. Ideally, the current wou
 ## Simple Solution
 The resistor R8 in the previous circuit limits the current that can flow through the LEDs. It has no other purpose. Suppose, however, we place the current limit resistor on the emitter of the drive transistor instead of between the collector and the LED. 
 
-![current regulated circuit](../assets/sensors/current-regulated.png)
+![current regulated circuit](../../assets/sensors/current-regulated.png)
 /// caption
 Simplest Current Regulation
 ///
@@ -63,14 +68,14 @@ Note that, because the transistor is operating in its linear region, it will dis
 
 Running this circuit through the simulator shows that the voltage on the capacitor, $V_{cap}$ still takes just as long to get to a stable value but the LED current pulses stabilise well before that.
 
- ![Simulation Power Up Behaviour](../assets/sensors/basic-regulation-power-up.png)
+ ![Simulation Power Up Behaviour](../../assets/sensors/basic-regulation-power-up.png)
  /// caption
  Basic Bipolar Regulation
  ///
 
 The pulses stabilise as soon as the capacitor voltage is high enough to provide adequate regulation by the transistor. As little as 4.5 Volts on the capacitor is enough and, at all voltages above that, the pulse shape is the same. Here is one of the stable pulses.
 
-![Single 328mA Pulse](../assets/sensors/basic-regulation-single-pulse-328ma.png)
+![Single 328mA Pulse](../../assets/sensors/basic-regulation-single-pulse-328ma.png)
 /// caption
 Single 328mA pulse from Basic Regulator
 ///
@@ -81,7 +86,7 @@ It is clear that there is no droop and the current pulse is nice and constant. T
 
 Compliance is the ability of the circuit to provide a consistent current for a range of input voltages. The power-up data shown above imply that, as long as the supply voltage is greater than 4.5 Volts, regulation will be good. Just to illustrate the point, the simulation can be run again with the supply voltage set to 8.4 Volts, corresponding to a freshly charged 2S LiPo battery.
 
- ![Simulation Power Up Behaviour - High Voltage](../assets/sensors/basic-regulation-higher-supply-voltage.png)
+ ![Simulation Power Up Behaviour - High Voltage](../../assets/sensors/basic-regulation-higher-supply-voltage.png)
  /// caption
  Basic Regulation With Higher Supply Voltage
  ///

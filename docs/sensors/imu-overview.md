@@ -1,1 +1,0 @@
-# IMUs - Gyros and Accelerometers

@@ -99,31 +99,44 @@ extra:
 # override what is found with specific files
 nav:
   - Home: index.md
-  
+  - Getting Started: getting-started/index.md
+  # - Electronics:
+  #   - electronics/index.md
+  # - Mechanics:
+  #   - mechanics/index.md
+  # - Motion Control:
+  #   - motion-control/index.md
+  # - Firmware:
+  #   - firmware/index.md
+  # - Build and Debug:
+  #   - build-and-debug/index.md
   - Sensors:
-    - sensors/00-sensors-overview.md
+    - sensors/index.md
     - Micromouse:
-      - Emitters: sensors/wall-sensor-emitters.md
-      - Switched Emitters: sensors/switched-emitter-drive.md
-      - Constant Current Drive: sensors/basic-constant-current-drive.md
-      - Improved Current Regulation: sensors/improved-current-regulation.md
-      - Detectors: sensors/wall-sensor-detectors.md
-    - Line Followers:
-       - template.md
-       - Line Sensing: template.md
-       - Marker Sensing: template.md
-    - Encoders:        
-       - template.md
-       - Light Sensors:   template.md
-    - IMUs:
-      - Overview: template.md
+      - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
+      - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
+      - Basic Constant Current: sensors/wall-sensors/basic-constant-current-drive.md
+      - Other Constant Current: sensors/wall-sensors/improved-current-regulation.md
+      - Detectors: sensors/wall-sensors/wall-sensor-detectors.md
+    # - Line Followers:
+    #    - template.md
+    #    - Line Sensing: template.md
+    #    - Marker Sensing: template.md
+    # - Encoders:        
+    #    - template.md
+    #    - Light Sensors:   template.md
+    # - IMUs:
+    #   - Overview: template.md
 
-  - Motors: 
-    - Overview: motors/30-00-motors.md
-    - DC Brush: motors/30-20-dc-brushed.md
-    - DC Brushless: motors/30-30-dc-brushless.md
-    - Stepper:  motors/30-40-steppers.md
+  # - Motors: 
+  #   - Overview: motors/30-00-motors.md
+  #   - DC Brush: motors/30-20-dc-brushed.md
+  #   - DC Brushless: motors/30-30-dc-brushless.md
+  #   - Stepper:  motors/30-40-steppers.md
     
+  # - Advanced Topics:
+  #   - advanced-topics/index.md
+
   - Author Guide:
     - authors/index.md
     - Writing your docs: authors/writing-your-docs.md

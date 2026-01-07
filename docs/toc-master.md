@@ -1,16 +1,21 @@
 ---
 # 1. FRONT MATTER (REQUIRED)
 # The MkDocs title is automatically used for the navigation and the page heading.
-title: Outline and TOC
+# title: Template
 subtitle: 
 description:
 icon:
 status:
 ---
 
+
 # Micromouse & Line‑Follower Robotics Guide
 
-## Part I — Foundations
+!!! warning
+
+    This is a draft outline, generated originally by CoPilot, and should not be considered binding. As pages are available, the entries will become highlighted links to those pages. Entries may change or disappear. Do not bookmark links if you see this note on the index page.
+
+## Foundations
 
 ### Introduction to Micromouse & Line‑Following
 - What the contests are
@@ -22,31 +27,37 @@ status:
 - Trade‑offs and design philosophy
 
 ### Essential Tools & Skills
+- Electronics Knowledge
 - Soldering and PCB basics
+- Mechanical Design and Manufacture
 - Firmware development workflow
 - Debugging tools (oscilloscope, logic analyser, etc.)
 
 ---
 
-## Part II — Electronics for Small Robots
+## Electronics for Small Robots
 
 ### Power Systems
-- LiPo batteries
+- Battery Types
 - Voltage regulators
 - Power distribution and grounding
 - Noise considerations
 
 ### Microcontrollers & Processing
-- Choosing an MCU
+- Choosing a Microcontroller
 - Timers, ADCs, interrupts, DMA
-- Clocking and power modes
+- Development Tools
 
 ### Motors & Drivers
-- DC motors, coreless motors, brushless options
-- H‑bridges and current limits
-- Thermal considerations
+- Electric Motor Types
+- Motor Driver Electronics
+- Motor Driving Software
+- Back‑EMF
+- Stall current
+- PWM strategies
 
 ### Encoders
+- Odometry Requirements
 - Optical, magnetic, reflective
 - Quadrature decoding
 - Mounting and alignment
@@ -57,7 +68,12 @@ status:
 
 ---
 
-## Part III — Sensor Systems (Deep Dive)
+## Wall Sensor Systems
+
+### Geometry & Optical Design
+- Beam shapes
+- Sensor placement
+- Wall reflectivity and angle effects
 
 ### Emitters
 - IR vs visible LEDs
@@ -70,15 +86,11 @@ status:
 - Transimpedance amplifiers
 
 ### Emitter Drive Circuits
-- Simple switched drive
-- Reservoir‑capacitor‑assisted drive
-- Constant‑current drive (BJT and MOSFET)
+- [Simple switched drive](sensors/wall-sensors/switched-emitter-drive.md)
+- [Constant‑current drive](sensors/wall-sensors/basic-constant-current-drive.md)
+- [Improved Constant‑current drive](sensors/wall-sensors/improved-current-regulation.md)
 - Trade‑offs and limitations
 
-### Geometry & Optical Design
-- Beam shaping
-- Sensor placement
-- Wall reflectivity and angle effects
 
 ### Signal Conditioning
 - Filtering
@@ -86,47 +98,85 @@ status:
 - ADC sampling strategies
 
 ### Calibration & Testing
+- Normalisation
 - Wall distance calibration
-- Line reflectivity calibration
-- Temperature effects
 
 ---
 
-## Part IV — Mechanics & Chassis Design
+## Line Sensor Systems
+
+### Geometry & Optical Design
+- Digital vs Analogue
+- Sensor placement
+- Line and Marker Detection
+
+### Emitters
+- IR vs visible LEDs
+- Forward voltage, current, pulse driving
+- Safety and lifetime
+
+### Detectors
+- Phototransistors
+- Photodiodes
+- Transimpedance amplifiers
+
+### Emitter Drive Circuits
+- Special Requirements for Line Followers
+- Trade‑offs and limitations
+
+
+### Signal Conditioning
+- Filtering
+- Amplification
+- ADC sampling strategies
+
+### Calibration & Testing
+- Line Sensor Calibration
+- Marker Sensor Calibration
+- Line Reflectivity
+- Special Cases
+
+---
+
+## Mechanics & Chassis Design
 
 ### Chassis Materials & Construction
-- 3D printing, carbon fibre, FR4
+- Materials
+- Dimensions
+- Clearances
 
-### Wheel Design
-- Diameter, grip, inertia
+### Drive System
+- Gearboxes
+- Wheel Count
+- Wheel Size
+- Grip
 
-### Gearboxes & Direct Drive
-
-### Weight Distribution & Centre of Gravity
+### Weight Distribution
+- Mass (Weight)
+- Centre of Gravity
+- Inertia
 
 ---
 
-## Part V — Motion Control
+## Motion Control
 
 ### Kinematics of Differential Drive
 - Speed, acceleration, turning
 
-### PID Control
+### Controller Design
+- System Characterisation
+- Controller Types, PD, PID, etc
+- Velocity Profiles
 - Tuning strategies
 - Feedforward terms
 
 ### Trajectory Generation
-- For line followers
 - For micromouse (straight, diagonal, turns)
-
-### Motor Characterisation
-- Back‑EMF
-- Stall current
-- PWM strategies
+- For line followers
 
 ---
 
-## Part VI — Navigation & Algorithms
+## Micromouse Navigation & Algorithms
 
 ### Maze Representation
 - Cells, walls, bitfields
@@ -142,12 +192,32 @@ status:
 
 ### State Estimation
 - Odometry
+- IMU (Gyro)
 - Sensor fusion
 - Drift management
 
 ---
 
-## Part VII — Firmware Architecture
+
+## Line Follower Navigation & Algorithms
+
+### Track Representation
+- Segments, Markers
+
+### Mapping
+- Track Recording
+
+### Path Planning
+- Track Playback
+
+### State Estimation
+- Odometry
+- IMU (Gyro)
+- Sensor fusion
+
+---
+
+## Firmware Architecture
 
 ### Real‑Time Structure
 - Main loop vs RTOS
@@ -160,12 +230,12 @@ status:
 
 ### Testing & Simulation
 - Unit testing
-- Maze simulators
+- Simulators
 - Logging and telemetry
 
 ---
 
-## Part VIII — Building, Debugging, and Iteration
+## Building, Debugging, and Iteration
 
 ### Prototyping Workflow
 - Breadboard → PCB → revision cycles
@@ -173,12 +243,12 @@ status:
 ### Common Failure Modes
 - Electrical noise
 - Sensor misalignment
-- Motor imbalance
+- Connectors
 
 ### Debugging Techniques
 - Oscilloscope use
-- Capturing sensor waveforms
-- Motor current monitoring
+- Capturing sensor traces
+- In Circuit Debugging
 
 ### Competition Preparation
 - Calibration routines
@@ -187,7 +257,7 @@ status:
 
 ---
 
-## Part IX — Advanced Topics
+## Advanced Topics
 
 ### High‑Performance Micromouse
 - High‑speed turns
@@ -197,29 +267,30 @@ status:
 ### Advanced Line‑Follower Techniques
 - Multi‑sensor arrays
 - High‑speed cornering
+- Course straightening
 
-### Custom Electronics
-- Designing your own motor drivers
-- Custom sensor boards
-
-### Machine Learning (Optional)
-- Line classification
-- Predictive control
-
+### Increased Downforce
+- The Grip Problem
+- Suction Fans
+- 
 ---
 
-## Part X — Appendices
+## Appendices
 
 ### Reference Designs
 - Example schematics
 - PCB layouts
 
 ### Component Selection Guides
-- LEDs, photodiodes, motors, MCUs
-
-### Datasheet Interpretation
+- Optical Sensors,
+- Motor Drivers
+- Motors
+- Batteries
+- IMUs 
+- Microcontrollers
 
 ### Mathematical Tools
 - PID derivations
 - Kinematic equations
 - Flood‑fill math
+

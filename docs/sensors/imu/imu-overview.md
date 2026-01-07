@@ -11,5 +11,4 @@ icon: octicons/dot-16
 status:
 ---
 
-
-# Wall Sensor Emitter Types
+# IMUs - Gyros and Accelerometers

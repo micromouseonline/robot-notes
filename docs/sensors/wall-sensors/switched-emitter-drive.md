@@ -1,9 +1,14 @@
 ---
-layout: default
-title: Switched Drivers
-parent: Sensors
-nav_order: 20
-# Leave has_children and permalink out
+# 1. FRONT MATTER (REQUIRED)
+# The MkDocs title is automatically used for the navigation and the page heading.
+# title: Template
+subtitle: 
+description:
+# icon: octicons/dot-fill-16
+# icon: octicons/dot-16
+icon: octicons/dash-16
+# icon: octicons/chevron-right-12
+status:
 ---
 
 # Switched Emitter Driving
@@ -55,7 +60,7 @@ It seems unlikely that you would want to use anything mechanical so the usual ch
 
 This is one of the simplest choices. All you need is a suitable bipolar transistor and a couple of resistors to build your circuit:
 
-![single transistor](../assets/sensors/single-switching-transistor.png)
+![single transistor](../../assets/sensors/single-switching-transistor.png)
 /// caption
 A simple transistor switch
 ///
@@ -104,7 +109,7 @@ One possible concern with the basic transistor circuit is the current needed fro
 
 To try and address this issue, some builders have used a driver chip that contains a number of Darlington pair transistors. A fairly common choice used to be something like the ULN2003 - a seven channel Darlington  transistor array. Internally, each channel looks like this:
 
-![ULN2003 Channel](../assets/sensors/ULN2003-channel.png)
+![ULN2003 Channel](../../assets/sensors/ULN2003-channel.png)
 /// caption
 Using a Darlington Transistor Array
 ///
@@ -123,7 +128,7 @@ If you have a 5 Volt rail and fancy the convenience of a single IC, this may be 
 
 For switching circuits like these it is rather more common to find an N-channel MOSFET used in place of the bipolar device in the first circuit. Compared to bipolar transistors, MOSFETs often provide lower losses, need almost no  drive current and can switch faster.
 
-![MOSFET Switch](../assets/sensors/single-mosfet-driver.png)
+![MOSFET Switch](../../assets/sensors/single-mosfet-driver.png)
 /// caption
 Using a MOSFET
 ///
@@ -158,7 +163,7 @@ A simple modification to the circuit can provide protection in such a case while
 
 To limit the possible current to some safe value, a series resistor, here it is R11, can be placed in series with the LED supply voltage. Clearly, this would also limit the current during the illumination time so a reservoir capacitor, C3, is added in parallel with the LED, its current limit resistor and the transistor, to provide the main illuminating current.
 
-![LED Protection](../assets/sensors/led-protection.png)
+![LED Protection](../../assets/sensors/led-protection.png)
 /// caption
 Protecting the LED
 ///
@@ -200,7 +205,7 @@ So you might pick a standard value like 100$\mu$F to be on the safe side.
 
 Consider now a switched emitter drive using a single bipolar transistor using some of the design decisions already discussed, using a 100 Ohm safety resistor, R11, a 100uF reservoir capacitor C3, and BC337-40 transistor:
 
-![Pulsed Bipolar Drive](../assets/sensors/pulsed-bipolar-drive.png)
+![Pulsed Bipolar Drive](../../assets/sensors/pulsed-bipolar-drive.png)
 /// caption
 Pulsed Bipolar Drive
 ///
@@ -226,7 +231,7 @@ The time constant for the capacitor voltage is R*C = $100 * 100 * 10^{-6}$ = 10m
 
 A SPICE simulation in KiCAD confirms the calculation
 
-![pulsed power on behaviour](../assets/sensors/pulsed-bipolar-power-on.png)
+![pulsed power on behaviour](../../assets/sensors/pulsed-bipolar-power-on.png)
 /// caption
 Pulsed Bipolar Power On Behaviour
 ///
@@ -235,7 +240,7 @@ Pulsed Bipolar Power On Behaviour
 
 The design called for 300mA pulses of 25us duration. It looks like they are OK but zooming in on just one pulse reveals that the current is a bit high and that it quickly droops a little. The droop is just the capacitor discharging slightly during the pulse.
 
-![Pulsed Bipolar - single pulse](../assets/sensors/pulsed-bipolar-single-pulse.png)
+![Pulsed Bipolar - single pulse](../../assets/sensors/pulsed-bipolar-single-pulse.png)
 /// caption
 Pulsed Bipolar - Single Pulse
 ///
@@ -244,7 +249,7 @@ Since the droop is quite modest, let's pretend it is flat and recalculate the va
 
 After changing R8 to 6.8 Ohms, the pulse looks like this:
 
-![Pulsed Bipolar - Corrected Single Pulse](../assets/sensors/pulsed-bipolar-single-pulse-corrected.png)
+![Pulsed Bipolar - Corrected Single Pulse](../../assets/sensors/pulsed-bipolar-single-pulse-corrected.png)
 /// caption
 Pulsed Bipolar - Corrected Single Pulse
 ///
