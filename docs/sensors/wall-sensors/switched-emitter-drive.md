@@ -1,14 +1,11 @@
 ---
-# 1. FRONT MATTER (REQUIRED)
-# The MkDocs title is automatically used for the navigation and the page heading.
-# title: Template
-subtitle: 
-description:
+layout: default
+title: Switched Drivers
+parent: Sensors
 # icon: octicons/dot-fill-16
-# icon: octicons/dot-16
-icon: octicons/dash-16
+icon: octicons/dot-16
+# icon: octicons/dash-16
 # icon: octicons/chevron-right-12
-status:
 ---
 
 # Switched Emitter Driving

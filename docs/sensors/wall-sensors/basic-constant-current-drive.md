@@ -1,14 +1,11 @@
 ---
-# 1. FRONT MATTER (REQUIRED)
-# The MkDocs title is automatically used for the navigation and the page heading.
-# title: Template
-subtitle: 
-description:
+layout: default
+title: Constant Current Drivers
+parent: Sensors
 # icon: octicons/dot-fill-16
-# icon: octicons/dot-16
-icon: octicons/dash-16
+icon: octicons/dot-16
+# icon: octicons/dash-16
 # icon: octicons/chevron-right-12
-status:
 ---
 
 # Basic Constant Current Drive for Sensor Emitters
@@ -31,7 +28,7 @@ What is needed is a way to keep the current through the LED constant even if the
 ## Constant current
 There are many ways to create a constant current drive. Ideally, the current would be completely independent of VDD but, of course there will be some lower limit below which there will not be enough headroom to fully accommodate the forward voltage drop of the LEDs. These circuits vary in their complexity and effectiveness. With space at a premium, builders want a simple solution wherever possible.
 
-## Simple Solution
+### Simple Solution
 The resistor R8 in the previous circuit limits the current that can flow through the LEDs. It has no other purpose. Suppose, however, we place the current limit resistor on the emitter of the drive transistor instead of between the collector and the LED. 
 
 ![current regulated circuit](../../assets/sensors/current-regulated.png)
@@ -64,7 +61,7 @@ Note that, because the transistor is operating in its linear region, it will dis
 
 
 
-## Simulating the Circuit
+### Simulating the Circuit
 
 Running this circuit through the simulator shows that the voltage on the capacitor, $V_{cap}$ still takes just as long to get to a stable value but the LED current pulses stabilise well before that.
 
@@ -82,7 +79,7 @@ Single 328mA pulse from Basic Regulator
 
 It is clear that there is no droop and the current pulse is nice and constant. The current rises to the same value as in the switched case but is now sustained throughout the pulse as the transistor compensates for any droop in the capacitor voltage.
 
-## Testing Compliance
+### Testing Compliance
 
 Compliance is the ability of the circuit to provide a consistent current for a range of input voltages. The power-up data shown above imply that, as long as the supply voltage is greater than 4.5 Volts, regulation will be good. Just to illustrate the point, the simulation can be run again with the supply voltage set to 8.4 Volts, corresponding to a freshly charged 2S LiPo battery.
 
@@ -93,7 +90,35 @@ Compliance is the ability of the circuit to provide a consistent current for a r
 
 Exactly as before, the pulses stabilise quickly at the same level and remain unaffected by the supply voltage.
 
-## Sources of error
+A simple test with actual devices in a real circuit confirms the simulation results. The following circuit was used:
+
+
+![Constant Current Compliance Test](../assets/sensors/constant-current-compliance-basic-circuit.png)
+/// caption
+Constant Current Driver Compliance Test Circuit
+///
+
+
+Tests were run with a range of values for the emitter resistor, R6 to give currents between about 110mA and 480mA. This was done for both the SFH4550 and TLCR5800 LEDs. The current through the emitter resistor was measured for convenience. This will be close to the LED current so long as the transistor gain is high enough since the emitter current is the sum of the base and collector currents ($I_e = I_b + I_c$).
+
+![Constant Current Compliance Results SFH4550](../assets/sensors/current-regulation-SFH4550.png)
+/// caption
+Compliance Test - SFH4550
+///
+
+![Constant Current Compliance Results SFH4550](../assets/sensors/current-regulation-TLCR5800.png)
+/// caption
+Compliance Test - TLCR5800
+///
+
+There are three important observations to be made in the data.
+
+- first, at lower currents, up to about 250mA, regulation for both LEDs is very good across a wide range of voltages - extending down to about 6 Volts.
+- second, it is apparent from the high current results that regulation is less good. This is largely a result of the normal behaviour of bipolar transistors. At higher currents the transistor’s gain falls, and the collector current becomes more sensitive to $V_{CE}$ due to the [Early effect](https://circuitcellar.com/resources/quickbits/early-effect/), which reduces the effectiveness of the current regulation.
+- third, as the LED forward voltage increases with current, the available headroom at lower supply voltages is reduces and regulation suffers.
+
+
+### Sources of error
 
 This is **not** a *precision* current source. While it can compensate very well for variations in supply voltage, it is subject to some change in the $V_{BE}$ behaviour with temperature and it will be affected by the actual voltage available from the GPIO pin.
 
@@ -108,18 +133,34 @@ There are some modest sources of error or inaccuracy but overall, for its intend
 When choosing a transistor for Q5, several types will do the job. Aim for something that can pass several hundred milliamps while still having a current gain of at least 100. The BC337-40 has proven reliable and is cheap and commonplace.
 
 
-## Circuit Protection
+### Circuit Protection
 
-The resistor R11 is there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. REplacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to at least 12150
-0 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to approach 6.5 Volts.
+The resistor R11 is there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. REplacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to at least 150 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to approach 6.5 Volts.
 
-## Other LED types
+Even so, some practical experiments with two popular emitters - the SFH4550 and TLCR5800 - show that the circuit can produce very stable currents across a wide range of supply voltages even with a robust on-current protection setup. The circuit used for the tests is this:
+
+![Constant Current Compliance Test With Protection](../assets/sensors/constant-current-compliance-circuit.png)
+/// caption
+Constant Current Driver Compliance Test Circuit With Protection
+///
+
+The actual current through the sense resistor was measured for a range of values for $V_{CC}$ with two different LED types and with either 10 Ohms or 22 Ohms to set the current.
+
+![Constant Current Compliance Test With Protection](../assets/sensors/compliance-with-circuit-protection.png)
+/// caption
+Constant Current Driver Compliance Results With Protection
+/// 
+
+As you might expect from the preceding discussions, the higher forward voltage of the visible-light TLCR5800 requires a higher minimum voltage before the current is really stable.
+
+
+### Other LED types
 
 All the calculations so far have been for  an IR LED like the SFH4550. If you wanted to use a high intensity visible type like TLCR5800, the only change will be the minimum supply voltage needed  ensure correct operation at the intended current. With the current still at 328mA, the TLCR5800 will need around 5.75 Volts on the capacitor before the pulses stabilise. That is still, just, possible with a supply voltage of 6.5 Volts but no less. That 6.5 Volts is the lowest that you should allow a 2S LiPo battery to operate at - certainly for more than a few seconds.
 
 Recall that most use cases in micromouse robots do not require LED currents to be that high unless your detector is a photodiode and you need to reduce the load resistance to better match the ADC input.
 
-## Possible Improvements
+### Possible Improvements
 
 Now that the LED current pulses are better regulated, it might be worth revisiting the reservoir capacitor calculation. Large value Tantalum capacitors are expensive and take up space so you might consider reducing the value. In this circuit, and still using 328mA pulses through a SFH4550 LED, the capacitor C3 can be reduced to as little as 10uF and still give good current pulses. The ripple on the $V_{cap}$ voltage will be much greater and the circuit should still operate at the lower limit of the intended supply range. Because the transistor is regulating the current through the LED, the actual value if $V_{cap}$ is less critical. With a visible light LED, the pulses will begin to droop fairly quickly. As already mentioned, consider reducing the current to manage that.
 
@@ -127,7 +168,7 @@ Take care though before using MLCC capacitors instead of Tantalums. Typical MLCC
 
 
 
-## Other Current Regulators
+### Other Current Regulators
 
 If you feel the need for more reliable or accurate solutions, have a look atthe [Improved Current Regulation]() page.
 
