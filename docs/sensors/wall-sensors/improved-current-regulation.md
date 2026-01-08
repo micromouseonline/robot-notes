@@ -11,17 +11,22 @@ icon: octicons/dot-16
 status:
 ---
 
-# Placeholder
+# Advanced Emitter Control
 
-This page intentionally blank
+This page will examine some other options for controlling the emitters.
 
-Sections to illustrate the TOC feature
+## Better Current sink
 
-## Section 1
-Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim.
+Improved constant current circuit with better regulation. More parts though.
 
-### Sub 1.1
-Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim.
+**Details to follow**
+
+## Multiple Output Levels
+
+The requirements for running along orthogonal straights and diagonal straights are a little different since the range of expected sensor signals changes with the orientation and distance of the walls. Diagonal running can produce much stronger responses than orthogonal paths. To deal with that, some builders have a reduced emitter output that is used only for diagonals.
+
+**Details to follow**
+
 
 
 
