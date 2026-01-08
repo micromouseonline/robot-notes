@@ -19,7 +19,20 @@ This page will examine some other options for controlling the emitters.
 
 Improved constant current circuit with better regulation. More parts though.
 
-**Details to follow**
+### MOSFETS
+
+One of the improvements for the basic switched emitter control was to replace the bipolar transistor with a MOSFET. You might want to try that with the constant current regulation method but there are a couple of issues that might make it a little tricky.
+
+The first problem is finding a suitable device. MOSFETS are voltage operated devices. As the voltage on the gate, $V_{GS}$, increases, the resistance between Drain and Source will decrease. The gate draws very little current when operating normally. If you look at datasheets for typical MOSFET devices, you will see a value quoted for the gate-source threshold voltage ($V_{GS(th)}$). This is the gate voltage at which the body of the MOSFET only just begins to conduct. The Drain-Source resistance, $R_{DS}$, will still be quite high. As $V_{GS}$ increases, the value of $R_{DS}$ will fall , often to quite small values. Elsewhere in the datasheet, you will often find some minimum value, $R_{DS(on)}$ with a corresponding $V_{GS}$. Alternatively, you might see a maximum continuous current, again with an associated $V_{GS}$. For many through-hole parts, this can be quite large. 
+
+The ZVN4206A is an attractive MOSFET in a convenient TO92 package. See the [datasheet](https://www.diodes.com/assets/Datasheets/ZVN4206A.pdf){target="_blank}
+
+In the datasheet for the ZVN4206A, $V_{GS(th)}$ is given as no more than 3 Volts. It could, then, be turned on by a GPIO pin delivering 3.3 Volts. However, the transfer characteristics graph indicates that the resistance would be quite high and the device may only be able to pass 100mA - 200mA at best. This is marginal for reliability and a greater margin would be good. A 5 Volt GPIO pin could definitely turn it on and the same graph in the datasheet indicates that it could then pass more than 1 Amp.
+
+In short, it should be possible to replace the bipolar transistor used in the basic constant current circuit with a ZVN4206A MOSFET. BUT **only** if you have a 5 Volt GPIO pin. With a 3.3 Volt GPIO level, it may work or it may not depending on the exact device in use. You will be wanting more certainty than that.
+
+
+**More Details to follow**
 
 ## Multiple Output Levels
 
