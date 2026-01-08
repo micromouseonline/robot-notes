@@ -45,10 +45,17 @@ As the current through the MOSFET rises, so too does the voltage across the sens
 
 Just like the bipolar version of this regulator, there must still be some headroom in the supply voltage for the MOSFET to operate correctly. If the value of $R_{DS(on)}$ cannot fall low enough with the available $V_{GS}$, the transistor will saturate and regulation is no longer possible. The supply voltage must exceed the sum of the LED forward voltage. the sense resistor voltage drop and the MOSFET' required $V_{DS}$ for regulation.
 
-In short, it should be possible to replace the bipolar transistor used in the basic constant current circuit with a ZVN4206A MOSFET. BUT **only** if you have a 5 Volt GPIO pin. With a 3.3 Volt GPIO level, it is unlikely to work without very small sense resistor values. Even for the same part number, some devices can have $V_{GS(th)}$ as low as 1.3 Volts while for others it may be 3.0 Volts. You really want more certainty than that. In fact, a device like the ZVN4206 is going to be inherently unreliable with only a 3.3 Volt gate drive.
+In short, it should be possible to replace the bipolar transistor used in the basic constant current circuit with a ZVN4206A MOSFET. BUT **only** if you have a 5 Volt GPIO pin. With a 3.3 Volt GPIO level, it is unlikely to work without very small sense resistor values. Even for the same part number, some devices can have $V_{GS(th)}$ as low as 1.3 Volts while for others it may be 3.0 Volts. You really want more certainty than that. A device like the ZVN4206 is going to be effectively unusable with only a 3.3 Volt gate drive.
 
 There are MOSFET devices with lower values for $V_{GS(th)}$ and which can reach low values of $R_{DS}$ even for relatively small gate voltages. These are typically described as "logic-level" MOSFETS, designed to switch on fully with a 3.3V logic '1' from a GPIO pin. Unfortunately, these are rare in friendly, small packages for through-hole use. They are, however, plentiful in SMT packages like SOT-23. When selecting a device to be used in this current regulating circuit, always bear in mind the additional voltage at the Source pin due to the drop across the current sense resistor.
 
+
+
+### Constant Current Diodes
+
+**More Details to follow**
+
+### Op-amp feedback for the MOSFET
 
 **More Details to follow**
 
