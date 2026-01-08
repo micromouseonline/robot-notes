@@ -39,7 +39,10 @@ The length of each pulse and the repetition frequency will vary according to you
 
 Usually the measurements are repeated once per control cycle. That may be 500Hz or 1kHz. Some users sample multiple times per control cycle, others have control cycles with higher frequencies.
 
-*** DIAGRAM OF OPERATION ***
+![Sensor Operation](../../assets/sensors/sensor-operation.png)
+/// caption 
+Principal of Operation
+///
 
 ## Driving the Emitter LED
 
