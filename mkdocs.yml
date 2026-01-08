@@ -113,6 +113,7 @@ nav:
   - Sensors:
     - sensors/index.md
     - Micromouse:
+      - sensors/wall-sensors/index.md   
       - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
       - Basic Constant Current: sensors/wall-sensors/basic-constant-current-drive.md
