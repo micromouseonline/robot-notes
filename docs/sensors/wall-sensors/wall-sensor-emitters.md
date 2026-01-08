@@ -63,6 +63,9 @@ There are several ways you can drive the LED. In terms of the triggering signal,
     Depending on the type of emitter controller you use, it might be necessary to provide quite large currents from the GPIO pins. A MOSFET draws almost no current while operating but may need a surprisingly large current spike when it is turned on or off. Bipolar transistors can require significant currents, even when used as switches. A single bipolar transistor with a gain of 50 will need at least 10mA into the base to keep it turned hard on in a switching configuration to supply 500mA through a LED. Processor GPIO pins have upper limits on the available current and this is likely to be in the range 10mA to 20mA. Some can manage less than that. You may have to increase the drive current in software to get the most from the pin. It is also quite possible that the default pin configuration in your chosen software environment is inadequate for the task.
 
 
+One thing is absolutely certain. The GPIO pin alone cannot drive the emitter LED. Some kind of external device or circuit is needed to provide the LED current.
+
+
 
 ## Emitter Control Methods
 
