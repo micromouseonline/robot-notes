@@ -21,8 +21,9 @@ Improved constant current circuit with better regulation. More parts though.
 
 ### MOSFETS
 
-One of the improvements for the basic switched emitter control was to replace the bipolar transistor with a MOSFET. The MOSFET can be simply swapped with the BJT - the source goes to the current sense resistor, the gate to the GPIO and the Drain to the LED cathode.
-You might want to try that with the constant current regulation method but there are a couple of issues that might make it a little tricky.
+One of the improvements for the basic switched emitter control was to replace the bipolar transistor with a MOSFET. In the basic constant current circuit, the MOSFET can also be simply swapped with the BJT - the source goes to the current sense resistor, the gate to the GPIO and the Drain to the LED cathode.
+
+There are, however, a couple of issues that should give you pause for thought.
 
 *** Circuit for MOSFET version ***
 
