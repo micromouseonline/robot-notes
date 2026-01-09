@@ -20,7 +20,8 @@ Note that IR emitters used in micromouse sensor can produce a lot of energy. The
 
 !!! danger "Safety with IR emitters"
 
-    Never look into IR emitters. The light is invisible and can cause permanent damage.
+    Never look into IR emitters. The light is invisible and can cause permanent eye damage at high intensities.
+    
 
 Datasheets for the two devices used in this guide are available here:
 
