@@ -31,7 +31,18 @@ Datasheets for the two devices used in this guide are available here:
 
 It is impractical to constantly drive an LED at a high enough brightness for it to be effective as a wall sensor. Not only would it be very wasteful of the available battery power, the LEDs will soon be destroyed by the heat built up.
 
-In almost all cases, the emitters will be pulsed on and off. Generally, the scheme is to measure the ambient light, light up the LED and then measure the reflected light. The difference between the two reading will then be dependent upon the walls and the effect of ambient light will be reduced - ideally to zero. Finally, the LED is turned off until the next cycle.
+
+### Cancellation of Ambient Illumination
+
+It is all well and good to turn on the emitter LED and then measure the amount of light reflected by the walls. However, some of that light comes from the other sources of illumination in the area - the ambient illumination. By making only one measurement, it is not possible to work out anything about the ambient light levels. Remember, if you are using IR sensors, you are unable to see any of that anyway so you cannot make a judgement about it either.
+
+The usual method for handling this is to read the detectors twice. First, take a reading with the LED off. This is the ambient light level. Then, turn on the LED, wait a few microseconds to make sure everything is stable and then take another reading. This reading, coming very soon after the ambient reading, should have the same ambient component plus whatever is purely the result of any nearby objects reflecting the LED light. Thus any changes in the ambient level, that happen relatively slowly, will be cancelled out. Note that modern LED lighting may not contain much of an IR component but may be flashing quite rapidly - perhaps hundreds of times per second. Finally, remember to turn off the emitter again.
+
+Now you can just subtract the ambient reading from the 'lit' reading to get the raw, reflected intensity reading:
+
+$$ I_{RAW} = I_{LIT} - I_{AMB} $$
+
+In almost all cases then, the emitters will be pulsed on and off.
 
 By making the light pulses extra bright, they will dominate the response and a less sensitive detector can be used. Having a less sensitive detector makes it easier to eliminate the effect of high ambient illumination. To get the extra light out of the LED, you will want to put a current through it which is significantly larger than the normal, safe maximum continuous current specified in the datasheet. The datasheet will normally include an indication of the maximum permitted pulse current along with an associated duty cycle. That aim is to limit the average power dissipation in the device.
 
@@ -60,7 +71,7 @@ There are several ways you can drive the LED. In terms of the triggering signal,
 
  - Current Available:
 
-    Depending on the type of emitter controller you use, it might be necessary to provide quite large currents from the GPIO pins. A MOSFET draws almost no current while operating but may need a surprisingly large current spike when it is turned on or off. Bipolar transistors can require significant currents, even when used as switches. A single bipolar transistor with a gain of 50 will need at least 10mA into the base to keep it turned hard on in a switching configuration to supply 500mA through a LED. Processor GPIO pins have upper limits on the available current and this is likely to be in the range 10mA to 20mA. Some can manage less than that. You may have to increase the drive current in software to get the most from the pin. It is also quite possible that the default pin configuration in your chosen software environment is inadequate for the task.
+    Depending on the type of emitter controller you use, it might be necessary to provide quite large currents from the GPIO pins. A MOSFET draws almost no current while operating but may need a surprisingly large current spike when it is turned on or off. Bipolar transistors can require significant currents, even when used as switches. A single bipolar transistor with a gain of 50 will need at least 10mA into the base to keep it turned hard on in a switching configuration to supply 500mA through a LED. Processor GPIO pins have upper limits on the available current and this is likely to be in the range 10mA to 20mA. Some can manage less than that. You may have to increase the drive current in software to configure the pin for increased drive to get the most from the pin. It is also quite possible that the default pin configuration in your chosen software environment is inadequate for the task.
 
 
 One thing is absolutely certain. The GPIO pin alone cannot drive the emitter LED. Some kind of external device or circuit is needed to provide the LED current.
