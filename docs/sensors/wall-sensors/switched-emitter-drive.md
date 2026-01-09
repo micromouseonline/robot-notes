@@ -78,21 +78,23 @@ For a visible light LED like the TLCR5800, that voltage drop can be higher. The 
 
 This resistor is used to limit the current that can flow through the LED. If the current is too high, or allowed to flow for too long, the LED can be damaged or destroyed. There is a power supply, $V_{LED}$, that can provide the current needed. Assume for a moment that the transistor, Q2, can be turned fully on and the voltage between collector and emitter, $V_{CE}$, is 0.2 Volts. It may be a little higher or lower, depending on the actual transistor type and the current we want through the LED.
 
-The LED and the transistor then may account for about 2.5 Volts and we should be able to have $V_{LED}$ as low as 3.3 Volts and still get the circuit to operate.
+The LED and the transistor then may account for about 2.5 Volts in this circuit and we should be able to have $V_{LED}$ as low as 3.3 Volts and still get the circuit to operate.
 
 Suppose $V_{LED}$ is 3.3 Volts. There is $3.3 - 2.5 = 0.8 Volts$ across R8 and, if we want 500mA to flow, R8 must have the value $0.8/0.5 = 1.6\Omega$
 
 That all seems well and good so long as the 3.3 Volt supply can provide the required current. It should be clear that, if the supply were 5 Volts, the value of R8 should increase. The voltage drop is now $(5.0 - 2.5) = 2.5 Volts$ and the current is 0.5 Amps so $R8 = 2.5/0.5 = 5\Omega$.
 
+Different devices will result in different forward and saturation voltages so be sure to check your datasheets.
+
 The power dissipation in R8 will increase significantly to $0.5^2 \times 5 = 1.25W$ if run continuously but we have a 4% duty cycle so the average power will be 50mW. Leaving the LED switched on with that high a current is going to destroy the resistor, or the LED, or both, quite quickly.
 
 For many micromouse designs, 250mA through an IR LED is more than sufficient and, with a 3.3 Volt supply, R8 could be 3.3 Ohms. For some configurations, such as the use of photodiode detectors, the design goal might be to have pulse currents nearer 1 Amp.
 
-But, what if the design required  a visible light LED like the TLCR5800. Now the forward voltage drop of the LED alone, especially at high currents, may exceed the available voltage from a 3.3 Volt supply and only a 5.0 Volt supply will do.
+But, what if the design required a visible light LED like the TLCR5800. Visible light LEDs typically have higher forward voltages for the same current and that voltage will increase more steeply with current. Now the forward voltage drop of the LED alone, especially at high currents, may exceed the available voltage from a 3.3 Volt supply and only a 5.0 Volt supply will do.
 
 #### The Transistor, Q2
 
-It is always possible to go exotic with transistor choices but simple is often better. Here the BC337-40 has been chosen because it is cheap, easy to find and has characteristics that are adequate for most use cases. This transistor has a current gain of about 100 even at the kinds of collector current we have considered. For safety though, consider the current gain to be just 50 and the maximum collector current we need to be just 500mA. That means the base will need $500/50 = 10mA$ which is well within he capabilities of most microprocessor IO pins. 
+It is always possible to go exotic with transistor choices but simple is often better. Here the BC337-40 has been chosen because it is cheap, easy to find and has characteristics that are adequate for most use cases. This transistor has a current gain of about 100 even at the kinds of collector current we have considered. This circuit will operate the transistor in saturation where the current gain is going to be lower than the $h_{FE}$value given in the datasheet for operation in the active region. For safety then, consider the current gain to be just 50 and the maximum collector current we need to be just 500mA. That means the base will need $500/50 = 10mA$ which is well within the capabilities of most microprocessor IO pins. 
 
 At higher currents, the saturation voltage, $V_{CE(sat)} may rise to 0.7 Volts but would normally be about 0.3 - 0.4 Volts.
 
@@ -102,7 +104,11 @@ To the processor, the base will just look like a diode connected to ground. Supp
 
 If the LED current required is substantially higher, the base current will need to be higher as well. Do not reduce the base resistor any more than needed to get the required transistor base current. You microcontroller will not play well with large current demands from its IO pins. Processor pins are commonly limited to values less than 20mA per pin so a minimum value might be no less than 150 Ohm.
 
+In general, the base current is not well controlled and the value of $V_{BE}$ can vary between 0.65 Volts and 0.9 Volts depending on the current flowing, temperature and device variations.
+
 If you are expecting higher output currents from the IO pins, check to see if your processor of choice has settings that limit the amount of drive available. The STM32 series do this as a power saving option so make sure sufficient drive is available.
+
+Note also that, while an individual IO pin on your MCU may be able to deliver 20mA, there will be a limit on the total current across all pins. Check that other pin usage is not going to contribute to an overload.
 
 --- 
 
@@ -119,13 +125,13 @@ To try and address this issue, some builders have used a driver chip that contai
 Using a Darlington Transistor Array
 ///
 
-A pair of transistors are connected together in such a way as to greatly increase the current gain. the other components ensure that the output transistor is turned hard on with an input voltage of at least 3.0 Volts. Perfect for modern processors with output voltages of 3.3 Volts. These chips were originally intended to drive things like stepper motors and relays so they include additional protection circuitry that does not really concern us here.
+A pair of transistors are connected together in such a way as to greatly increase the current gain. The other components ensure that the output transistor is turned hard on with an input voltage of at least 3.0 Volts. Perfect for modern processors with output voltages of 3.3 Volts. These chips were originally intended to drive things like stepper motors and relays so they include additional protection circuitry that does not really concern us here.
 
 While convenient in many ways, the ULN2003 does have some limitations. 
 
 First, they are only rated for a peak maximum current of 500mA per channel. If you feel a need for more, you can connect channels in parallel. The device as a whole can handle up to 2.5 Amps in total.
 
-Second, when fully turned on, the voltage drop between the output and ground may be as high as 1.6 Volts according to the data sheet. When you add that to the 2.1 - 2.3 Volts dropped by an IR LED, it is clear that these devices are only really useful in systems that can provide a 5 Volt supply. You still need to calculate an appropriate current limit resistor value though you no longer need to worry about the base resistor since only about 1mA is needed to fully turn on the output. With a high-brightness visible light LED like the TLCR5800, even operation at 5 Volts maybe difficult with very high currents.
+Second, when fully turned on, the voltage drop between the output and ground may be as high as 1.6 Volts according to the data sheet. When you add that to the 2.1 - 2.3 Volts dropped by an IR LED, it is clear that these devices are only really useful in systems that can provide a 5 Volt supply. Because the Darlington consumes so much voltage, the current limit resistor has less headroom and must be chosen carefully. You no longer need to worry too much about the base resistor since only about 1mA is needed to fully turn on the output - larger values will be fine. Probably around 470 Ohms. With a high-brightness visible light LED like the TLCR5800, even operation at 5 Volts may be difficult with very high currents.
 
 If you have a 5 Volt rail and fancy the convenience of a single IC, this may be the device for you.
 
@@ -142,13 +148,15 @@ MOSFETs can bring distinct advantages in this application. Driving the gate of a
 
 You will also see an additional resistor of 10kOhm from the gate to ground. This is a safety precaution to ensure reliable operation of the device. During processor startup following a reset, or in the case of a poorly configured output pin, the gate may be left floating. That is, it might have no connection to any other part of the circuit. In that state, because it takes only very tiny gate currents to operate a MOSFET, you may find the device being turned on by stray signals. For example, simply touching the board may be enough to turn on the LED. Since the gate takes almost no current it is even possible to turn on the MOSFET with stray charge and have it stay on for a long time. At the high currents used, this is going to damage or destroy the LED. The resistor between gate and ground, R10, ensures that the transistor is always turned off unless the processor explicitly turns it on.
 
-Selection of a suitable MOSFET is not terribly simple. Common parts for through-hole use may need surprisingly high voltages between the gate and ground ($V_{gs}$) before they fully turn on. Even then they may not be able to pass the design current. Parts like the ZVN4306A are useful only if your processor can provide 5 Volts on its output pins. 
+Selection of a suitable MOSFET is not terribly simple. Common parts for through-hole use may need surprisingly high voltages between the gate and ground ($V_{gs}$) before they fully turn on. Most of these devices were designed some time ago when higher supply voltages (and therefore, higher gate drive voltages) were more common. Even then they may not be able to pass the design current. Parts like the ZVN4306A are useful only if your processor can provide 5 Volts on its output pins. 
 
 Many surface mount parts, like the DMG3202U, are much better suited to the task and can easily pass 1 Amp with only 3 Volts at the gate .
 
 #### Calculating Current with R8
 
-Just like the bipolar version, the amount of current through the LED will depend upon the supply voltage, $V_{LED}$ and the value of the resistor R8. The better MOSFETs, like DMG3202U, have on-state resistances ($R_{DS(ON)}$) of only a few tens of milliOhms and so they can be ignored for this purpose. Even with a current of 1 Amp, the MOSFET might only have a voltage drop of around 20 milliVolts. It is only necessary to consider the LED forward voltage drop. For example, with a supply voltage of 3.3 Volts an IR LED like SFH4550 could operate at 500 mA with a value for R8 of
+Just like the bipolar version, the amount of current through the LED will depend upon the supply voltage, $V_{LED}$ and the value of the resistor R8. The better MOSFETs, like DMG3202U, have minimum on-state resistances ($R_{DS(ON)}$) of only a few tens of milliOhms and so they can be ignored for this purpose. Always check that the RDS(on) value is specified at the gate voltage you actually have — ideally 2.5 V or 3.0 V.
+
+Even with a current of 1 Amp, the MOSFET might only have a voltage drop of around 20 milliVolts. It is only necessary to consider the LED forward voltage drop. For example, with a supply voltage of 3.3 Volts an IR LED like SFH4550 could operate at 500 mA with a value for R8 of
 
 $$
 R8 = \frac{3.3 - 2.0}{0.5} = 2.6\Omega
@@ -157,6 +165,23 @@ $$
 ### Choosing a MOSFET
 
 This is a simple switching circuit. When searching for a suitable MOSFET, you should look for **logic-level** devices. That is, devices designed to turn fully on with only about 3 Volts at the gate. Always check. Do not be misled by a low threshold voltage ($V_{GS(th)}$). This is just the gate-source voltage at which the MOSFET only just starts to conduct and will typically be quite small.
+
+## Device Comparison
+
+| Feature / Property | **Single BJT (e.g., BC337‑40)** | **Darlington Array (e.g., ULN2003)** | **Logic‑Level MOSFET (e.g., DMG3202U)** |
+|-------------------|----------------------------------|---------------------------------------|------------------------------------------|
+| **GPIO drive current needed** | Moderate (5–15 mA typical) | Very low (~1 mA) | Extremely low (almost zero; only gate charge) |
+| **Voltage drop when ON** | Low (0.2–0.4 V typical, up to ~0.7 V at high current) | High (1.0–1.6 V typical) | Very low (tens of millivolts) |
+| **Efficiency / wasted power** | Good | Poor (large VCE(sat)) | Excellent |
+| **Suitable for 3.3 V supply** | Usually yes | Often no (too much voltage lost) | Yes, if using a true logic‑level MOSFET |
+| **Peak current capability** | Good (depends on transistor) | Limited (500 mA per channel) | Excellent (1 A+ easily in SOT‑23 parts) |
+| **Switching speed** | Moderate | Slow (due to Darlington storage time) | Fast (clean rise/fall, no saturation delay) |
+| **Component count** | 1 transistor + 1–2 resistors | Single IC + 1 resistor | 1 MOSFET + 1–2 resistors |
+| **Ease of driving from MCU** | Requires base‑resistor sizing | Very easy (internal resistors) | Very easy (tiny gate current) |
+| **Thermal behaviour** | Moderate | Runs hot at high current | Cool (low dissipation) |
+| **Best use case** | Simple, cheap, moderate currents | Convenience when using 5 V and low currents | High‑current, fast, efficient LED pulsing |
+| **Worst limitation** | Needs significant base current | Huge voltage drop; limited current | Must choose correct logic‑level device |
+
 
 ## Circuit Safety
 
