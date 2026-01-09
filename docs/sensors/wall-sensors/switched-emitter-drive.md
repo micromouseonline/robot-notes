@@ -10,7 +10,7 @@ icon: octicons/dot-16
 
 # Switched Emitter Driving
 
-The fundamental task of the wall sensor emitters is to shine light on the walls so that it can be detected by some other device. It is nether practical, nor desirable to just turn on a LED and leave it on. Not only is the available light output not likely to be sufficient when the LED is operating safely within its limits, the light from each LED will also illuminate detectors other than the one for which it is intended.
+The fundamental task of the wall sensor emitters is to shine light on the walls so that it can be detected by some other device. It is neither practical, nor desirable to just turn on a LED and leave it on. Not only is the available light output not likely to be sufficient when the LED is operating safely within its limits, the light from each LED will also illuminate detectors other than the one for which it is intended.
 
 A better solution is to turn on each LED in turn for a brief period and measure the light reflected from just that LED. This brings a few benefits:
 
@@ -26,21 +26,25 @@ It may be safe to light up the two side sensors together, or the two front senso
 
 Depending on your detector circuit and software configuration, it can be possible that the signal of one sensor is affected by the signal from the previous sensor. This should be rare but it is worth experimenting with the order in which the sensors are read and the interval between readings if you suspect that one sensor is interfering with another.
 
+Note also that the detector should be well shielded from any light that may reach it from the emitter without bouncing off a wall. Wrap the devices with black heatshrink tubing to minimise that risk.
+
 ### Extra Bright Illumination
 
 In normal, continuous illumination a sensor LED might only be able to handle a relatively low current without overheating. For the SFH4550 IR LED, for example, that limit is only about 100mA. However, the same device is able to handle currents as high as 1 Amp (10x bigger) for short periods up to about 100us. The light output is proportional to current so you can create very bright pulses of light but only for a short time. The detector and processor typically only need a few tens of microseconds at most to capture the resulting reflection. 
 
-Pulsing the light like this reduces the average amount of current needed for each LED. If you were to turn each one on for just 25us out of every 1000us and provide a 250mA current pulse, the average current draw would be only 6mA and yet you are getting light pulses that are 2.5 times as bright as would be available for a continuous 100mA illumination. The saving is huge - especially for half-size robots where the batteries are necessarily much smaller. Note that the duty cycle - that is, the proportion of time that the LED is lit - should be kept low so that the average current is not exceeded.
+Pulsing the light like this reduces the average amount of current needed for each LED. If you were to turn each one on for just 25us out of every 1000us and provide a 250mA current pulse, the average current draw would be only 
 
-### Cancellation of Ambient Illumination
+$$
+I_{av} = 250mA \times \frac{25\mu s}{1000\mu s} = 6.25mA 
+$$
 
-It is all well and good to turn on the emitter LED and then measure the amount of light reflected by the walls. However, some of that light comes from the other sources of illumination in the area - the ambient illumination. By making only one measurement, it is not possible to work out anything about the ambient light levels. Remember, if you are using IR sensors, you are unable to see any of that anyway so you cannot make a judgement about it either.
+and yet you are getting light pulses that are 2.5 times as bright as would be available for a continuous 100mA illumination. The saving is huge - especially for half-size robots where the batteries are necessarily much smaller. Note that the duty cycle - that is, the proportion of time that the LED is lit - should be kept low so that the average current, and therefore the average power dissipation, is not exceeded.
 
-The usual method for handling this is to read the detectors twice. First, take a reading with the LED off. This is the ambient light level. Then, turn on the LED, wait a few microseconds to make sure everything is stable and then take another reading. This reading, coming very soon after the ambient reading, should have the same ambient component plus whatever is purely the result of any nearby objects reflecting the LED light. Thus any changes in the ambient level, that happen relatively slowly, will be cancelled out. Note that modern LED lighting may not contain much of an IR component but may be flashing quite rapidly - perhaps hundreds of times per second.
 
-Now you can just subtract the ambient reading from the 'lit' reading to get the raw, reflected intensity reading:
+Datasheets for the two devices used in this guide are available here:
 
-$$ I_{RAW} = I_{LIT} - I_{AMB} $$
+- [TLCR5800 Ultrabright Red LED](https://www.vishay.com/docs/83178/tlcr5800.pdf){target="_blank"}
+- [SFH4550 Infra Red Emitter](https://look.ams-osram.com/m/7d214b223a9adb85/original/SFH-4550.pdf){target = "_blank"}
 
 ---
 
@@ -62,13 +66,13 @@ This is one of the simplest choices. All you need is a suitable bipolar transist
 A simple transistor switch
 ///
 
-The circuit has some fairly arbitrary values so that's take them in turn and look at how to choose your own values.
+The circuit has some fairly arbitrary values so let's take them in turn and look at how to choose your own values.
 
 #### The LED
 
-Arguably the most important component. You may choose Infra Red (IR) or visible light devices. Aside from any optical properties, all LEDs will result in a forward voltage drop when current flows through them. For a typical IR LED - the SFH4550 - this will be about 2.0 Volts at 500mA, rising to 2.5 Volts at 1 Amp. This voltage will need to be taken into account when caclulating the current limit resistor R8.
+Arguably the most important component. You may choose Infra Red (IR) or visible light devices. Aside from any optical properties, all LEDs will result in a forward voltage drop $V_F$ when current flows through them. For a typical IR LED - the SFH4550 - this will be about 2.0 Volts at 500mA, rising to 2.5 Volts at 1 Amp. Pulse currents that large are only possible for short pulse times ($t_p$) at low duty cycles ($D$). The datasheet indicated that 1 Amp is possible for $t_s < 400\mu s$ and $D < 0.005$ . For sensor use, we might aim for $t_s = 40\mu s, D = 40/1000 = 4\%$. Clearly, operation with 1 Amp pulses will exceed the device ratings. Whatever current is chosen, the forward voltage will need to be taken into account when calculating the current limit resistor R8.
 
-For a visible light LED like the TLCR5800, that voltage drop can be much higher and might approach 3.5 Volts at 500mA, rising to 4.7 Volts at 1 Amp.
+For a visible light LED like the TLCR5800, that voltage drop can be higher. The datasheet indicates a typical 2.1 Volt drop at 50mA, rising to 2.3 Volts at 100mA, and 3 Volts at 480mA (measured). Very short pulses (10$\mu s$) of up to 1 Amp are possible at a low duty cycle - perhaps 40$\mu$s at 50Hz. Under such extreme conditions the forward voltage might approach 3.5 Volts or more during such a pulse. This should be regarded as a surge limit, not a desired operating point. For sensor use, with pulses of around 40$\mu$ s every 1000$\mu s$, a much more conservative limit of no more than 250mA is advisable if you want your LED to have a reasonable lifetime. The TLCR5800 is significantly less robust than the SFH4550.
 
 #### Current Limit Resistor R8
 
@@ -78,21 +82,25 @@ The LED and the transistor then may account for about 2.5 Volts and we should be
 
 Suppose $V_{LED}$ is 3.3 Volts. There is $3.3 - 2.5 = 0.8 Volts$ across R8 and, if we want 500mA to flow, R8 must have the value $0.8/0.5 = 1.6\Omega$
 
-That all seems well and good so long as the 3.3 Volt supply can provide the required current. It should be clear that, if the supply were 5 Volts, the value of R8 should increase to $(5.0 - 2.5) = 2.5/0.5 = 5\Omega$ 
+That all seems well and good so long as the 3.3 Volt supply can provide the required current. It should be clear that, if the supply were 5 Volts, the value of R8 should increase. The voltage drop is now $(5.0 - 2.5) = 2.5 Volts$ and the current is 0.5 Amps so $R8 = 2.5/0.5 = 5\Omega$.
 
-For many micromouse designs, 250mA through an IR LED is sufficient and, with a 3.3 Volt supply, R8 could be 5.6 Ohms. For others, the goal might be nearer 1 Amp.
+The power dissipation in R8 will increase significantly to $0.5^2 \times 5 = 1.25W$ if run continuously but we have a 4% duty cycle so the average power will be 50mW. Leaving the LED switched on with that high a current is going to destroy the resistor, or the LED, or both, quite quickly.
 
-But, what if the design required  a visible light LED like the TLCR5800. Now the forward voltage drop of the LED exceeds the available voltage from a 3.3 Volt supply and only a 5.0 Volt supply will do.
+For many micromouse designs, 250mA through an IR LED is more than sufficient and, with a 3.3 Volt supply, R8 could be 3.3 Ohms. For some configurations, such as the use of photodiode detectors, the design goal might be to have pulse currents nearer 1 Amp.
+
+But, what if the design required  a visible light LED like the TLCR5800. Now the forward voltage drop of the LED alone, especially at high currents, may exceed the available voltage from a 3.3 Volt supply and only a 5.0 Volt supply will do.
 
 #### The Transistor, Q2
 
 It is always possible to go exotic with transistor choices but simple is often better. Here the BC337-40 has been chosen because it is cheap, easy to find and has characteristics that are adequate for most use cases. This transistor has a current gain of about 100 even at the kinds of collector current we have considered. For safety though, consider the current gain to be just 50 and the maximum collector current we need to be just 500mA. That means the base will need $500/50 = 10mA$ which is well within he capabilities of most microprocessor IO pins. 
 
+At higher currents, the saturation voltage, $V_{CE(sat)} may rise to 0.7 Volts but would normally be about 0.3 - 0.4 Volts.
+
 
 #### The base resistor, R9
-To the processor, the base will just look like a diode connected to ground. Suppose the processor IO pin high voltage is 3.3 Volts. To limit the current from the processor to the 10mA we need, the base resistor, R9, should be chosen to be $(3.3 - 0.7)/0.01 = 260\Omega$.  The circuit has a value of 220 Ohms for a bit of extra margin.
+To the processor, the base will just look like a diode connected to ground. Suppose the processor IO pin high voltage is 3.3 Volts. Assume that the base-emitter voltage ($V_{BE}$) is around 0.7 Volts for the kind of base current required. To limit the current from the processor to the 10mA we need, the base resistor, R9, should be chosen to be $(3.3 - 0.7)/0.01 = 260\Omega$.  The circuit has a value of 220 Ohms for a bit of extra margin.
 
-If the LED current required is substantially higher, the base current will need to be higher as well. Do not reduce the base resistor any more than needed to get the required transistor base current. You microcontroller will not play well with large current demands from its IO pins. Processor pins are commonly limited to values less than 20mA per pin.
+If the LED current required is substantially higher, the base current will need to be higher as well. Do not reduce the base resistor any more than needed to get the required transistor base current. You microcontroller will not play well with large current demands from its IO pins. Processor pins are commonly limited to values less than 20mA per pin so a minimum value might be no less than 150 Ohm.
 
 If you are expecting higher output currents from the IO pins, check to see if your processor of choice has settings that limit the amount of drive available. The STM32 series do this as a power saving option so make sure sufficient drive is available.
 
@@ -200,7 +208,7 @@ So you might pick a standard value like 100$\mu$F to be on the safe side.
 
 ## Pulsed Bipolar Drive Example
 
-Consider now a switched emitter drive using a single bipolar transistor using some of the design decisions already discussed, using a 100 Ohm safety resistor, R11, a 100uF reservoir capacitor C3, and BC337-40 transistor:
+Consider now a switched emitter drive using a single bipolar transistor using some of the design decisions already discussed, using a 100 Ohm safety resistor, R11, a 100uF reservoir capacitor C3, and BC337-40 transistor. The GPIO output voltage is 3.3 Volts:
 
 ![Pulsed Bipolar Drive](../../assets/sensors/pulsed-bipolar-drive.png)
 /// caption
@@ -218,13 +226,23 @@ Goals:
 
 
 ### Average current:
-Assuming we can get a solid 300mA through the LED for the duration of the pulse, the average current through the LED will be 300mA * 25us/1000us = 7.5mA
+Assuming we can get a solid 300mA through the LED for the duration of the pulse, the average current through the LED will be 
+$$
+I_{av} = 300mA \times 25\mu s / 1000\mu s = 7.5mA
+$$
 
-### Average voltage on the storage capacitor
-If the average current through R11 is 7.5mA, we can expect the average voltage drop across it to be 7.5mA * 100 Ohm = 0.75 Volts. Therefore, the capacitor average voltage is $V_{cap}$ = 5.0 - 0.75 = 4.25 Volts
+### Average LED voltage
+If the average current through R11 is 7.5mA, we can expect the average voltage drop across it to be $7.5mA \times 100\Omega = 0.75 Volts$. Therefore, the capacitor average voltage is 
+$$
+V_{cap} = 5.0 - 0.75 = 4.25 Volts
+$$
 
-### Settling time for $V_{cap}$ after power up
-The time constant for the capacitor voltage is R*C = $100 * 100 * 10^{-6}$ = 10ms. It will take around 3 time constants to get close (95%) to the steady state so the circuit should be operating normally 30ms or so after power on.
+### Settling time
+The time constant for the capacitor voltage is 
+$$
+R \cdot C = 100 \times 100 \times 10^{-6} = 10ms. 
+$$
+It will take around 3 time constants to get close (95%) to the steady state so the circuit should be operating normally 30ms or so after power on.
 
 A SPICE simulation in KiCAD confirms the calculation
 
@@ -233,7 +251,7 @@ A SPICE simulation in KiCAD confirms the calculation
 Pulsed Bipolar Power On Behaviour
 ///
     
-#### Pulse current
+### Pulse current
 
 The design called for 300mA pulses of 25us duration. It looks like they are OK but zooming in on just one pulse reveals that the current is a bit high and that it quickly droops a little. The droop is just the capacitor discharging slightly during the pulse.
 
@@ -252,6 +270,10 @@ Pulsed Bipolar - Corrected Single Pulse
 ///
 
 Which is pretty acceptable. The peak is close to the target, the droop is small and the shape is stable.
+
+### Operating with 5V GPIO
+
+This circuit will operate just as well if the GPIO voltage is 5 Volts. The aim is to ensure the transistor is turned fully on and that is already possible with just 3.3 Volts. 
 
 ### Limitations
 
@@ -279,5 +301,9 @@ See the [Constant Current Drive Section](./basic-constant-current-drive.md) for 
 In the preceding sections, examples are given for circuits with quite large LED currents. You should not assume large currents are essential. These examples represent relatively extreme cases used to illustrate some issues that arise. Your robot will have its own needs and typical, commonly used configurations might only need LED currents that are around 250mA for a classic micromouse and much less for a half-size micromouse when the detecting element is a phototransistor.
 
 Detectors built with photodiodes are faster and more linear but produce much smaller photocurrents and so they may benefit from significantly brighter illumination and/or an amplification stage on the detector side.
+
+## Design Exercise
+
+As an exercise, try to design a switched bipolar emitter circuit able to deliver current pulses of 100mA for 40$\mu$s every millisecond. Assume the power supply is regulated at 3.3 Volts and that the GPIO voltage, $V_{IO}$, is 3.3 Volts. Use the SFH4550 LED.
 
 Note also that the emitter configuration is only a part of the sensor design. See also the pages on geometry and [detectors](./wall-sensor-detectors.md) for a more complete picture.
