@@ -187,7 +187,7 @@ This is a simple switching circuit. When searching for a suitable MOSFET, you sh
 
 Earlier it was stated that the maximum safe continuous current through an LED might only be about 50 - 100 mA. Suppose an error in the code left the transistor switch permanently on. With the circuits seen so far, the current might be as high as 500mA or 1 Amp. 
 
-Not for very long though as the LED would probably be destroyed quite quickly. Even if it it were not destroyed, it may be damaged such that future operation is affected. Typically the light output would be greatly reduced. With an IR LED especially, it would be hard to detect such a fault.
+Not for very long though as the LED would probably be destroyed quite quickly. Even if it were not destroyed, it may be damaged such that future operation is affected. Typically the light output would be greatly reduced. With an IR LED especially, it would be hard to detect such a fault.
 
 A simple modification to the circuit can provide protection in such a case while also reducing the demand on the power supply during the large current pulses. 
 
@@ -198,15 +198,25 @@ To limit the possible current to some safe value, a series resistor, here it is 
 Protecting the LED
 ///
 
-The addition of these components will change the other calculations a little. First, though, the value of R11 should be set to a value that will guarantee no harm to the LED should the transistor be turned fully on. In this circuit, if we assume a 5 Volt supply, it is simplest to ignore the other components as having a small effect and just consider the LED connected in series with the protection resistor. At its maximum safe current of 50mA, the SFH4550 would drop about 1.5 Volts. Therefore we need R11 to drop 3.5 Volts at 50mA. A resistor of 70 Ohms would do the trick and for a bit of extra margin, a 100 Ohm resistor has been selected.
+The addition of these components will change the other calculations a little. First, though, the value of R11 should be set to a value that will guarantee no harm to the LED should the transistor be turned fully on. In this circuit, if we assume a 5 Volt supply, it is simplest to ignore the other components as having a small effect and just consider the LED connected in series with the protection resistor. At its maximum safe current of 50mA, the SFH4550 would drop about 1.5 Volts (The exact value may vary from device to device). Therefore we need R11 to drop 3.5 Volts at 50mA. A resistor of 70 Ohms would do the trick and for a bit of extra margin, a 100 Ohm resistor has been selected.
+
+Note that in the event of a fault the protection resistor will draw 50mA and the power dissipation, in this case, will be
+
+$$
+Power = 0.05^2 \times 100 = 0.25Watts.
+$$
+
+Make sure the resistor has an appropriate power rating to allow it to survive a continuous-fault condition.
 
 During the illumination pulse, almost all of the current through the LED will be provided by the capacitor. Between pulses, the capacitor recharges through R11. Because almost all the current for the LED comes from the capacitor, there will be a substantial reduction in noise on the power supply lines.
 
 This also means that  the reservoir capacitor should have a low Equivalent Series Resistance (ESR). For this purpose, Tantalum capacitors are recommended though they are more expensive. For through-hole parts, aluminium electrolytics will be sufficient.
 
+Because the LED pulse current is drawn from the capacitor rather than directly from the supply, the supply sees only the much smaller average recharge current.
+
 Note that it is unlikely to charge all the way up to the supply voltage because the charge is constantly being depleted. In fact, the average voltage across the capacitor is easy enough to calculate. Assume the current during each pulse is 500mA, that the pulses are 25us long and are repeated every 1000us. Now the average current is going to be 500mA * 25/1000 = 12.5mA. That average current will flow through R11 which will cause a voltage drop of 100 Ohms * 12.5 mA = 1.25 Volts. Thus, the capacitor can only charge up to the supply voltage less 1.25 Volts.
 
-If there is only a 3.3 Volt supply available this is a problem because you have now lost 1.25 Volts to the protection resistor, R11, and the SFH4550 LED will need more than 2 Volts when it is illuminated. there is nothing left for the current limit resistor, R8, to provide any regulation. With a visible light LED like TLCR5800, with its greater forward voltage, the situation would be worse and there would be no chance of correct operation unless the power supply was at least 5 Volts.
+If there is only a 3.3 Volt supply available this is a problem because you have now lost 1.25 Volts to the protection resistor, R11, and the SFH4550 LED will need more than 2 Volts when it is illuminated. There is nothing left for the current limit resistor, R8, to provide any regulation. With a visible light LED like TLCR5800, with its greater forward voltage, the situation would be worse and there would be no chance of correct operation unless the power supply was at least 5 Volts.
 
 The size of the capacitor will determine the ability of the LED to maintain a constant output during the illumination pulse. If the capacitor is too small, its charge will be depleted quickly causing the LED current, and so its light output, to rapidly drop. Choosing a larger capacitor will ensure that there is sufficient charge for even high current pulses though it will take a little longer for the circuit to reach some kind of equilibrium after the sensors are powered up.  This is because the capacitor must be charged through R11 from the power supply. This would normally only happen after the entire robot is powered on and should be complete within a few hundred milliseconds at most.
 
@@ -285,7 +295,7 @@ The design called for 300mA pulses of 25us duration. It looks like they are OK b
 Pulsed Bipolar - Single Pulse
 ///
 
-Since the droop is quite modest, let's pretend it is flat and recalculate the value of the current limit resistor, R8. The data sheet for the SFH4550 indicates that the forward voltage should be about 1.75 Volts at 300mA. The transistor is saturated and will have a voltage of about 0.2 Volts at the collector. The capacitor voltage has already been calculated at 4.25 Volts. Now, at 300mA, R8 must drop 4.25 - 0.2 - 1.75 = 2.3 Volts and so its resistance will be 2.3/0.3 = 7.66 Ohms. Choose a close standard value.  Make that 6.8 Ohms to try and meet, or slightly exceed, the required current. There is little point in being over-precise since there will be some variation in the characteristics of all the components. The aim is to get close enough. Besides, the values in this circuit interact. Changing R8 alters the current which changes the LED voltage drop, which changes the voltage across R8 and so on.
+Since the droop is quite modest, let's pretend it is flat and recalculate the value of the current limit resistor, R8. This is possible because the droop is small compared to the available voltage headroom. The data sheet for the SFH4550 indicates that the forward voltage should be about 1.75 Volts at 300mA. The transistor is saturated and will have a voltage of about 0.2 Volts at the collector. The capacitor voltage has already been calculated at 4.25 Volts. The capacitor voltage oscillates a little around this average value but for design purposes, the average is what matters. Now, at 300mA, R8 must drop 4.25 - 0.2 - 1.75 = 2.3 Volts and so its resistance will be 2.3/0.3 = 7.66 Ohms. Choose a close standard value.  Make that 6.8 Ohms to try and meet, or slightly exceed, the required current. There is little point in being over-precise since there will be some variation in the characteristics of all the components. The aim is to get close enough. Besides, the values in this circuit interact. Changing R8 alters the current which changes the LED voltage drop, which changes the voltage across R8 and so on.
 
 After changing R8 to 6.8 Ohms, the pulse looks like this:
 
@@ -330,5 +340,7 @@ Detectors built with photodiodes are faster and more linear but produce much sma
 ## Design Exercise
 
 As an exercise, try to design a switched bipolar emitter circuit able to deliver current pulses of 100mA for 40$\mu$s every millisecond. Assume the power supply is regulated at 3.3 Volts and that the GPIO voltage, $V_{IO}$, is 3.3 Volts. Use the SFH4550 LED.
+
+***tip:*** the protection resistor is not really needed for safety here though it may serve to isolate the rest of the supply from noise.
 
 Note also that the emitter configuration is only a part of the sensor design. See also the pages on geometry and [detectors](./wall-sensor-detectors.md) for a more complete picture.
