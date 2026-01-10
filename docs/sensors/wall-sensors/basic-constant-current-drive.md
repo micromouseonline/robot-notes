@@ -164,6 +164,28 @@ All the calculations so far have been for  an IR LED like the SFH4550. If you wa
 
 Recall that most use cases in micromouse robots do not require LED currents to be that high unless your detector is a photodiode and you need to reduce the load resistance to better match the ADC input.
 
+### 5 Volt GPIO Constraint
+
+The calculations so far assume that the GPIO voltage is 3.3 Volts. That puts $V_E$ at around 2.4 Volts which is a conveniently low value for a sense resistor. While it is somewhat wasteful of 2.4 Volts of headroom, it would be a lot worse with a processor having a 5 Volt GPIO voltage.
+
+In that case, $V_E$ would be 4.3 Volts and would be unlikely to leave enough voltage headroom for correct operation of the circuit unless the supply was 8 Volts or more.
+
+In both cases, it would be possible to reduce the voltage seen by the transistor base if another resistor were added from base to ground, to form a voltage divider. The problem then is that the current through that divider should really be significantly greater than the expected base current in order to make sure the base voltage is relatively stable. As stated before, GPIO pins are unlikely to provide more than about 20mA and that may not prove to be enough for a stable voltage divider on the transistor base. Recall that, to get 250mA from the transistor, you may need 5mA or more into the base. Even if you want to divide the GPIO voltage by two, you may need surprisingly unequal resistors in the voltage divider. 
+
+Suppose for some particular design you have $V_{IO} = 5 Volts$ and you calculate that 4mA is needed into the transistor base. Also suppose that you are happy to have the GPIO pin supply 10mA during each pulse and you want to set the transistor base voltage to 2.5 Volts. Now the resistor between the GPIO pin and the base, $R_a$, must drop 2.5 Volts
+
+$$
+R_a = \frac{2.5}{0.010} = 250 Ohms
+$$
+
+Of the 10mA coming from the pin, 4mA is needed by the transistor, leaving 6mA to flow through the resistor between base and ground, $R_b$
+
+$$
+R_b = \frac{2.5}{0.006} = 417 Ohms
+$$
+
+In practice, you might choose standard values of 220 Ohms and 390 Ohms and adjust the current sense resistor value to get the current required. As ever, this is an extreme example for relatively high current pulses. Your design requirements, in most cases, will be less severe. A solution like this can increase the headroom by reducing the emitter voltage but the tradeoff is a significantly increased current drawn from the processor pin.
+
 ### Possible Improvements
 
 Now that the LED current pulses are better regulated, it might be worth revisiting the reservoir capacitor calculation. Large value surface mount Tantalum capacitors are expensive and take up space so you might consider reducing the value. In this circuit, and still using 328mA pulses through a SFH4550 LED, the capacitor C3 can be reduced to as little as 10uF and still give good current pulses. The ripple on the $V_{cap}$ voltage will be much greater and the circuit should still operate at the lower limit of the intended supply range. Because the transistor is regulating the current through the LED, the actual value if $V_{cap}$ is less critical. With a visible light LED, the pulses will begin to droop fairly quickly. As already mentioned, consider reducing the current to manage that.
@@ -176,5 +198,5 @@ For through-hole use, most Aluminium electrolytic capacitors rated at 16 Volts o
 
 ### Other Current Regulators
 
-If you feel the need for more reliable or accurate solutions, have a look atthe [Improved Current Regulation]() page.
+If you feel the need for more reliable, accurate, or novel solutions, have a look at the [Improved Current Regulation]() page.
 
