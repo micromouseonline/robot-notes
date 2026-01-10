@@ -172,19 +172,76 @@ In that case, $V_E$ would be 4.3 Volts and would be unlikely to leave enough vol
 
 In both cases, it would be possible to reduce the voltage seen by the transistor base if another resistor were added from base to ground, to form a voltage divider. The problem then is that the current through that divider should really be significantly greater than the expected base current in order to make sure the base voltage is relatively stable. As stated before, GPIO pins are unlikely to provide more than about 20mA and that may not prove to be enough for a stable voltage divider on the transistor base. Recall that, to get 250mA from the transistor, you may need 5mA or more into the base. Even if you want to divide the GPIO voltage by two, you may need surprisingly unequal resistors in the voltage divider. 
 
-Suppose for some particular design you have $V_{IO} = 5 Volts$ and you calculate that 4mA is needed into the transistor base. Also suppose that you are happy to have the GPIO pin supply 10mA during each pulse and you want to set the transistor base voltage to 2.5 Volts. Now the resistor between the GPIO pin and the base, $R_a$, must drop 2.5 Volts
+#### 5 Volt Example
+
+Let's work through an example. Suppose your requirements are for an LED current of 150mA, you have a processor with 5 Volt IO and you are happy with a voltage at the emitter, during a pulse, of 1 Volt.
+
+- $I_{LED} = 0.15 A$
+- $V_{IO} = 5.0 V$
+- $V_E = 1.0 V$
+
+You can assume the the transistor gain (beta, $\beta$) is 50 or more and therefore the emitter current is very close to the collector current value, $I_{LED}$.
+
+Now:
+$$
+R_E \approx \frac{V_E}{I_{LED}} = \frac{1.0}{0.15} = 6.67 \Omega
+$$
+
+So we can set $R_E$ to be 6.8 Ohms as the closest standard value.
+
+As long as we are operating in the transistor's active region, the base will be about 0.7 Volts more positive than the emitter so 
 
 $$
-R_a = \frac{2.5}{0.010} = 250 Ohms
+V_B = V_E + 0.7 = 1.7 V
 $$
 
-Of the 10mA coming from the pin, 4mA is needed by the transistor, leaving 6mA to flow through the resistor between base and ground, $R_b$
+If the transistor $\beta$ is at least 50 for these currents, the base will need to take
 
 $$
-R_b = \frac{2.5}{0.006} = 417 Ohms
+I_B = \frac{I_E}{\beta} = \frac{0.15}{50} = 0.003 A
 $$
 
-In practice, you might choose standard values of 220 Ohms and 390 Ohms and adjust the current sense resistor value to get the current required. As ever, this is an extreme example for relatively high current pulses. Your design requirements, in most cases, will be less severe. A solution like this can increase the headroom by reducing the emitter voltage but the tradeoff is a significantly increased current drawn from the processor pin.
+At modest currents of 100-300mA, $\beta$ is likely to be higher than this, depending on the transistor choice, and the base may only need less than 1mA. Now assume that you are happy to have the GPIO pin supply 10mA during the pulse. The sum of $R_A$ and $R_B$ should be 
+
+$$
+R_A + R_B = \frac{V_{IO}}{I_{IO}} = \frac{5.0}{0.010} = 500\Omega
+$$
+
+Calculate the value of $R_A$ needed to drop (5.0-1.7) Volts at a current of 10mA
+
+$$
+R_A = \frac{V_{IO} - V_B}{I_{IO}} = \frac{5.0 - 1.7}{0.01} = \frac{3.3}{0.01} = 330\Omega
+$$
+
+Which is a convenient standard value. The resistor $R_B$ will be taking a slightly smaller current because some (3mA) has to flow into the transistor base
+
+$$
+R_B = \frac{V_B}{I_{IO} - I_B} = \frac{1.7}{0.010 - 0.003} = \frac{1.7}{0.007} = 240\Omega
+$$
+
+The closest standard value is 220 Ohms. 
+
+The sum of these is a little larger than previously calculated but should still allow sufficient current to flow from the GPIO pin to supply the transistor base while maintaining the base voltage.
+
+Here is the final circuit:
+
+![5 Volt IO Design](../../assets/sensors/current-control-5V.png)
+/// caption
+Current Control with 5V GPIO
+///
+
+The circuit can be simulated using ngspice in KiCAD to calculated the DC operating point. Note that the circuit would never run like that continuously - it is designed for pulsed operation. Ngspice does not let the smoke out of mistreated components.:
+
+![5 Volt IO Design Operating Point](../../assets/sensors/current-control-5V-operating-point.png)
+/// caption
+Simulated Operating Point for Current Control with 5V GPIO
+///
+
+In the simulated circuit, the value of $V_{DD}$ is 8 Volts
+
+Measurements from a breadboarded version of this circuit give an LED current of about 140mA while the SPICE simulation shows it to be 175mA. The differences are due to component variation and the actual transistor gain, $\beta$, being lower than that assumed in the simulation but more than the value of 50 assumed in the calculation. In a practical circuit, you could adjust the emitter resistor if a specific LED currrent had to be achieved.
+
+A solution like this can also increase the headroom by reducing the emitter voltage but the tradeoff is a significantly increased current drawn from the processor pin. In the built version of this example circuit, pulse current regulation was excellent all the way down to $V_{DD}$ of 4.2 Volts.
 
 ### Possible Improvements
 
