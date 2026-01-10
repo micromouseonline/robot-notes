@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Constant Current Drivers
+title: Basic Constant Current Drivers
 parent: Sensors
 # icon: octicons/dot-fill-16
 icon: octicons/dot-16
@@ -201,11 +201,18 @@ $$
 I_B = \frac{I_E}{\beta} = \frac{0.15}{50} = 0.003 A
 $$
 
-At modest currents of 100-300mA, $\beta$ is likely to be higher than this, depending on the transistor choice, and the base may only need less than 1mA. Now assume that you are happy to have the GPIO pin supply 10mA during the pulse. The sum of $R_A$ and $R_B$ should be 
+At modest currents of 100-300mA, $\beta$ is likely to be higher than this, depending on the transistor choice, and so the base current is likely to less than the 3mA calculated. For collector currents in this range, the BC337-40 can provide a gain for 150 or more. 
+
+Now assume that you are happy to have the GPIO pin supply 10mA during the pulse. 
+
+Normally, the guidance for the current through such a voltage divider would be at least ten times the current you expect to be taken from the tap. Here, we make do with what we can get. The GPIO pin cannot safely provide 30mA so we rely on having a relatively high gain from the transistor. 
+
+The sum of $R_A$ and $R_B$ should be 
 
 $$
 R_A + R_B = \frac{V_{IO}}{I_{IO}} = \frac{5.0}{0.010} = 500\Omega
 $$
+
 
 Calculate the value of $R_A$ needed to drop (5.0-1.7) Volts at a current of 10mA
 
@@ -230,26 +237,42 @@ Here is the final circuit:
 Current Control with 5V GPIO
 ///
 
-The circuit can be simulated using ngspice in KiCAD to calculated the DC operating point. Note that the circuit would never run like that continuously - it is designed for pulsed operation. Ngspice does not let the smoke out of mistreated components.:
+The circuit can be simulated using ngspice in KiCAD to calculated the DC operating point. Note that the circuit would never run like that continuously - it is designed for pulsed operation. Ngspice does not let the smoke out of mistreated components.
 
 ![5 Volt IO Design Operating Point](../../assets/sensors/current-control-5V-operating-point.png)
 /// caption
 Simulated Operating Point for Current Control with 5V GPIO
 ///
 
-In the simulated circuit, the value of $V_{DD}$ is 8 Volts
+In the simulated circuit, the value of $V_{DD}$ is 8 Volts. This represents a fully charged 2S LiPo battery and will definitely provide enough headroom for correct operation of the transistor as a current regulator
 
 Measurements from a breadboarded version of this circuit give an LED current of about 140mA while the SPICE simulation shows it to be 175mA. The differences are due to component variation and the actual transistor gain, $\beta$, being lower than that assumed in the simulation but more than the value of 50 assumed in the calculation. In a practical circuit, you could adjust the emitter resistor if a specific LED currrent had to be achieved.
 
 A solution like this can also increase the headroom by reducing the emitter voltage but the tradeoff is a significantly increased current drawn from the processor pin. In the built version of this example circuit, pulse current regulation was excellent all the way down to $V_{DD}$ of 4.2 Volts.
 
+### Comparison
+
+| Aspect                         | 3.3 V GPIO, simple base drive              | 5 V GPIO, base directly to transistor      | 5 V GPIO, base-divider (RA/RB) scheme                |
+|--------------------------------|--------------------------------------------|--------------------------------------------|------------------------------------------------------|
+| Typical emitter sense voltage  | ≈ 2.4 V (for 3.3 V IO – 0.9 V V_BE margin) | ≈ 4.3 V (for 5 V IO – 0.7 V V_BE)          | Set by design (e.g. 1.0 V via RE)                    |
+| Headroom needed from supply    | V_LED + 2.4 V + transistor/other drops     | V_LED + 4.3 V + transistor/other drops     | V_LED + V_E + small transistor margin                |
+| Ease of using low supply (3.3 V–5 V) | Fairly good for modest currents          | Poor; often needs ≥ 8 V to work properly   | Better: V_E is lower, so less supply headroom needed |
+| GPIO current draw              | Base current only (e.g. 2–5 mA)            | Base current only (similar to 3.3 V case)  | Divider current + base current (e.g. ~10 mA total)   |
+| Base voltage control           | Fixed by GPIO level minus V_BE             | Fixed by GPIO level minus V_BE             | More flexible (set via RA/RB ratio)                  |
+| Sensitivity to β variation     | Moderate                                   | Moderate                                   | Higher: divider current not >> base current          |
+| Design complexity              | Simple (one base resistor)                 | Simple but often impractical               | Higher (RE + RA + RB, more interaction)              |
+| Best use case                  | 3.3 V MCUs, modest LED currents            | Rarely ideal; needs high VDD               | 5 V MCUs needing controlled emitter voltage/headroom |
+| Main downside                  | Wastes a couple of volts in sense resistor | Eats almost all headroom at low VDD        | Higher GPIO current; more β‑dependent behaviour      |
+
+
+
 ### Possible Improvements
 
-Now that the LED current pulses are better regulated, it might be worth revisiting the reservoir capacitor calculation. Large value surface mount Tantalum capacitors are expensive and take up space so you might consider reducing the value. In this circuit, and still using 328mA pulses through a SFH4550 LED, the capacitor C3 can be reduced to as little as 10uF and still give good current pulses. The ripple on the $V_{cap}$ voltage will be much greater and the circuit should still operate at the lower limit of the intended supply range. Because the transistor is regulating the current through the LED, the actual value if $V_{cap}$ is less critical. With a visible light LED, the pulses will begin to droop fairly quickly. As already mentioned, consider reducing the current to manage that.
+Now that the LED current pulses are better regulated, it might be worth revisiting the reservoir capacitor calculation. Large value surface mount Tantalum capacitors are expensive and take up space so you might consider reducing the value. In this circuit, and still using 328mA pulses through a SFH4550 LED, the capacitor C3 can be reduced to as little as 10uF and still give good current pulses. The ripple on $V_{cap}$ will be much larger, but as long as it stays high enough for the current‑regulating transistor to do its job, the LED current pulses remain well‑controlled.  With a visible light LED, the pulses will begin to droop fairly quickly. Visible light LEDs have a greater forward voltage so any droop i $V_{cap}$ soon eats into the headroom needed for the current regulator, causing the LED current to fall. As already mentioned, consider reducing the current to manage that.
 
 Take care though before using MLCC capacitors instead of Tantalums. Typical MLCC capacitors do not give anywhere near their rated capacitance once they have a few volts of DC bias across them. Also, the smaller the package, the worse the effect. This is not the place to go into detail but, if you *must* use MLCC types, make them at least four times larger than you calculate and avoid small packages like 0603 or 0402.
 
-For through-hole use, most Aluminium electrolytic capacitors rated at 16 Volts or more will be adequate. That is the type of capacitor used in the practical tests above.
+For through-hole use, most Aluminium electrolytic capacitors rated at 16 Volts or more will be adequate in terms of both capacity and ESR (Equivalent Series Resistance). That is the type of capacitor used in the practical tests above.
 
 
 
