@@ -47,8 +47,22 @@ Just like the bipolar version of this regulator, there must still be some headro
 
 In short, it should be possible to replace the bipolar transistor used in the basic constant current circuit with a ZVN4206A MOSFET. BUT **only** if you have a 5 Volt GPIO pin. With a 3.3 Volt GPIO level, it is unlikely to work without very small sense resistor values. Even for the same part number, some devices can have $V_{GS(th)}$ as low as 1.3 Volts while for others it may be 3.0 Volts. You really want more certainty than that. A device like the ZVN4206 is going to be effectively unusable with only a 3.3 Volt gate drive.
 
-There are MOSFET devices with lower values for $V_{GS(th)}$ and which can reach low values of $R_{DS}$ even for relatively small gate voltages. These are typically described as "logic-level" MOSFETS, designed to switch on fully with a 3.3V logic '1' from a GPIO pin. Unfortunately, these are rare in friendly, small packages for through-hole use. They are, however, plentiful in SMT packages like SOT-23. When selecting a device to be used in this current regulating circuit, always bear in mind the additional voltage at the Source pin due to the drop across the current sense resistor.
+#### Logic-Level MOSFETS 
 
+There are MOSFET devices with lower values for $V_{GS(th)}$ and which can reach low values of $R_{DS}$ even for relatively small gate voltages. These are typically described as "logic-level" MOSFETS, designed to switch on fully with a 3.3V logic '1' from a GPIO pin. Unfortunately, these are rare in friendly, small packages for through-hole use. They are, however, plentiful in SMT packages like SOT-23. Although not marketed as a 'logic-level' device, the DMG2302-UK [Datasheet](https://www.diodes.com/datasheet/download/DMG2302UK.pdf){target=" blank"} is available in a SOT-23 package and can achieve $R_{DS}$ as low as 100mOhms with $V_{GS}$ of only 2.0 Volts as well as being capable of handling short (<10$\mu$s) pulses of 12 Amps.
+
+When selecting a device to be used in this current regulating circuit, always bear in mind the additional voltage at the Source pin due to the drop across the current sense resistor.
+
+---
+
+#### Summary
+
+When selecting a MOSFET for this circuit, remember:
+
+- The source voltage rises with LED current because of the sense resistor
+- The effective gate-to-source voltage is reduced by that amount
+- The MOSFET must be able to reach a suitably low $R_{DS}$ at that reduced $V_{GS}$
+- It is challenging to design a source-follower current regulator because the $I_D - V_{GS}$ relationship is less well defined than for a bipolar device.
 
 
 ### Constant Current Diodes
