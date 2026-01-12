@@ -21,7 +21,7 @@ Note that IR emitters used in micromouse sensor can produce a lot of energy. The
 !!! danger "Safety with IR emitters"
 
     Never look into IR emitters. The light is invisible and can cause permanent eye damage at high intensities.
-    
+
 
 Datasheets for the two devices used in this guide are available here:
 
@@ -85,4 +85,4 @@ Other pages in this section look in more detail at some options for controlling 
 
 - [Basic Switching](./switched-emitter-drive.md): Uses a transistor or other device as a switch in an attempt to provide a fixed, consistent current pulse through the LED. Easy to implement, these have limitations.
 - [Simple Current Control](./basic-constant-current-drive.md):  Uses a slightly more complex circuit, or specialist driver, to try and ensure that the LED current, and thus the light output, is constant over a range of operating conditions.
-- [Advanced Current Control](./improved-current-regulation.md): More complex circuits can be used to improve the performance of the current regulation technique to guarantee a consistent light output for each pulse that can be varied in different circumstances.
+- [Advanced Current Control](./better-current-regulation.md): More complex circuits can be used to improve the performance of the current regulation technique to guarantee a consistent light output for each pulse that can be varied in different circumstances.
