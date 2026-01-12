@@ -107,33 +107,33 @@ So long as the transistor has sufficient gain, the circuit will successfully reg
 
 Take a closer look at what is happening at the transistor base though. With a 1 Amp pulse, the emitter voltage will be about 1.5 Volts and the base voltage may be between 0.7 and 1.0 Volts higher, depending on the transistor gain. With $V_{IO}$ at only 3.3 Volts, and $V_{BE}$ at 0.7 Volts, the base would sit at 2.2 Volts so the maximum likely base current will be only $(3.3 - 2.2)/100 = 11mA$. The processor will have no problem delivering that current but the transistor gain will need to be at least 100 @ 1Amp if you are to get the required current. In this particular case, the BC337-40 is the highest gain variant for that transistor and, although should be capable of performing as designed, it is not guaranteed. Even within the same part number, gain varies widely between devices and falls sharply at high currents, so some units may regulate better than others.
 
-If a logic level MOSFET is used in source-follower mode to replace the BC337, it will have to be able to pass 1 Amp with a $V_{GS}$ of just $3.3 - 1.5 = 1.8$ Volts. The DM2302UK should be able to achieve that.
+If a logic level MOSFET is used in source-follower mode to replace the BC337, it will have to be able to pass 1 Amp with a gate-to-source voltage of just $3.3 - 1.5 = 1.8$ Volts. The DM2302UK should be able to achieve that. Take care though: As mentioned elsewhere, the relationship between $I_D$ and $V_{GS}$ is not sharply defined and the final regulated current is likely to be an adjust-on-test matter that may be different from one example to another.
 
-Both types of transistor should work but may be at the margins of reliability for this circuit. Look at the sections on op-amp feedback in the [Advanced Constant Current](./improved-current-regulation.md) page for a possible solution.
+Both types of transistor should work but may be at the margins of reliability for this circuit. Look at the sections on op-amp feedback in the [Advanced Constant Current](./improved-current-regulation.md/#op-amp-feedback-for-the-mosfet) page for a more robust and repeatable solution.
 
 
 ### Why This Design Is Marginal
 
 Even though the regulated emitter‑follower version *can* deliver short 1 A pulses, it operates very close to several practical limits:
 
-#### • Limited Base‑Drive Margin
+#### - Limited Base‑Drive Margin
 With the emitter at ~1.5 V during a 1 A pulse and the base at ~2.2–2.5 V, a 3.3 V GPIO pin can only supply around 10–12 mA of base current.  
 At 1 A collector current, this requires a transistor gain of **80–100**, which is achievable but not guaranteed across all devices, temperatures, or batches.
 
-#### • Gain Falls at High Current
+#### - Gain Falls at High Current
 Bipolar transistor gain typically **drops sharply** at high collector currents.  
 A BC337‑40 may meet the requirement, but another unit from the same reel may not.  
 This makes the design sensitive to device variation.
 
-#### • Tight Voltage‑Headroom Budget
+#### - Tight Voltage‑Headroom Budget
 The LED forward voltage, sense‑resistor drop, and transistor $V_{BE}$ all consume headroom.  
 Any droop in the supply or storage capacitor reduces the available $V_{CE}$, pushing the transistor out of regulation.
 
-#### • MOSFETs Don’t Escape the Headroom Problem
-A MOSFET in source‑follower mode loses V_GS as the sense‑resistor voltage rises.  
+#### - MOSFETs Don’t Escape the Headroom Problem
+A MOSFET in source‑follower mode loses $V_{GS}$ as the sense‑resistor voltage rises.  
 With only 3.3 V of gate drive, many devices cannot reach a low enough $R_{DS}$ to sustain 1 A.
 
-#### • Thermal and Pulse‑Rating Limits
+#### - Thermal and Pulse‑Rating Limits
 At 1 A, even 10 µs pulses stress both the LED and the transistor.  
 Safe operation depends on pulse width, duty cycle, and junction temperature — all of which leave little margin.
 
