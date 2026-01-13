@@ -108,28 +108,16 @@ So long as the transistor has sufficient gain, the circuit will successfully reg
 Take a closer look at what is happening at the transistor base though. With a 1 Amp pulse, the emitter voltage will be about 1.5 Volts and the base voltage may be between 0.7 and 1.0 Volts higher, depending on the transistor gain. With $V_{IO}$ at only 3.3 Volts, and $V_{BE}$ at 0.7 Volts, the base would sit at 2.2 Volts so the maximum likely base current will be only $(3.3 - 2.2)/100 = 11mA$. The processor will have no problem delivering that current but the transistor gain will need to be at least 100 @ 1Amp if you are to get the required current. In this particular case, the BC337-40 is the highest gain variant for that transistor and, although should be capable of performing as designed, it is not guaranteed. Even within the same part number, gain varies widely between devices and falls sharply at high currents, so some units may regulate better than others.
 
 
-!!! note "Breadboard Test"
-
-    A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main powr supply was set to 8 Volts. A 3.0 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. During the pulse, $V_{BE}$ rose to 1 Volt and there was 1.37 Volts across $R_E$. That makes the pulse current $I_E = 1.37/1.3 = 1.054A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
-
-    A 470uF electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse
-
-    with a 5% duty cycle, the power supply registered.
-
-    It has already been noted that the average current through the protection resistor brings down the voltage on the reservoir capacitor. Reducing the duty cycle will decrease that loss. In this circuit, reducing the pulse length to 20$\mu$s increased the emitter pulse current to 1.153A. This is most likely due to transistor non-linearities at higher currents and voltages rather than increased headroom for the LED.
-
 --- 
 
 
-!!! note "Breadboard Test"
+### Breadboard Test
 
-    A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main powr supply was set to 8 Volts. A 3.0 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. During the pulse, $V_{BE}$ rose to 1 Volt and there was 1.37 Volts across $R_E$. That makes the pulse current $I_E = 1.37/1.3 = 1.054A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
+A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main powr supply was set to 8 Volts. A 3.0 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. During the pulse, $V_{BE}$ rose to 1 Volt and there was 1.37 Volts across $R_E$. That makes the pulse current $I_E = 1.37/1.3 = 1.054A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
 
-    A 470uF electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse
+A 470uF electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse with a 5% duty cycle, the power supply registered.
 
-    with a 5% duty cycle, the power supply registered.
-
-    It has already been noted that the average current through the protection resistor brings down the voltage on the reservoir capacitor. Reducing the duty cycle will decrease that loss. In this circuit, reducing the pulse length to 20$\mu$s increased the emitter pulse current to 1.153A. This is most likely due to transistor non-linearities at higher currents and voltages rather than increased headroom for the LED.
+It has already been noted that the average current through the protection resistor brings down the voltage on the reservoir capacitor. Reducing the duty cycle will decrease that loss. In this circuit, reducing the pulse length to 20$\mu$s increased the emitter pulse current to 1.153A. This is most likely due to transistor non-linearities at higher currents and voltages rather than increased headroom for the LED.
 
 --- 
 
