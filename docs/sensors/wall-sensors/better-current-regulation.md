@@ -149,7 +149,7 @@ The circuit will also work with a bipolar transistor with only minor changes. If
 
 The requirements for running along orthogonal straights and diagonal straights are a little different since the range of expected sensor signals changes with the orientation and distance of the walls. Diagonal running can produce much stronger responses than orthogonal paths. To deal with that, some builders have a reduced emitter output that is used only for diagonals.
 
-**Details to follow**
+The op-amp feedback circuit offers a simple solution for this. Since the reference voltage is derived from a potential divider connected to a GPIO pin, you could use two pins to select between different reference voltages. The reference voltage determines the current, along with the sense resistor.
 
 
 
