@@ -111,7 +111,7 @@ Take a closer look at what is happening at the transistor base though. With a 1 
 --- 
 
 
-### Breadboard Test
+### Breadboard Test for Bipolar Transistor
 
 A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main power supply was set to 8 Volts. A 3.3 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. $V_{B}$ was measured at 2.3 Volts, implying a base current to about 21mA. During the pulse, $V_{BE}$ rose to nearly 1 Volt and there was 1.35 Volts across $R_E$. That makes the pulse current $I_E = 1.35/1.3 = 1.038A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
 
@@ -136,7 +136,33 @@ It has already been noted that the average current through the protection resist
 
 If a logic level MOSFET is used in source-follower mode to replace the BC337, it will have to be able to pass 1 Amp with a gate-to-source voltage of just $3.3 - 1.5 = 1.8$ Volts. The DMG2302UK should be able to achieve that. Take care though: As mentioned elsewhere, the relationship between $I_D$ and $V_{GS}$ is not sharply defined and the final regulated current is likely to be an adjust-on-test matter that may be different from one example to another.
 
-Both types of transistor should work but may be at the margins of reliability for this circuit. Look at the sections on op-amp feedback in the [Better Current Regulation](./better-current-regulation.md/#op-amp-feedback-for-the-mosfet) page for a more robust and repeatable solution.
+### Breadboard Test for MOSFET Transistor
+
+The same high current circuit was then built with a DMG2302 MOSFET in plce of the BC337-40. The source resistor, $R_S$, was again 1.3 Ohms and the gate was supplied with the same 3.3 Volt, 40$\mu s$ pulse from a signal generator with source impedance of 50 Ohms. The same SFH4550 emitter LED is connected to the drain. The reservoir capacitor remains $470\mu F$ and the supply voltage is 8 Volts.
+
+Here is the oscilloscope trace showing the gate and source voltages during the pulse.
+
+![High Current Breadboard Test](../../assets/sensors/high-current-mosfet-test.png)
+/// caption
+Breadboard Test. Yellow is $V_G$, Blue is $V_S$
+///
+
+This time the gate voltage is nearly 3.3 Volts because no current is taken by the gate in a MOSFET. The voltage at the source is 1.45 Volts so the LED current is:
+
+$$
+I_{LED} = I_D = I_S = \frac{V_S}{R_S} = \frac{1.45}{1.3} = 1.115 A
+$$
+
+Again, there is very little droop in the current during the pulse. 
+
+Although the current pulse is maintained very well, there is no compliance in this circuit. That is, any change in the supply voltage from the 8 Volts in the test will change the LED current. The high average current drain from the supply means that there is only a little over 4 Volts available at the top of the reservoir capacitor. Since 1.45 Volts is lost to the  sense resistor,, there is only about 2.6 Volts available for the LED forward voltage and that is all that is seen when measured. In other words, with a current pulse this large, the MOSFET is saturated and the current is limited by the available headroom. Clearly, that is not what is intended and the circuit cannot deliver the required over a range of voltages.
+
+The problem is caused by the MOSFET characteristic. As set up, the value of $V_{GS}$ is 3.3 V - 1.45 Volts = 1.85 Volts. With $V_{GS}$ that high, the DMG2302 can turn on hard enough to saturate.
+
+The source resistor is replaced with a 2.0 Ohm (measured) part. Now the system stabilises with the source voltage at 2.0 Volts and $V_GS$ is just (3.24 - 2.00) = 1.24 Volts and the source current is just 1 Amp.  The transistor is barely able to operate in the active region because the LED drop is 2.44 Volts. The reservoir capacitor has risen slightly to 4.72 Volts because of the reduced average current so the headroom is (4.72 - 2.44 - 2.00) = 0.28 Volts. We are going to be OK with a fully charged 2 cell LiPo but, as soon as the battery voltage drops below about 7.75 Volts, the LED current will begin fall proportionally.
+
+
+Both types of transistor can work but are likely be at the margins of reliability for this circuit with such high currents. Look at the sections on op-amp feedback in the [Better Current Regulation](./better-current-regulation.md/#op-amp-feedback-for-the-mosfet) page for a more robust and repeatable solution.
 
 ---
 
@@ -157,9 +183,11 @@ This makes the design sensitive to device variation.
 The LED forward voltage, sense‑resistor drop, and transistor $V_{BE}$ all consume headroom.  
 Any droop in the supply or storage capacitor reduces the available $V_{CE}$, pushing the transistor out of regulation.
 
-#### - MOSFET Headroom
+#### - MOSFET $V_{GS}$ Headroom
 A MOSFET in source‑follower mode loses $V_{GS}$ as the sense‑resistor voltage rises.  
 With only 3.3 V of gate drive, many devices cannot reach a low enough $R_{DS}$ to sustain 1 A.
+The DMG2302 used here has the opposite problem in that  $R_{DS(on)}$ is very low for even quite small $V_{GS}$.
+Because it is difficult to know exactly what value of $V_{GS}$ is needed for a given $I_D$, it is very hard to calculate, in advance, a correct value for the current sense resistor.
 
 #### - Pulse Rating Limits
 At 1 A, even 10 µs pulses stress both the LED and the transistor.  
@@ -167,4 +195,4 @@ Safe operation depends on pulse width, duty cycle, and junction temperature - al
 
 ---
 
-**In short:** this circuit *can* work, but only if everything goes right - high‑gain transistor, strong supply, low wiring losses, and carefully chosen components. For a more robust and repeatable design, the advanced constant‑current drivers are a better choice.
+**In short:** this circuit *can* work, but only if everything goes right - high‑gain transistor, strong supply, low wiring losses, and carefully chosen components. For a more robust and repeatable design, there are [better current regulation](./better-current-regulation.md) choices.
