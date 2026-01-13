@@ -122,6 +122,14 @@ A $470\mu F$ electrolytic capacitor for the reservoir gave no perceptible droop 
 Breadboard Test. Yellow is $V_E$, Blue is $V_E$
 ///
 
+This agrees very well with the results from a simulation using ngspice in KiCAD:
+
+![High Current Breadboard Test](../../assets/sensors/high-current-breadboard-sim.png)
+/// caption
+Breadboard Test. KiCAD Simulation
+///
+
+
 It has already been noted that the average current through the protection resistor brings down the voltage on the reservoir capacitor. Reducing the duty cycle will decrease that loss. In this circuit, reducing the pulse length to 20$\mu$s increased the emitter pulse current to 1.153A. This is most likely due to transistor non-linearities at higher currents and voltages rather than increased headroom for the LED.
 
 --- 
