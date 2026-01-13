@@ -46,7 +46,7 @@ Suppose then that you want 150mA through the LED and the current sense resistor 
 
 As the current through the MOSFET rises, so too does the voltage across the sense resistor, reducing $V_{GS}$ from its initial value of 5 Volts. This increases the MOSFET resistance and raises $R_{DS}$ until an equilibrium is reached and the current becomes stable.
 
-Just like the bipolar version of this regulator, there must still be some headroom in the supply voltage for the MOSFET to operate correctly. If the value of $R_{DS(on)}$ cannot fall low enough with the available $V_{GS}$, the transistor will saturate and regulation is no longer possible. The supply voltage must exceed the sum of the LED forward voltage. the sense resistor voltage drop and the MOSFET' required $V_{DS}$ for regulation.
+Just like the bipolar version of this regulator, there must still be some headroom in the supply voltage for the MOSFET to operate correctly. If the value of $R_{DS(on)}$ cannot fall low enough with the available $V_{GS}$, the transistor will saturate and regulation is no longer possible. The supply voltage must exceed the sum of the LED forward voltage, the sense resistor voltage drop, and the MOSFET's required $V_{DS}$ for regulation.
 
 In short, it should be possible to replace the bipolar transistor used in the basic constant current circuit with a ZVN4206A MOSFET. BUT **only** if you have a 5 Volt GPIO pin. With a 3.3 Volt GPIO level, it is unlikely to work without very small sense resistor values. Even for the same part number, some devices can have $V_{GS(th)}$ as low as 1.3 Volts while for others it may be 3.0 Volts. You really want more certainty than that. A device like the ZVN4206 is going to be effectively unusable with only a 3.3 Volt gate drive.
 
