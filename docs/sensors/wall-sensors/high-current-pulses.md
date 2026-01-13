@@ -113,9 +113,14 @@ Take a closer look at what is happening at the transistor base though. With a 1 
 
 ### Breadboard Test
 
-A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main powr supply was set to 8 Volts. A 3.0 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. During the pulse, $V_{BE}$ rose to 1 Volt and there was 1.37 Volts across $R_E$. That makes the pulse current $I_E = 1.37/1.3 = 1.054A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
+A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main power supply was set to 8 Volts. A 3.3 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. $V_{B}$ was measured at 2.3 Volts, implying a base current to about 21mA. During the pulse, $V_{BE}$ rose to nearly 1 Volt and there was 1.35 Volts across $R_E$. That makes the pulse current $I_E = 1.35/1.3 = 1.038A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
 
-A 470uF electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse with a 5% duty cycle, the power supply registered.
+A $470\mu F$ electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse with a 5% duty cycle.
+
+![High Current Breadboard Test](../../assets/sensors/high-current-breadboard-test.png)
+/// caption
+Breadboard Test. Yellow is $V_E$, Blue is $V_E$
+///
 
 It has already been noted that the average current through the protection resistor brings down the voltage on the reservoir capacitor. Reducing the duty cycle will decrease that loss. In this circuit, reducing the pulse length to 20$\mu$s increased the emitter pulse current to 1.153A. This is most likely due to transistor non-linearities at higher currents and voltages rather than increased headroom for the LED.
 
