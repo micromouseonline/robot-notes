@@ -125,18 +125,18 @@ Bipolar transistor gain typically **drops sharply** at high collector currents.
 A BC337‑40 may meet the requirement, but another unit from the same reel may not.  
 This makes the design sensitive to device variation.
 
-#### - Tight Voltage‑Headroom Budget
+#### - Tight Voltage Headroom
 The LED forward voltage, sense‑resistor drop, and transistor $V_{BE}$ all consume headroom.  
 Any droop in the supply or storage capacitor reduces the available $V_{CE}$, pushing the transistor out of regulation.
 
-#### - MOSFETs Don’t Escape the Headroom Problem
+#### - MOSFET Headroom
 A MOSFET in source‑follower mode loses $V_{GS}$ as the sense‑resistor voltage rises.  
 With only 3.3 V of gate drive, many devices cannot reach a low enough $R_{DS}$ to sustain 1 A.
 
-#### - Thermal and Pulse‑Rating Limits
+#### - Pulse Rating Limits
 At 1 A, even 10 µs pulses stress both the LED and the transistor.  
-Safe operation depends on pulse width, duty cycle, and junction temperature — all of which leave little margin.
+Safe operation depends on pulse width, duty cycle, and junction temperature - all of which leave little margin.
 
 ---
 
-**In short:** this circuit *can* work, but only if everything goes right — high‑gain transistor, strong supply, low wiring losses, and carefully chosen components. For a more robust and repeatable design, the advanced constant‑current drivers are a better choice.
+**In short:** this circuit *can* work, but only if everything goes right - high‑gain transistor, strong supply, low wiring losses, and carefully chosen components. For a more robust and repeatable design, the advanced constant‑current drivers are a better choice.
