@@ -119,7 +119,7 @@ A $470\mu F$ electrolytic capacitor for the reservoir gave no perceptible droop 
 
 ![High Current Breadboard Test](../../assets/sensors/high-current-breadboard-test.png)
 /// caption
-Breadboard Test. Yellow is $V_E$, Blue is $V_E$
+Breadboard Test. Yellow is $V_E$, Blue is $V_B$
 ///
 
 This agrees very well with the results from a simulation using ngspice in KiCAD:
