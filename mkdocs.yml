@@ -141,6 +141,7 @@ nav:
 
   - Author Guide:
     - authors/index.md
+    - Admonitions: authors/admonitions.md
     - Writing your docs: authors/writing-your-docs.md
     - Styling your docs: authors/styling-your-docs.md
     - Images: authors/images.md
