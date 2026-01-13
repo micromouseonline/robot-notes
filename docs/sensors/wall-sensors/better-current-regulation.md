@@ -69,10 +69,6 @@ When selecting a MOSFET for this circuit, remember:
 - Variations between devices may need the sense resistor to be adjust-on-test
 
 
-### Constant Current Diodes
-
-**More Details to follow**
-
 ### Op-amp Feedback
 
 The circuits used so far rely on the GPIO providing a fixed voltage and a sense resistor that drops enough voltage for the transistor's $V_{BE}$ (for bipolars) or $V_{GS}$ (for MOSFETS) to fall to the point where current begins to self-limit. This generally works well so long as the supply voltage provides sufficient headroom and the GPIO voltage, $V_{IO}$, is high enough to drive the transistor correctly. When using a bipolar transistor, there must also be enough current available from the GPIO pin to drive the base. In extremes, that current may be large. With MOSFETS, the gate voltage needed to bring $R_{DS(on)}$ down to a useable value may be more than is available from the pin. Device-to-device variations make it difficult to design reliable, repeatable circuits.
@@ -152,5 +148,16 @@ The requirements for running along orthogonal straights and diagonal straights a
 The op-amp feedback circuit offers a simple solution for this. Since the reference voltage is derived from a potential divider connected to a GPIO pin, you could use two pins to select between different reference voltages. The reference voltage determines the current, along with the sense resistor.
 
 
+## Constant Current Diodes
 
+There are a number of integrated current regulating devices in two-terminal packages. These are sometimes described as *current regulating diodes* or *Two Terminal Constant Current LED Driver*. One example is the [AL5809Q](https://www.diodes.com/datasheet/download/AL5809Q.pdf){target="_blank"} family. They claim a current accuracy of 3% or better over a very wide range of operating voltages. There are specific devices available with fixed currents including 100mA, 120mA and 150mA. They can simply be placed in series with one or more LEDs - effectively replacing the current limit resistor in a switched emitter design. All you need to turn the emitter on is a basic low-side transistor switch.
 
+Internally, they have a complete current regulator and will operate with an external voltage between the pins from 2.5 Volts to 60 Volts. Add to that the switch voltage and LED forward voltage. 
+
+For micromouse wall sensors, so long as you are happy with one of the available currents, these devices will let you connect the emitter LEDs directly to the battery so long as you have at least two cells.
+
+The datasheet notes that the current can be increased by connecting two or more AL5809Q devices in parallel. This might be a good way to implement multi-level current control for the sensor emitters.
+
+### Pulse Width Constraint
+
+Before committing to the use of these devices, be aware that the datasheet states that the minimum pulse width should be 500$\mu s$ and the rise-time appears quite slow at 50$\mu s$ or so. Careful testing should be undertaking but they may still be suitable for systems with a relatively low sample rate.
