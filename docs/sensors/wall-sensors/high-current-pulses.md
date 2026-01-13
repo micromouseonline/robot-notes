@@ -115,7 +115,7 @@ Take a closer look at what is happening at the transistor base though. With a 1 
 
 A breadboard implementation of this circuit was made using an emitter resistor measured at 1.3 Ohms. The main power supply was set to 8 Volts. A 3.3 Volt GPIO pulse of 40$\mu$s duration came from a signal generator with a 50 Ohm source impedance. $V_{B}$ was measured at 2.3 Volts, implying a base current to about 21mA. During the pulse, $V_{BE}$ rose to nearly 1 Volt and there was 1.35 Volts across $R_E$. That makes the pulse current $I_E = 1.35/1.3 = 1.038A$. Some of that came from the base but it is still around the 1 Amp desired through the LED. 
 
-A $470\mu F$ electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse with a 5% duty cycle.
+A $470\mu F$ electrolytic capacitor for the reservoir gave no perceptible droop during a 40$\mu$s pulse with a 4% duty cycle.
 
 ![High Current Breadboard Test](../../assets/sensors/high-current-breadboard-test.png)
 /// caption
@@ -136,7 +136,7 @@ It has already been noted that the average current through the protection resist
 
 If a logic level MOSFET is used in source-follower mode to replace the BC337, it will have to be able to pass 1 Amp with a gate-to-source voltage of just $3.3 - 1.5 = 1.8$ Volts. The DMG2302UK should be able to achieve that. Take care though: As mentioned elsewhere, the relationship between $I_D$ and $V_{GS}$ is not sharply defined and the final regulated current is likely to be an adjust-on-test matter that may be different from one example to another.
 
-Both types of transistor should work but may be at the margins of reliability for this circuit. Look at the sections on op-amp feedback in the [Advanced Constant Current](./better-current-regulation.md/#op-amp-feedback-for-the-mosfet) page for a more robust and repeatable solution.
+Both types of transistor should work but may be at the margins of reliability for this circuit. Look at the sections on op-amp feedback in the [Better Current Regulation](./better-current-regulation.md/#op-amp-feedback-for-the-mosfet) page for a more robust and repeatable solution.
 
 ---
 
