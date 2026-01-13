@@ -12,7 +12,7 @@ icon: octicons/dot-16
 
 ## Rationale
 
-There are two principal reasons you might want to deliver very high current pulses through the emitter LEDs. To be clear, by high current I mean more than 500mA - perhaps as much as 1 Amp. High current pulses are only safe when they are very short.  and have a low duty cycle. Attempting continuous drive at more than 50 - 100mA is likely to damage or destroy most LED emitters.
+There are two principal reasons you might want to deliver very high current pulses through the emitter LEDs. To be clear, by high current I mean more than 500mA - perhaps as much as 1 Amp. High current pulses are only safe when they are very short and have a low duty cycle. Attempting continuous drive at more than 50 - 100mA is likely to damage or destroy most LED emitters.
 
 ### Signal to Noise
 

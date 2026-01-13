@@ -83,6 +83,7 @@ One thing is absolutely certain. The GPIO pin alone cannot drive the emitter LED
 
 Other pages in this section look in more detail at some options for controlling the LED output
 
-- [Basic Switching](./switched-emitter-drive.md): Uses a transistor or other device as a switch in an attempt to provide a fixed, consistent current pulse through the LED. Easy to implement, these have limitations.
-- [Simple Current Control](./basic-constant-current-drive.md):  Uses a slightly more complex circuit, or specialist driver, to try and ensure that the LED current, and thus the light output, is constant over a range of operating conditions.
-- [Advanced Current Control](./better-current-regulation.md): More complex circuits can be used to improve the performance of the current regulation technique to guarantee a consistent light output for each pulse that can be varied in different circumstances.
+- [Switched Emitters](./switched-emitter-drive.md): Uses a transistor or other device as a switch in an attempt to provide a fixed, consistent current pulse through the LED. Easy to implement, these have limitations.
+- [Basic Current Control](./basic-constant-current-drive.md):  Uses a slightly more complex circuit, or specialist driver, to try and ensure that the LED current, and thus the light output, is constant over a range of operating conditions.
+- [Better Current Control](./better-current-regulation.md): More complex circuits can be used to improve the performance of the current regulation technique to guarantee a consistent light output for each pulse that can be varied in different circumstances.
+- [High Current Pulses](./high-current-pulses.md): If you want significantly higher current pulses through the emitters, there are some extra consideration you should know about.
