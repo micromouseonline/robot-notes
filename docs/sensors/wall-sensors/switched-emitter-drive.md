@@ -328,6 +328,23 @@ The answer lies in a slightly different configuration that will guarantee a cons
 
 See the [Constant Current Drive Section](./basic-constant-current-drive.md) for some ways to manage that.
 
+---
+
+## Extreme Switching
+
+As the current through a LED increases, so too does the forward voltage drop. For the kinds of visible light and infra-red LEDs used in wall sensors, you can expect forward voltages of between 2 and 3 Volts at moderately high currents. If the sensor circuit contains, for each LED, a protection resistor of 100 Ohms and a reservoir capacitor, say 47uF, the average voltage on that capacitor will be less than the supply voltage. 
+
+Now suppose you have only a 3.3Volt regulated supply available and you connect a transistor as a simple switch that permits current to flow from the reservoir capacitor, through the LED and transistor but without any current regulating or current limiting resistor. Clearly, the maximum voltage that can be dropped by the LED is the capacitor voltage less the transistor saturation voltage.
+
+Assume you target 500mA pulses of 25$\mu s$ every 1000$\mu s$. The average voltage dropped by the protection resistor would be (0.5 * 100 * 0.025) = 1.25 Volts. Even if the transistor saturation voltage were zero, that would leave only about 2 Volts for the LED and its current would be automatically limited by the available voltage. That is the kind of forward voltage associated with a much lower LED current of around 10mA. Consequently, the average current would be lower, the capacitor voltage would be higher and the available current would rise.
+
+Somewhere in between 10mA and 500mA, the circuit would reach an equilibrium. The LED current would be high but less than 500mA.
+
+Trying the experiment with a TLCR5800 LED, and a 470uF capacitor and 25\$u s$ pulses at 1kHz is interesting. The transistor is a DMG2302UK mosfet and the triggering pulses are 3.3 Volts from the GPIO through a 100 Ohm resistor. The transistor immediately saturates because $V_{GS}$ is not affected by the source current and that particular MOSFET can saturate with $V_{GS}$ as low as 1.5 Volts. The average voltage drop across the safety resistor is 0.6 Volts which makes the average current 6mA. With a duty cycle of 2.5%, the peak current during the pules must be something like $0.006 / 0.025 = 240mA$
+
+The actual pulse current available would depend heavily on the $I_F - V_F$ characteristics of the LEDs in use and may vary substantially from one part to another, as well as with temperature, supply tolerance, and component tolerances. A solution like this is likely to be variable rather than repeatable and will depend on a number of factors that may not be easily controllable. Extending the pulse length will significantly affect the behaviour for example. A longer pulse will actually reduce the LED current because the safety resistor drop would increase. In the extreme, of course, you would be operating with only the current permitted by the safety resistor which might result in only a few tens of mA. 
+
+This circuit is not very amenable to analysis. If you really want to try it, then considerable experimentation might ne required.
 
 ---
 
