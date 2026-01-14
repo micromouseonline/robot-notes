@@ -11,7 +11,7 @@ icon: octicons/dot-16
 status:
 ---
 
-# Advanced Emitter Control
+# Better Current Control
 
 This page will examine some other options for controlling the emitters.
 
