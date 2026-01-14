@@ -330,53 +330,6 @@ See the [Constant Current Drive Section](./basic-constant-current-drive.md) for 
 
 ---
 
-## Extreme Switching
-
-As the current through a LED increases, so too does the forward voltage drop. For the kinds of visible light and infra-red LEDs used in wall sensors, you can expect forward voltages of between 2 and 3 Volts at moderately high currents. If the sensor circuit contains, for each LED, a protection resistor of 100 Ohms and a reservoir capacitor, say 47uF, the average voltage on that capacitor will be less than the supply voltage. 
-
-Now suppose you have only a 3.3Volt regulated supply available and you connect a MOSFET as a simple switch that permits current to flow from the reservoir capacitor, through the LED and transistor but without any current regulating or current limiting resistor. Clearly, the maximum voltage that can be dropped by the LED is the capacitor voltage less the transistor saturation voltage.
-
-![Extreme MOSFET Switch](../../assets/sensors/extreme-mosfet-switching.png)
-/// caption
-Extreme MOSFET Switched Emitter
-///
-
-All you can know is that the MOSFET is fully saturated. The LED characteristic is not well defined and, even if it were, what is the forward voltage going to be in this circuit? All you can do is calculate some limits and make an estimate of the pulse current from there. 
-
-Assume you target 500mA pulses of 25$\mu s$ every 1000$\mu s$. The average voltage dropped by the protection resistor can be calculated:
-
-$$
-\begin{align}
-I_{peak} &= 0.5 \\
-Duty\ cycle &= 25\mu s / 1000\mu s = 0.025 \\
-I_{avg} &= 0.5 * 0.025 = 12.5mA \\
-V_R &= I_{avg} \times 100\Omega = 1.25 V \\
-\end{align}
-$$
-
-The SFH4550 datasheet tells you that the forward voltage at 500mA should be around 2 Volts. That all seems quite reasonable since the average capacitor voltage, plus the LED forward voltage, adds up to very close to the supply voltage. So you might conclude that the LED pulse current is indeed close to 500mA.
-
-The circuit can be built on a breadboard and tested with 25\$u s$ pulses at 1kHz. The transistor is a DMG2302UK MOSFET and the triggering pulses are 3.3 Volts from the GPIO through a 100 Ohm resistor. The transistor immediately saturates because $V_{GS}$ is not affected by the source current and that particular MOSFET can saturate with $V_{GS}$ as low as 1.5 Volts. The average voltage drop across the safety resistor is 1.2 Volts which makes the average current 12mA. With a duty cycle of 2.5%, the peak current during the pulses must be something like $0.012 / 0.025 = 480mA$. The oscilloscope recorded a forward voltage of 2.02 Volts. 
-
-The circuit naturally seeks an equilibrium. Higher LED currents discharge the capacitor faster, increasing the voltage drop across the safety resistor, which in turn reduces the voltage and therefore the current in the next pulse.
-So, the result is very close to the prediction.
-
-![Extreme MOSFET Switch result ](../../assets/sensors/extreme-mosfet-switch-result.png)
-/// caption
-Extreme MOSFET Switched Emitter Rsults
-///
-
-
-The results are gratifying but are they reliable?
-
-The actual pulse current available would depend heavily on the $I_F - V_F$ characteristics of the LEDs in use and may vary substantially from one part to another, as well as with temperature, supply tolerance, and component tolerances. A solution like this is likely to be variable rather than repeatable and will depend on a number of factors that may not be easily controllable. Extending the pulse length will significantly affect the behaviour for example. A longer pulse will actually reduce the LED current because the safety resistor drop would increase. In the extreme, of course, you would be operating with only the current permitted by the safety resistor which might result in only a few tens of mA. 
-
-Note the use of a large reservoir capacitor, If that were reduced to, say, 47uF, the pulse current would quickly droop as the capacitor charge is depleted. That must reduce the average current so the average voltage on the capacitor must drop. You might think that would allow more current to flow in the LED and you would be right but only at the start of the pulse. The droop would be quite substantial and by the end of the pulse the current would be significantly less. Furthermore, it is not easy to predict the overall effect on the light output. In the breadboarded circuit, reducing the capacitor to 47$\mu$F reduces the average current to just 70mA but it is difficult to say exactly what that does to the shape of the pulse or the current in the LED at the time that you sample with an ADC.
-
-This circuit is not very amenable to analysis. Small changes in parameters may shift the operating point significantly. If you really want to try it, then considerable experimentation might be required and you may decide that to be a worthwhile tradeoff for the extreme minimalism.
-
----
-
 ## Real-World Cases 
 
 In the preceding sections, examples are given for circuits with quite large LED currents. You should not assume large currents are essential. These examples represent relatively extreme cases used to illustrate some issues that arise. Your robot will have its own needs and typical, commonly used configurations might only need LED currents that are around 250mA for a classic micromouse and much less for a half-size micromouse when the detecting element is a phototransistor.

@@ -116,6 +116,7 @@ nav:
       - sensors/wall-sensors/index.md   
       - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
+      - Extreme Switching: sensors/wall-sensors/extreme-switched-drive.md
       - Basic Constant Current: sensors/wall-sensors/basic-constant-current-drive.md
       - High Current Pulses: sensors/wall-sensors/high-current-pulses.md
       - Better Constant Current: sensors/wall-sensors/better-current-regulation.md
