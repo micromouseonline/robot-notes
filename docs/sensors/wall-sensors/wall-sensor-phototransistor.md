@@ -12,4 +12,4 @@ status:
 ---
 
 
-# Dhototransistor Detectors
+# Phototransistor Detectors

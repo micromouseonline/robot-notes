@@ -123,6 +123,7 @@ nav:
       - Detectors: sensors/wall-sensors/wall-sensor-detectors.md
       - Phototransistors: sensors/wall-sensors/wall-sensor-phototransistor.md
       - Photodiodes: sensors/wall-sensors/wall-sensor-photodiode.md
+      - Part Selection: sensors/wall-sensors/part-selection.md
     # - Line Followers:
     #    - template.md
     #    - Line Sensing: template.md
