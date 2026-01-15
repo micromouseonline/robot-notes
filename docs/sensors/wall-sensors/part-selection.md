@@ -127,68 +127,68 @@ Sensitivity can be particularly hard to evaluate as the units are not always con
 ### Phototransistors
 
 - SFH309 - [datasheet](https://look.ams-osram.com/m/48f3c58ae57c5dfc/original/SFH-309.pdf){target="_blank"}
-  - 3mm clear package
-  - 860nm peak sensitivity
-  - Photocurrent typical: 3mA @ 1.0mW/cm^2; 4500uA @ 1000 lux
-  - Response > 80% @ 700nm - 1000nm 
-  - Response > 60% @ 620nm - 1050nm 
-  - Risetime: 7$\mu s$
-  - Saturation Voltage 0.2 Volts
-  - Half Angle $\pm$12 deg, no lobes
+    - 3mm clear package
+    - 860nm peak sensitivity
+    - Photocurrent typical: 3mA @ 1.0mW/cm^2; 4500uA @ 1000 lux
+    - Response > 80% @ 700nm - 1000nm 
+    - Response > 60% @ 620nm - 1050nm 
+    - Risetime: 7$\mu s$
+    - Saturation Voltage 0.2 Volts
+    - Half Angle $\pm$12 deg, no lobes
 
 - SFH309-FA - [datasheet](https://look.ams-osram.com/m/ce14b97f1982f0f/original/SFH-309-FA.pdf){target="_blank"}
-  - 3mm black package, daylight filtered
-  - 950nm peak sensitivity
-  - Photocurrent typical: 3mA @ 1.0mW/cm^2
-  - Response > 80% @ 800nm - 1000nm 
-  - Response > 60% @ 750nm - 1050nm 
-  - Risetime: 7$\mu s$
-  - Saturation Voltage 0.2 Volts
-  - Half Angle $\pm$12 deg, no lobes
+    - 3mm black package, daylight filtered
+    - 950nm peak sensitivity
+    - Photocurrent typical: 3mA @ 1.0mW/cm^2
+    - Response > 80% @ 800nm - 1000nm 
+    - Response > 60% @ 750nm - 1050nm 
+    - Risetime: 7$\mu s$
+    - Saturation Voltage 0.2 Volts
+    - Half Angle $\pm$12 deg, no lobes
 
 - BPW85C - [datasheet](https://www.vishay.com/docs/81531/bpw85a.pdf){target="_blank"}
-  - 3mm clear package
-  - 850nm peak sensitivity
-  - Photocurrent typical: 5mA @ 1.0mW/cm^2
-  - Response > 80% @ 750nm - 950nm 
-  - Response > 60% @ 650nm - 980nm 
-  - Risetime: 2$\mu s$
-  - Saturation Voltage 0.3 Volts
-  - Half Angle $\pm$ 25 deg, no lobes
-  - BPW85A and BPW85B are lower sensitivity groups of same product
+    - 3mm clear package
+    - 850nm peak sensitivity
+    - Photocurrent typical: 5mA @ 1.0mW/cm^2
+    - Response > 80% @ 750nm - 950nm 
+    - Response > 60% @ 650nm - 980nm 
+    - Risetime: 2$\mu s$
+    - Saturation Voltage 0.3 Volts
+    - Half Angle $\pm$ 25 deg, no lobes
+    - BPW85A and BPW85B are lower sensitivity groups of same product
 
 - TEFT4300 - [datasheet](https://www.vishay.com/docs/81549/teft4300.pdf){target="_blank"}
-  - 3mm black package, daylight filtered
-  - 925nm peak sensitivity
-  - Photocurrent typical: 3mA @ 1.0mW/cm^2
-  - Response > 80% @ 890nm - 970nm 
-  - Response > 60% @ 870nm - 990nm 
-  - Risetime: 2$\mu s$
-  - Saturation Voltage 0.3 Volts
-  - Half Angle $\pm$ 30 deg, no lobes, flat response
-  - No response at <= 850nm
+    - 3mm black package, daylight filtered
+    - 925nm peak sensitivity
+    - Photocurrent typical: 3mA @ 1.0mW/cm^2
+    - Response > 80% @ 890nm - 970nm 
+    - Response > 60% @ 870nm - 990nm 
+    - Risetime: 2$\mu s$
+    - Saturation Voltage 0.3 Volts
+    - Half Angle $\pm$ 30 deg, no lobes, flat response
+    - No response at <= 850nm
 
 - TEPT5600 - [datasheet](https://www.vishay.com/docs/84768/tept5600.pdf){target="_blank"}
-  - 5mm clear package
-  - 570nm peak sensitivity, human eye response
-  - Photocurrent typical: 630uA @ 100lux, 3mA @ 1000lux
-  - Response > 80% @ 500nm - 700nm 
-  - Response > 60% @ 450nm - 770nm 
-  - Risetime: ??$\mu s$ (not given)
-  - Saturation Voltage 0.2 Volts
-  - Half Angle $\pm$ 20 deg, no lobes
-  - Very Poor IR response
+    - 5mm clear package
+    - 570nm peak sensitivity, human eye response
+    - Photocurrent typical: 630uA @ 100lux, 3mA @ 1000lux
+    - Response > 80% @ 500nm - 700nm 
+    - Response > 60% @ 450nm - 770nm 
+    - Risetime: ??$\mu s$ (not given)
+    - Saturation Voltage 0.2 Volts
+    - Half Angle $\pm$ 20 deg, no lobes
+    - Very Poor IR response
 
 - LTR4206E - [datasheet](https://www.mouser.com/catalog/specsheets/LTR-4206E.pdf){target="_blank"}
-  - 3mm black package with daylight filter
-  - 940nm peak sensitivity
-  - Photocurrent typical: 3mA @ 1.0mW/cm^2
-  - Response > 80% @ XXXnm - XXXXnm 
-  - Response > 60% @ XXXnm - XXXXnm 
-  - Risetime: 10$\mu s$
-  - Saturation Voltage 0.4 Volts
-  - Half Angle $\pm$ 10 deg, no lobes (estimated)
-  - Relatively poor datasheet
+    - 3mm black package with daylight filter
+    - 940nm peak sensitivity
+    - Photocurrent typical: 3mA @ 1.0mW/cm^2
+    - Response > 80% @ XXXnm - XXXXnm 
+    - Response > 60% @ XXXnm - XXXXnm 
+    - Risetime: 10$\mu s$
+    - Saturation Voltage 0.4 Volts
+    - Half Angle $\pm$ 10 deg, no lobes (estimated)
+    - Relatively poor datasheet
 
 
 
