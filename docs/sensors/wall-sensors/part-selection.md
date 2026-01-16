@@ -200,17 +200,7 @@ Sensitivity can be particularly hard to evaluate as the units are not always con
 
 
 ### Photodiodes
-(move explanation to photodiode page)
 
-Photodiodes are generally used in the photoconductive mode. That is, they are reverse biased with the cathode connected to the positive supply. Under reverse bias, the diode produces almost no current in darkness, and current flows only when light reaches the junction. The resulting photocurrent is directly proportional to the amount of light absorbed by the active region.
-
-This behaviour produces three of the most important characteristics of the photodiode when used in this mode:
-
- - photocurrent is proportional to the active region area
- - photocurrent is very linear with changes in incident light
- - photocurrent is typically very small
-
-The dependence on active region area is worth emphasising. A larger active area produces a larger photocurrent and therefore greater sensitivity, but it also requires a physically larger package. Some photodiode packages omit a lens to maximise the active area, which increases sensitivity but also widens the acceptance angle. A wide acceptance angle makes the device more susceptible to unwanted ambient illumination and can reduce the directional selectivity of the sensor.
 
 Photodiodes have a wavelength-dependent sensitivity. Like phototransistors, you need to select your photodiode to match the spectral characteristics of the emitter.
 
