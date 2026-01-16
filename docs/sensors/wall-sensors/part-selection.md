@@ -242,7 +242,7 @@ The devices shown here are through-hole parts in lensed packages. Photodiodes ar
 - no response below 700nm
 
 
-#### SFH2229
+#### SFH229
 - [datasheet](https://look.ams-osram.com/m/2a0be50605895dac/original/SFH-229.pdf){target="_blank"}
 - 3mm clear package
 - 900nm peak sensitivity
@@ -254,7 +254,7 @@ The devices shown here are through-hole parts in lensed packages. Photodiodes ar
 - Half Angle $\pm$ 15 deg, no lobes
 - broad response
 
-#### SFH2229-FA
+#### SFH229-FA
 - [datasheet](https://look.ams-osram.com/m/594c1e47800b9bb9/original/SFH-229-FA.pdf){target="_blank"}
 - 3mm black package, daylight filtered
 - 900nm peak sensitivity
