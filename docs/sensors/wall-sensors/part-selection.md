@@ -88,7 +88,7 @@ These too are likely to be much more readily available in a 5mm LED package rath
 
 ##### SFH4545 
 - [datasheet](https://look.ams-osram.com/m/3456970c8eccd2cb/original/SFH-4545.pdf){target="_blank"}
-- Comes in a 5mm black, conical package. 
+- Comes in a 5mm black, **conical** package. 
 - Peak wavelength 950nm. 
 - Radiant intensity 550mW/sr @ 100mA; 4200mW/sr @ 1 Amp, 25$\mu s$
 - Irradiance @ 100mA and 100mm $\approx 5mW/cm^2$
@@ -200,4 +200,82 @@ Sensitivity can be particularly hard to evaluate as the units are not always con
 
 
 ### Photodiodes
+(move explanation to photodiode page)
+
+Photodiodes are generally used in the photoconductive mode. That is, they are reverse biased with the cathode connected to the positive supply. Under reverse bias, the diode produces almost no current in darkness, and current flows only when light reaches the junction. The resulting photocurrent is directly proportional to the amount of light absorbed by the active region.
+
+This behaviour produces three of the most important characteristics of the photodiode when used in this mode:
+
+ - photocurrent is proportional to the active region area
+ - photocurrent is very linear with changes in incident light
+ - photocurrent is typically very small
+
+The dependence on active region area is worth emphasising. A larger active area produces a larger photocurrent and therefore greater sensitivity, but it also requires a physically larger package. Some photodiode packages omit a lens to maximise the active area, which increases sensitivity but also widens the acceptance angle. A wide acceptance angle makes the device more susceptible to unwanted ambient illumination and can reduce the directional selectivity of the sensor.
+
+Photodiodes have a wavelength-dependent sensitivity. Like phototransistors, you need to select your photodiode to match the spectral characteristics of the emitter.
+
+
+The devices shown here are through-hole parts in lensed packages. Photodiodes are relatively uncommon in micromouse wall sensors. Only a few representative parts have been included. These have not been thoroughly tested.
+
+#### SFH213 
+- [datasheet](https://look.ams-osram.com/m/236756eb2a4c9193/original/SFH-213.pdf){target="_blank"}
+- 5mm clear package
+- 850nm peak sensitivity
+- Sensitive Area 1mm^2
+- Photocurrent typical: 0.135mA @ 1000 lux
+- Response > 80% @ 700nm - 950nm 
+- Response > 60% @ 600nm - 1000nm 
+- Risetime: 5ns
+- Half Angle $\pm$ 10 deg, no lobes
+- broad response
+
+#### SFH213-FA
+- [datasheet](https://look.ams-osram.com/m/3798e9afd3f63ea8/original/SFH-213-FA.pdf){target="_blank"}
+- 5mm black package, daylight filtered
+- 900nm peak sensitivity
+- Sensitive Area 1mm^2
+- Photocurrent typical: 0.090mA @ 1.0mW/cm^2
+- Response > 80% @ 810nm - 980nm 
+- Response > 60% @ 790nm - 1020nm 
+- Risetime: 5ns
+- Half Angle $\pm$ 10 deg, no lobes
+- no response below 700nm
+
+
+#### SFH2229
+- [datasheet](https://look.ams-osram.com/m/2a0be50605895dac/original/SFH-229.pdf){target="_blank"}
+- 3mm clear package
+- 900nm peak sensitivity
+- Sensitive Area 0.31mm^2
+- Photocurrent typical: 0.038mA @ 1000 lux; 0.028mA @ 1mW/cm^2
+- Response > 80% @ 700nm - 980nm 
+- Response > 60% @ 590nm - 1020nm 
+- Risetime: 1us
+- Half Angle $\pm$ 15 deg, no lobes
+- broad response
+
+#### SFH2229-FA
+- [datasheet](https://look.ams-osram.com/m/594c1e47800b9bb9/original/SFH-229-FA.pdf){target="_blank"}
+- 3mm black package, daylight filtered
+- 900nm peak sensitivity
+- Sensitive Area 0.31mm^2
+- Photocurrent typical: 0.025mA @ 1mW/cm^2
+- Response > 80% @ 800nm - 1000nm 
+- Response > 60% @ 750nm - 1020nm 
+- Risetime: 6us
+- Half Angle $\pm$ 15 deg, no lobes
+- no response below 700nm
+
+#### QSB34CGR
+- [datasheet](https://www.onsemi.com/download/data-sheet/pdf/qsb34-d.pdf){target="_blank"}
+- 4mmx6mm SMT package
+- 940nm peak sensitivity
+- Sensitive Area 6.5mm^2
+- Photocurrent typical: 0.037mA @ 1mW/cm^2
+- Response > 80% @ 650nm - 1050nm 
+- Response > 60% @ 500nm - 1050nm 
+- Risetime: 50ns
+- Half Angle $\pm$ 60 deg, no lobes
+- Also available filtered as QSB34GR
+
 
