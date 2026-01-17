@@ -15,6 +15,24 @@ status:
 
 Parts suggested here are among those commonly used in micromouse wall sensors and have a degree of proven use. Other parts may be available and may prove a better match for your design. For half-size robots in particular, it might be worth searching out more appropriately sized devices.
 
+## Possible Combinations
+
+### IR Phototransistors:
+
+- 850nm: SFH4550 or VLSY5850 with BPW85C or SFH309-FA
+- 950nm: SFH4545 or VLSY5950 with TEFT4300 or LTR4206E
+
+### IR Photodiodes:
+- 850nm: SFH4550 or VLCY5850 with SFH213-FA or QSB34CGR
+- 950nm: SFH4545 or VLSY5950 with SFH213-FA or QSB34CGR or LTR4206E
+
+### Visible Phototransistors
+- TLCR5800 or VLCS5830 with TEPT5600 or BPW85C or SFH309
+
+
+
+
+
 ## Emitters
 
 The emitter device should, ideally, illuminate only the wall over the working range of the sensor. Any light spilling over the wall is wasted at best and may upset the results if it is reflected from the floor. For a sensor operating with 50mm high walls, 200mm away, the included angle is 14 degrees. Try to ensure that the great majority of the light output falls within a narrower beam than that.
@@ -37,9 +55,11 @@ For consistency and high output, the VLCY5830 is probably the better part.
 
 Both parts come in a standard, clear 5mm LED package. High brightness parts with a narrow beam are not easy to find in 3mm or surface mount packages. Carefully examine the polar pattern in the datasheet. Reject any parts that have multiple output lobes as these will give misleading results as the angle changes.
 
- - TLCR5800 - [datasheet](https://www.vishay.com/docs/83178/tlcr5800.pdf){target="_blank"}
+#### TLCR5800 
+   - [datasheet](https://www.vishay.com/docs/83178/tlcr5800.pdf){target="_blank"}
 
- - VLCS5830 - [datasheet](https://www.vishay.com/docs/81892/vlcs5830.pdf){target="_blank"}
+#### VLCS5830
+   - [datasheet](https://www.vishay.com/docs/81892/vlcs5830.pdf){target="_blank"}
 
 Possible SMD parts might include:
 
@@ -189,12 +209,12 @@ Sensitivity can be particularly hard to evaluate as the units are not always con
 - 3mm black package with daylight filter
 - 940nm peak sensitivity
 - Photocurrent typical: 3mA @ 1.0mW/cm^2
-- Response > 80% @ XXXnm - XXXXnm 
-- Response > 60% @ XXXnm - XXXXnm 
+- Response > 80% @ XXXnm - XXXXnm (not shown)
+- Response > 60% @ XXXnm - XXXXnm (not shown)
 - Risetime: 10$\mu s$
 - Saturation Voltage 0.4 Volts
 - Half Angle $\pm$ 10 deg, no lobes (estimated)
-  - Relatively poor datasheet
+  - Narrow acceptance, oor datasheet missing spectral response
 
 
 
@@ -205,7 +225,7 @@ Sensitivity can be particularly hard to evaluate as the units are not always con
 Photodiodes have a wavelength-dependent sensitivity. Like phototransistors, you need to select your photodiode to match the spectral characteristics of the emitter.
 
 
-The devices shown here are through-hole parts in lensed packages. Photodiodes are relatively uncommon in micromouse wall sensors. Only a few representative parts have been included. These have not been thoroughly tested.
+The devices shown here are mostly through-hole parts in lensed packages. Photodiodes are relatively uncommon in micromouse wall sensors. Only a few representative parts have been included. These have not been thoroughly tested.
 
 #### SFH213 
 - [datasheet](https://look.ams-osram.com/m/236756eb2a4c9193/original/SFH-213.pdf){target="_blank"}
