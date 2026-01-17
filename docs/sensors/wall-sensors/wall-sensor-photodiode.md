@@ -66,6 +66,6 @@ This method is probably the simplest way to use a photodiode get a positive-goin
 
 ## Advantages
 
-In general, photodiodes offer two important advantages over phototransistors. First, they are much faster when responding to pulsed illumination. This may not matter if your ADC cannot sample at hundreds of kilohertz or more, but it can be valuable in some designs. Second, photodiodes are intrinsically more linear over a wide range of illumination levels. However, in the simple circuit above, as the output voltage approaches the supply, the reverse bias is reduced and linearity suffers. When operated between supply and ground, the output will flatten as it nears the supply—much like a phototransistor—especially within the last 0.5–1.0 V.
+In general, photodiodes offer two important advantages over phototransistors. First, they are much faster when responding to pulsed illumination. This may not matter if your ADC cannot sample at hundreds of kilohertz or more, but it can be valuable in some designs. Second, photodiodes are intrinsically more linear over a wide range of illumination levels. However, in the simple circuit at the top of the page, as the output voltage approaches the supply, the reverse bias is reduced and linearity suffers. When operated between supply and ground, the output will flatten as it nears the supply—much like a phototransistor—especially within the last 0.5–1.0 V.
 
 
