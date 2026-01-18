@@ -16,42 +16,15 @@ status:
 The simplest current regulator is show in the [Basic Constant Current](./basic-constant-current-drive.md) page. That used a single bipolar transistor (BJT) and just moved the current limit resistor to the emitter of the transistor. That works quite well in many cases but one of the downsides is that higher currents cause the regulating transistor base voltage to become quite high. That causes a dependence on the available GPIO voltage.
 
 
-## Dual Bipolar Current Regulator
 
-The basic circuit can be improved by adding just one more component - another transistor.
+## MOSFETS
 
-![Dual Bipolar Current Regulator](../../assets/sensors/dual-bipolar-regulator.png)
-/// caption
-Dual Bipolar Current Regulation
-///
+One of the improvements for the basic switched emitter control was to replace the bipolar transistor with a MOSFET. It might then be reasonable to suppose that a MOSFET might help here.
 
-In this circuit Q1 regulates the current through the LED but Q2 ensures that the voltage at the base of Q1 is always just two diode drops above ground. It may not be obvious how this is achieved though. Basic transistor behaviour will ensure that the base of Q2 is about 0.6 Volts so the current through the current-setting resistor, R3 is just $I_E = 0.6/4.7 = 128mA$ ignoring any small base current into Q1, the current through the LED will also be 128mA. If the current were to increase, the voltage across R3 would increase and Q1 would turn on harder, stealing current from the base of Q1 and reducing the emitter current. Similarly, any reduction in the current through R3 would tend to turn off Q1 and raise the base of Q2. This negative feedback keeps the emitter current of Q1 very stable and predictable.
+For modest currents of 300mA or less, the short answer is, probabaly, no.
 
-The circuit has two big advantages:
-
-- You can use it with either 3.3 Volt or 5.0 Volt GPIO outputs. The current needed for regulation in Q1 qill be small, assuming your are using LED currents up to about 200mA and so R2 need only be able to supply a couple of milliAmps to make that work.
-
-- Because the base of Q1 is held at around 1.3 Volts, the collector can come all the way down to less than 2 Volts (possibly 1.5 Volts) and still provide good regulation. That greatly increases the compliance voltage range of the circuit.
-
-Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you can sustain 128mA pulses all the way down to 3 Volt power supply levels. That would make it quite useable on a single-cell half size mouse. With 330mA pulses, the minimum supply voltage was 4 Volts. For PCB layout convenience, you can get dual NPN bipilar devices in a single package. For example, the EMX18T2R  contains a pair of 2SC5585 NPN transistors in a tiny package.
-
-- [EMX18T2R datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/emx18t2r-e.pdf_)
-- [2SC5585 datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/2sc5585tl-e.pdf)
-
-
-If you plot the voltage at the collector of Q1 during the pulse, you will see it drop. From that, you might conclude that the LED current drops but that is not the case. The circuit is maintaining the current even while the charge is depleted from the storage capacitor. That can clearly be seen in a circuit simulation using ngspice in KiCAD:
-
-
-![Dual Bipolar Current Regulator Simulation](../../assets/sensors/dual-bipolar-regulator-sim.png)
-/// caption
-Dual Bipolar Current Regulation Simulation
-///
-
-You may come across similar circuits using a pair of diodes to provide the bias voltage for the regulating transistor. Not only does  this use another part, These work less well, in part because the base voltage will change if you change the current through the diodes. For example when changing from 3.3Volt GPIO to a 5 Volt GPIO. Not by much but it is just another thing to worry about.
-
-### MOSFETS
-
-One of the improvements for the basic switched emitter control was to replace the bipolar transistor with a MOSFET. In the basic constant current circuit, the MOSFET can also be simply swapped with the BJT - the source goes to the current sense resistor, the gate to the GPIO and the Drain to the LED cathode. This illustration is for a high-current emitter drive. More commonly the sense resistor, R8, would be larger.
+### MOSFET Issues
+In the basic constant current circuit, the MOSFET can also be simply swapped with the BJT - the source goes to the current sense resistor, the gate to the GPIO and the Drain to the LED cathode. This illustration is for a high-current emitter drive. More commonly the sense resistor, R8, would be larger.
 
 ![High Current Regulated Bipolar](../../assets/sensors/high-current-regulated-bipolar.png)
 /// caption
@@ -80,7 +53,7 @@ Just like the bipolar version of this regulator, there must still be some headro
 
 In short, it should be possible to replace the bipolar transistor used in the basic constant current circuit with a ZVN4206A MOSFET. BUT **only** if you have a 5 Volt GPIO pin. With a 3.3 Volt GPIO level, it is unlikely to work without very small sense resistor values. Even for the same part number, some devices can have $V_{GS(th)}$ as low as 1.3 Volts while for others it may be 3.0 Volts. You really want more certainty than that. A device like the ZVN4206 is going to be effectively unusable with only a 3.3 Volt gate drive.
 
-#### Logic-Level MOSFETS 
+### Logic-Level MOSFETS 
 
 There are MOSFET devices with lower values for $V_{GS(th)}$ and which can reach low values of $R_{DS}$ even for relatively small gate voltages. These are typically described as "logic-level" MOSFETS, designed to switch on fully with a 3.3V logic '1' from a GPIO pin. Unfortunately, these are rare in friendly, small packages for through-hole use. They are, however, plentiful in SMT packages like SOT-23. Although not marketed as a 'logic-level' device, the DMG2302-UK [Datasheet](https://www.diodes.com/datasheet/download/DMG2302UK.pdf){target=" blank"} is available in a SOT-23 package and can achieve $R_{DS}$ as low as 100mOhms with $V_{GS}$ of only 2.0 Volts as well as being capable of handling short (<10$\mu$s) pulses of 12 Amps.
 
@@ -88,7 +61,7 @@ When selecting a device to be used in this current regulating circuit, always be
 
 ---
 
-#### Summary
+### Summary
 
 When selecting a MOSFET for this circuit, remember:
 
@@ -98,10 +71,9 @@ When selecting a MOSFET for this circuit, remember:
 - It is challenging to design a source-follower current regulator because the $I_D - V_{GS}$ relationship is less well defined than for a bipolar device. 
 - Variations between devices may need the sense resistor to be adjust-on-test
 
+## Feedback Improves Control
 
-### Op-amp Feedback
-
-The circuits used so far rely on the GPIO providing a fixed voltage and a sense resistor that drops enough voltage for the transistor's $V_{BE}$ (for bipolars) or $V_{GS}$ (for MOSFETS) to fall to the point where current begins to self-limit. This generally works well so long as the supply voltage provides sufficient headroom and the GPIO voltage, $V_{IO}$, is high enough to drive the transistor correctly. When using a bipolar transistor, there must also be enough current available from the GPIO pin to drive the base. In extremes, that current may be large. With MOSFETS, the gate voltage needed to bring $R_{DS(on)}$ down to a useable value may be more than is available from the pin. Device-to-device variations make it difficult to design reliable, repeatable circuits.
+The simpler circuits used so far rely on the GPIO providing a fixed voltage and a sense resistor that drops enough voltage for the transistor's $V_{BE}$ (for bipolars) or $V_{GS}$ (for MOSFETS) to fall to the point where current begins to self-limit. This generally works well so long as the supply voltage provides sufficient headroom and the GPIO voltage, $V_{IO}$, is high enough to drive the transistor correctly. When using a bipolar transistor, there must also be enough current available from the GPIO pin to drive the base. In extremes, that current may be large. With MOSFETS, the gate voltage needed to bring $R_{DS(on)}$ down to a useable value may be more than is available from the pin. Device-to-device variations make it difficult to design reliable, repeatable circuits.
 
 As the required current increases, headroom is lost in two ways: the sense resistor drop increases, and the transistor needs more drive current (for bipolars) or voltage (for MOSFETS).
 
@@ -111,11 +83,46 @@ To make matters worse, the $V_{GS}$ voltage needed by many MOSFETS to get the va
 
 Another consequence of increasing the sense-resistor drop is a reduction in the total headroom available from the supply so that your ability to work with lower supply voltages is compromised.
 
-A more robust approach is to use an op-amp in the feedback path. The op-amp compares the voltage across the sense resistor with a reference voltage on its other input. Since the op-amp inputs draw essentially no current, the reference voltage can be set to any convenient value, independent of the value of $V_{IO}$. The op-amp can then drive the transistor, of either type, with whatever is needed (within its supply limits) to achieve the desired current. For MOSFETS in particular, the circuit no longer depends on the exact shape of the $I_D - V_{GS}$ relationship and you get consistent, reliable results even if the GPIO voltage is too low to drive the transistor directly.
+What is needed is a way to reduce the headroom loss in the regulating circuit while also removing the dependence on GPIO voltage and transistor characteristics like beta and $V_GS$.
+
+### Dual Transistor Regulator
+
+The basic circuit can be improved by adding just one more component - another transistor.
+
+![Dual Bipolar Current Regulator](../../assets/sensors/dual-bipolar-regulator.png)
+/// caption
+Dual Bipolar Current Regulation
+///
+
+In this circuit Q1 regulates the current through the LED but Q2 ensures that the voltage at the base of Q1 is always just two diode drops above ground. It may not be obvious how this is achieved though. Basic transistor behaviour will ensure that the base of Q2 is about 0.6 Volts so the current through the current-setting resistor, R3 is just $I_E = 0.6/4.7 = 128mA$. Ignoring any small base current into Q1, the current through the LED will also be 128mA. If the current were to increase, the voltage across R3 would increase and Q2 would turn on harder, stealing current from the base of Q1 and reducing the emitter current. Similarly, any reduction in the current through R3 would tend to turn off Q2 and raise the base of Q1. This negative feedback keeps the emitter current of Q1 very stable and predictable.
+
+The circuit has two big advantages:
+
+- You can use it with either 3.3 Volt or 5.0 Volt GPIO outputs. The current needed for regulation in Q1 will be small, assuming you are using LED currents up to about 200mA, and so R2 need only be able to supply a couple of milliAmps to make that work. This not only keeps the load on the GPIO pin small, it also makes it easier for the feedback transistor, Q2, to pull down the base of Q1 without demanding too much current from the pin.
+
+- Because the base of Q1 is held at around 1.3 Volts, the collector can come all the way down to less than 2 Volts (possibly 1.5 Volts) and still provide good regulation. That greatly increases the compliance voltage range of the circuit.
+
+Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you can sustain 128mA pulses all the way down to 3 Volt power supply levels. That would make it quite useable on a single-cell half size mouse. With 330mA pulses, the minimum useable supply voltage was 4 Volts. For PCB layout convenience, you can get dual NPN bipilar devices in a single package. For example, the EMX18T2R  contains a pair of 2SC5585 NPN transistors in a tiny package.
+
+- [EMX18T2R datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/emx18t2r-e.pdf_)
+- [2SC5585 datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/2sc5585tl-e.pdf)
+
+If you plot the voltage at the collector of Q1 during the pulse, you will see it drop. From that, you might conclude that the LED current drops but that is not the case. The circuit is maintaining the current even while the charge is depleted from the storage capacitor. That can clearly be seen in a circuit simulation using ngspice in KiCAD. The forward voltage of the LED, and the current through it, remain constant throughout the pulse.
+
+![Dual Bipolar Current Regulator Simulation](../../assets/sensors/dual-bipolar-regulator-sim.png)
+/// caption
+Dual Bipolar Current Regulation Simulation
+///
+
+You may come across similar circuits using a pair of diodes to provide the bias voltage for the regulating transistor. Not only does this use an extra part, these work less well. In part because the base voltage will change if you change the current through the diodes. For example when changing from 3.3 Volt GPIO to a 5 Volt GPIO. Not by much but it is just another thing to worry about.
+
+### Op-amp Feedback Regulator
+
+The dual transistor regulator uses negative feedback to ensure good regulation of the current during apulse. What else is good at negative feedback? An operational amplifier.
+
+A more robust approach then might be to use an op-amp in the feedback path. The op-amp compares the voltage across the sense resistor with a reference voltage on its other input. Since the op-amp inputs draw essentially no current, the reference voltage can be set to any convenient value, independent of the value of $V_{IO}$. The op-amp can then drive the transistor, of either type, with whatever is needed (within its supply limits) to achieve the desired current. For MOSFETS in particular, the circuit no longer depends on the exact shape of the $I_D - V_{GS}$ relationship and you get consistent, reliable results even if the GPIO voltage is too low to drive the transistor directly.
 
 By setting the reference voltage to some low value - perhaps 0.5 Volts or 1 Volt - you ensure that the same low voltage will be dropped by the sense resistor, leaving more of the LED supply to available to drive the LED. As in other circuits, there will still be some voltage greater than the saturation voltage lost to the transistor if it is to operate in its active region, but the overall headroom is improved.
-
-#### Example Circuit:
 
 Here is a basic current sink using an op-amp for the feedback to a MOSFET.
 
@@ -161,8 +168,10 @@ There are a few considerations when selecting the op-amp. It should have:
 
 - rail-to-rail IO
 - low noise
-- low common-mode range
+- input common-mode input range must include ground
 - good stability when driving a capacitive load
+
+note that real op-amps, even if rated as rail-to-rail IO are still going to fall short by some small margin. 
 
 The Microchip MCP6001U is a good choice. Note that it is only rated for a supply voltage of up to 6 Volts so you cannot use the battery voltage. Be sure that the MOSFET you choose can still pass the required current with $V_{GS} <= 5 Volts$. Note that you do not have to account for the sense resistor voltage drop. All 5 Volts is available for the gate.
 
@@ -187,7 +196,5 @@ Internally, they have a complete current regulator and will operate with an exte
 For micromouse wall sensors, so long as you are happy with one of the available currents, these devices will let you connect the emitter LEDs directly to the battery so long as you have at least two cells.
 
 The datasheet notes that the current can be increased by connecting two or more AL5809Q devices in parallel. This might be a good way to implement multi-level current control for the sensor emitters.
-
-### Pulse Width Constraint
 
 Before committing to the use of these devices, be aware that the datasheet states that the minimum pulse width should be 500$\mu s$ and the rise-time appears quite slow at 50$\mu s$ or so. Careful testing should be undertaking but they may still be suitable for systems with a relatively low sample rate.
