@@ -13,11 +13,41 @@ status:
 
 # Better Current Control
 
-This page will examine some other options for controlling the emitters.
+The simplest current regulator is show in the [Basic Constant Current](./basic-constant-current-drive.md) page. That used a single bipolar transistor (BJT) and just moved the current limit resistor to the emitter of the transistor. That works quite well in many cases but one of the downsides is that higher currents cause the regulating transistor base voltage to become quite high. That causes a dependence on the available GPIO voltage.
 
-## Better Current Sink
 
-Improved constant current circuit with better regulation. More parts though.
+## Dual Bipolar Current Regulator
+
+The basic circuit can be improved by adding just one more component - another transistor.
+
+![Dual Bipolar Current Regulator](../../assets/sensors/dual-bipolar-regulator.png)
+/// caption
+Dual Bipolar Current Regulation
+///
+
+In this circuit Q1 regulates the current through the LED but Q2 ensures that the voltage at the base of Q1 is always just two diode drops above ground. It may not be obvious how this is achieved though. Basic transistor behaviour will ensure that the base of Q2 is about 0.6 Volts so the current through the current-setting resistor, R3 is just $I_E = 0.6/4.7 = 128mA$ ignoring any small base current into Q1, the current through the LED will also be 128mA. If the current were to increase, the voltage across R3 would increase and Q1 would turn on harder, stealing current from the base of Q1 and reducing the emitter current. Similarly, any reduction in the current through R3 would tend to turn off Q1 and raise the base of Q2. This negative feedback keeps the emitter current of Q1 very stable and predictable.
+
+The circuit has two big advantages:
+
+- You can use it with either 3.3 Volt or 5.0 Volt GPIO outputs. The current needed for regulation in Q1 qill be small, assuming your are using LED currents up to about 200mA and so R2 need only be able to supply a couple of milliAmps to make that work.
+
+- Because the base of Q1 is held at around 1.3 Volts, the collector can come all the way down to less than 2 Volts (possibly 1.5 Volts) and still provide good regulation. That greatly increases the compliance voltage range of the circuit.
+
+Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you can sustain 128mA pulses all the way down to 3 Volt power supply levels. That would make it quite useable on a single-cell half size mouse. With 330mA pulses, the minimum supply voltage was 4 Volts. For PCB layout convenience, you can get dual NPN bipilar devices in a single package. For example, the EMX18T2R  contains a pair of 2SC5585 NPN transistors in a tiny package.
+
+- [EMX18T2R datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/emx18t2r-e.pdf_)
+- [2SC5585 datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/2sc5585tl-e.pdf)
+
+
+If you plot the voltage at the collector of Q1 during the pulse, you will see it drop. From that, you might conclude that the LED current drops but that is not the case. The circuit is maintaining the current even while the charge is depleted from the storage capacitor. That can clearly be seen in a circuit simulation using ngspice in KiCAD:
+
+
+![Dual Bipolar Current Regulator Simulation](../../assets/sensors/dual-bipolar-regulator-sim.png)
+/// caption
+Dual Bipolar Current Regulation Simulation
+///
+
+You may come across similar circuits using a pair of diodes to provide the bias voltage for the regulating transistor. Not only does  this use another part, These work less well, in part because the base voltage will change if you change the current through the diodes. For example when changing from 3.3Volt GPIO to a 5 Volt GPIO. Not by much but it is just another thing to worry about.
 
 ### MOSFETS
 
