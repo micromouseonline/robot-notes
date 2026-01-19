@@ -109,7 +109,7 @@ Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you 
 
 Alternatively, consider the PBSS4160DS, also available in a TSOP/6SOT457 package. It can handle 1 Amp and has beta >= 400 @ 400mA. Onbe of the nice things about these dual transistor packages is that they are symmetrical and can be put either way round.
 
--[PBSS4160DS](https://assets.nexperia.com/documents/data-sheet/PBSS4160DS.pdf)
+- [PBSS4160DS datasheet](https://assets.nexperia.com/documents/data-sheet/PBSS4160DS.pdf)
 
 
 
