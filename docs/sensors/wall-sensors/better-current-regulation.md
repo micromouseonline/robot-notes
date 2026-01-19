@@ -107,6 +107,12 @@ Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you 
 - [EMX18T2R datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/emx18t2r-e.pdf_)
 - [2SC5585 datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/2sc5585tl-e.pdf)
 
+Alternatively, consider the PBSS4160DS, also available in a TSOP/6SOT457 package. It can handle 1 Amp and has beta >= 400 @ 400mA. Onbe of the nice things about these dual transistor packages is that they are symmetrical and can be put either way round.
+
+-[PBSS4160DS](https://assets.nexperia.com/documents/data-sheet/PBSS4160DS.pdf)
+
+
+
 If you plot the voltage at the collector of Q1 during the pulse, you will see it drop. From that, you might conclude that the LED current drops but that is not the case. The circuit is maintaining the current even while the charge is depleted from the storage capacitor. That can clearly be seen in a circuit simulation using ngspice in KiCAD. The forward voltage of the LED, and the current through it, remain constant throughout the pulse.
 
 ![Dual Bipolar Current Regulator Simulation](../../assets/sensors/dual-bipolar-regulator-sim.png)
