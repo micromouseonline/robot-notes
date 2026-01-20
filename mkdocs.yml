@@ -101,16 +101,17 @@ nav:
   - Home: index.md
   - Getting Started: getting-started/index.md
   
-  # - Electronics:
-  #  - electronics/index.md
+  - Electronics:
+     - electronics/index.md
   #  - Basics
   #    - Ohms law and why it matters
-  #    - How to read circuit schematics
+  #    - Circuit Diagrams
   #    - Usual voltages and their uses
-  #  - Components
-  #    - Resistors and their uses in mice
+  #  - Passive Components
+  #    - Resistors 
   #    - Capacitors
-  #      - Why and different cap types and what they can be used for
+  #    - Inductors
+  #    - Connectors
   #  - Semiconductors
   #    - Diodes
   #    - LEDs
@@ -121,8 +122,8 @@ nav:
   #    - Multi-meter
   #    - Scope
 
-  #  - Micro controllers
-  #    - micro-controllers/index.md 
+  - Microcontrollers:
+     - microcontrollers/index.md 
   #    - Types of controller
   #    - GPIO Pins
   #       - Digital
@@ -136,20 +137,15 @@ nav:
   #    - Interrupts
   #    - Timers
 
-  #  - Power management
-  #    - Power supply
-  #    - Battery Requirements
-  #    - Power management
-
-  # - Mechanics:
-  #   - mechanics/index.md
+  - Mechanics:
+    - mechanics/index.md
   #   - Motors
   #     - DC motors
   #     - Stepper motors
   #   - Gears
   
-  # - Motion Control:
-  #   - motion-control/index.md
+  - Motion Control:
+    - motion-control/index.md
   #   - Dynamics
   #   - Kinematics
   #   - Odometry
@@ -158,8 +154,8 @@ nav:
   #   - Feedforward
   #   - V-W Control
   
-  # - Software:
-  #   - software/index.md
+  - Software:
+    - software/index.md
   #   - Language choices and tools
   #   - Basic programming concepts
   #     - Variables, loops
@@ -202,30 +198,29 @@ nav:
     #    - Light Sensors:   template.md
     # - IMUs:
     #   - Overview: template.md
-    
-  # - Line Following Robots:
-  #   - line-following-robots/index.md
-  #   - Line Following: line-following-robots/line-following.md
-  #   - Marker Sensing: line-following-robots/marker-sensors.md
-  #   - Line Sensing: line-following-robots/line-sensors.md
-  #   - Mapping Runs: line-following-robots/mapping-runs.md
-  #   - Speed Runs: line-following-robots/speed-runs.md
 
-  # - Maze Solving Robots:
-  #   - maze-solving-robots/index.md
-  #   - Maze Solving Basics: maze-solving-robots/maze-solving-basics.md
-  #   - Maze Mapping: maze-solving-robots/maze-mapping.md
-  #   - Cell Movement: maze-solving-robots/cell-movement.md
-  #   - Pathfinding: maze-solving-robots/pathfinding.md
-  #   - Path Planning: maze-solving-robots/path-planning.md
-  #   - Path Execution: maze-solving-robots/path-execution.md
-
-  # - Drag Racing Robots:
-  #   - drag-racing-robots/index.md
-
-  # - Wall Following Robots:
-  #   - wall-following-robots/index.md
-  #   - Wall Following: maze-solving-robots/wall-following.md
+  - Robot Contests:
+    - robot-contests/index.md    
+  #   - Line Following Robots:
+  #     - line-following-robots/index.md
+  #     - Line Following: line-following-robots/line-following.md
+  #     - Marker Sensing: line-following-robots/marker-sensors.md
+  #     - Line Sensing: line-following-robots/line-sensors.md
+  #     - Mapping Runs: line-following-robots/mapping-runs.md
+  #     - Speed Runs: line-following-robots/speed-runs.md
+  #   - Maze Solving Robots:
+  #     - maze-solving-robots/index.md
+  #     - Maze Solving Basics: maze-solving-robots/maze-solving-basics.md
+  #     - Maze Mapping: maze-solving-robots/maze-mapping.md
+  #     - Cell Movement: maze-solving-robots/cell-movement.md
+  #     - Pathfinding: maze-solving-robots/pathfinding.md
+  #     - Path Planning: maze-solving-robots/path-planning.md
+  #     - Path Execution: maze-solving-robots/path-execution.md
+  #   - Drag Racing Robots:
+  #     - drag-racing-robots/index.md
+  #   - Wall Following Robots:
+  #     - wall-following-robots/index.md
+  #     - Wall Following: maze-solving-robots/wall-following.md
 
   # - Advanced Topics:
   #   - advanced-topics/index.md

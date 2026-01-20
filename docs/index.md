@@ -9,22 +9,35 @@ status:
 ---
 
 
-# Micromouse & Line‑Follower Robotics Guide
+# Micromouse & Line-Follower Robotics Guide
 
 !!! warning
 
     This is a draft outline, generated originally by CoPilot, and should not be considered binding. As pages are available, the entries will become highlighted links to those pages. Entries may change or disappear. Do not bookmark links if you see this note on the index page.
 
+
+- :material-check-circle: [Line Sensors](line-sensors.md) 
+- :material-progress-clock: ~~Marker Sensors~~ *(planned)*
+
+- [Pathfinding](pathfinding.md) :material-check-circle:{ .success }
+- Path Planning :material-alert-circle:{ .warning } Draft
+- Path Execution :material-close-circle:{ .danger } Not started
+
+- :material-check-circle:{ .success } Complete
+- :material-progress-clock:{ .warning } Planned
+- :material-close-circle:{ .danger } Not started
+
+
 ## Foundations
 
-### Introduction to Micromouse & Line‑Following
+### Introduction to Micromouse & Line-Following
 - What the contests are
 - Typical robot constraints
 - What “success” looks like
 
 ### Core Principles of Small Robot Design
 - Weight, size, power, cost
-- Trade‑offs and design philosophy
+- Trade-offs and design philosophy
 
 ### Essential Tools & Skills
 - Electronics Knowledge
@@ -52,7 +65,7 @@ status:
 - Electric Motor Types
 - Motor Driver Electronics
 - Motor Driving Software
-- Back‑EMF
+- Back-EMF
 - Stall current
 - PWM strategies
 
@@ -63,7 +76,7 @@ status:
 - Mounting and alignment
 
 ### Sensor Overview
-- Differences between micromouse and line‑follower sensing
+- Differences between micromouse and line-follower sensing
 - Reflectivity, geometry, timing, noise
 
 ---
@@ -87,9 +100,9 @@ status:
 
 ### Emitter Drive Circuits
 - [Simple switched drive](sensors/wall-sensors/switched-emitter-drive.md)
-- [Constant‑current drive](sensors/wall-sensors/basic-constant-current-drive.md)
-- [Improved Constant‑current drive](sensors/wall-sensors/better-current-regulation.md)
-- Trade‑offs and limitations
+- [Constant-current drive](sensors/wall-sensors/basic-constant-current-drive.md)
+- [Improved Constant-current drive](sensors/wall-sensors/better-current-regulation.md)
+- Trade-offs and limitations
 
 
 ### Signal Conditioning
@@ -122,7 +135,7 @@ status:
 
 ### Emitter Drive Circuits
 - Special Requirements for Line Followers
-- Trade‑offs and limitations
+- Trade-offs and limitations
 
 
 ### Signal Conditioning
@@ -182,13 +195,13 @@ status:
 - Cells, walls, bitfields
 
 ### Mapping
-- Flood‑fill
+- Flood-fill
 - Distance transforms
-- Wall‑following
+- Wall-following
 
 ### Path Planning
 - Shortest path
-- Speed‑optimised path
+- Speed-optimised path
 
 ### State Estimation
 - Odometry
@@ -219,7 +232,7 @@ status:
 
 ## Firmware Architecture
 
-### Real‑Time Structure
+### Real-Time Structure
 - Main loop vs RTOS
 - Interrupt design
 
@@ -259,14 +272,14 @@ status:
 
 ## Advanced Topics
 
-### High‑Performance Micromouse
-- High‑speed turns
+### High-Performance Micromouse
+- High-speed turns
 - Diagonal movement
 - Dynamic speed control
 
-### Advanced Line‑Follower Techniques
-- Multi‑sensor arrays
-- High‑speed cornering
+### Advanced Line-Follower Techniques
+- Multi-sensor arrays
+- High-speed cornering
 - Course straightening
 
 ### Increased Downforce
@@ -292,5 +305,5 @@ status:
 ### Mathematical Tools
 - PID derivations
 - Kinematic equations
-- Flood‑fill math
+- Flood-fill math
 

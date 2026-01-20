@@ -1,0 +1,85 @@
+- Electronics
+  - electronics/index.md
+  - Basics
+  - Passive Components
+  - Semiconductors
+  - Circuit Debugging
+
+- Microcontrollers
+  - micro-controllers/index.md
+  - Types of Controller
+  - GPIO Pins
+  - PWM
+  - ADC
+  - Interrupts
+  - Timers
+
+- Software
+  - software/index.md
+  - Language Choices and Tools
+  - Basic Programming Concepts
+  - Embedded-Specific Concepts
+    - Timing and Timers
+    - Memory
+    - Speed
+    - Debugging Approaches
+    - Interrupts
+    - Getting Code onto the Controller
+  - Design Philosophies
+  - Build and Debug
+  - **Algorithms for Navigation**
+    - Pathfinding (from maze solving)
+    - Path Planning (from maze solving)
+    - Path Execution (from maze solving)
+    - Mapping Algorithms (maze + line following)
+    - Cell-Based Movement (maze solving)
+
+- Mechanics
+  - mechanics/index.md
+  - Motors
+  - Gears and Transmission
+  - Wheels and Locomotion
+  - Chassis and Structure
+  - Bearings and Friction
+  - Fasteners and Assembly
+  - Practical Mechanical Design Tips
+  - **Contest-Relevant Mechanics**
+    - High-speed chassis (drag racing)
+    - Traction and wheel choice (line following, drag racing)
+    - Stability and alignment (line following, wall following)
+
+- Motion Control
+  - motion-control/index.md
+  - Dynamics
+  - Kinematics
+  - Odometry
+  - Open and Closed Loop Control
+  - PID and Tuning
+  - Feedforward
+  - V-W Control
+  - **Applied Motion Control**
+    - Line Following Control
+    - Wall Following Control
+    - Maze Navigation Control
+    - Speed-run optimisation (line following)
+    - Encoder-based distance control (drag racing)
+
+- Sensors
+  - sensors/index.md
+  - Wall Sensors:
+    - sensors/wall-sensors/index.md   
+    - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
+    - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
+    - Extreme Switching: sensors/wall-sensors/extreme-switched-drive.md
+    - Basic Constant Current: sensors/wall-sensors/basic-constant-current-drive.md
+    - High Current Pulses: sensors/wall-sensors/high-current-pulses.md
+    - Better Constant Current: sensors/wall-sensors/better-current-regulation.md
+    - Detectors: sensors/wall-sensors/wall-sensor-detectors.md
+    - Phototransistors: sensors/wall-sensors/wall-sensor-phototransistor.md
+    - Photodiodes: sensors/wall-sensors/wall-sensor-photodiode.md
+    - Part Selection: sensors/wall-sensors/part-selection.md
+  - Line Sensors
+  - Marker Sensors
+  - Encoders
+  - IMUs
+  - Reflectance arrays
