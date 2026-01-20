@@ -100,16 +100,85 @@ extra:
 nav:
   - Home: index.md
   - Getting Started: getting-started/index.md
+  
   # - Electronics:
-  #   - electronics/index.md
+  #  - electronics/index.md
+  #  - Basics
+  #    - Ohms law and why it matters
+  #    - How to read circuit schematics
+  #    - Usual voltages and their uses
+  #  - Components
+  #    - Resistors and their uses in mice
+  #    - Capacitors
+  #      - Why and different cap types and what they can be used for
+  #  - Semiconductors
+  #    - Diodes
+  #    - LEDs
+  #    - Transistors
+  #      - Bipolar 
+  #      - MOSFET
+  #  - Circuit Debugging
+  #    - Multi-meter
+  #    - Scope
+
+  #  - Micro controllers
+  #    - micro-controllers/index.md 
+  #    - Types of controller
+  #    - GPIO Pins
+  #       - Digital
+  #         - input and output
+  #         - push pull and open drain
+  #         - pull up and pull down
+  #         - Voltages and Currents
+  #       - Analog  
+  #    - PWM
+  #    - ADC
+  #    - Interrupts
+  #    - Timers
+
+  #  - Power management
+  #    - Power supply
+  #    - Battery Requirements
+  #    - Power management
+
   # - Mechanics:
   #   - mechanics/index.md
+  #   - Motors
+  #     - DC motors
+  #     - Stepper motors
+  #   - Gears
+  
   # - Motion Control:
   #   - motion-control/index.md
-  # - Firmware:
-  #   - firmware/index.md
-  # - Build and Debug:
-  #   - build-and-debug/index.md
+  #   - Dynamics
+  #   - Kinematics
+  #   - Odometry
+  #   - Open and Closed Loop Control
+  #   - PID and Tuning
+  #   - Feedforward
+  #   - V-W Control
+  
+  # - Software:
+  #   - software/index.md
+  #   - Language choices and tools
+  #   - Basic programming concepts
+  #     - Variables, loops
+  #     - Functions and classes
+  #     - Arrays and lists
+  #     - Code layout
+  #   - Embedded specific concepts
+  #     - Timing and timers
+  #     - Memory
+  #     - Speed
+  #     - Debugging approaches
+  #     - Interrupts
+  #     - Getting code onto the controller
+  #   - Design philosophies
+  #     - Need to build for execution speed and efficient memory usage
+  #     - Might not be able to use floating point operations
+  #   - Build and Debug:
+  #     - build-and-debug/index.md
+
   - Sensors:
     - sensors/index.md
     - Micromouse:
@@ -133,13 +202,31 @@ nav:
     #    - Light Sensors:   template.md
     # - IMUs:
     #   - Overview: template.md
-
-  # - Motors: 
-  #   - Overview: motors/30-00-motors.md
-  #   - DC Brush: motors/30-20-dc-brushed.md
-  #   - DC Brushless: motors/30-30-dc-brushless.md
-  #   - Stepper:  motors/30-40-steppers.md
     
+  # - Line Following Robots:
+  #   - line-following-robots/index.md
+  #   - Line Following: line-following-robots/line-following.md
+  #   - Marker Sensing: line-following-robots/marker-sensors.md
+  #   - Line Sensing: line-following-robots/line-sensors.md
+  #   - Mapping Runs: line-following-robots/mapping-runs.md
+  #   - Speed Runs: line-following-robots/speed-runs.md
+
+  # - Maze Solving Robots:
+  #   - maze-solving-robots/index.md
+  #   - Maze Solving Basics: maze-solving-robots/maze-solving-basics.md
+  #   - Maze Mapping: maze-solving-robots/maze-mapping.md
+  #   - Cell Movement: maze-solving-robots/cell-movement.md
+  #   - Pathfinding: maze-solving-robots/pathfinding.md
+  #   - Path Planning: maze-solving-robots/path-planning.md
+  #   - Path Execution: maze-solving-robots/path-execution.md
+
+  # - Drag Racing Robots:
+  #   - drag-racing-robots/index.md
+
+  # - Wall Following Robots:
+  #   - wall-following-robots/index.md
+  #   - Wall Following: maze-solving-robots/wall-following.md
+
   # - Advanced Topics:
   #   - advanced-topics/index.md
 
