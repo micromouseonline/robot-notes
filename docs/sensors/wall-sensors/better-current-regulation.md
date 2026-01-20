@@ -94,6 +94,15 @@ The basic circuit can be improved by adding just one more component - another tr
 Dual Bipolar Current Regulation
 ///
 
+|Part    | Value    | Purpose|
+|-----   |-------   |--------|
+|R1      | 100 Ohm  | Limits the current that can flow if the emiter is accidentally left on.|
+|R2      | 1k Ohm   | Limits load on IO. Between 470 Ohm and 2k2 Ohm for most cases |
+|R3      | 4.7 Ohm  | Sets the pulse current. Select as $0.6/I_E$ |
+|D1      | SFH4550  | Emmiter LED. Could also be TLCR5800 or your choice of LED |
+|C1      | 10 $\mu$F| Provides pulse current. 10uF OK up to 200mA. Increase for higher currents |
+| Q1, Q2 | BC337-40 | Any NPN transistor that can provide the pulse current with $h_{FE} \ge 50$ |
+
 In this circuit Q1 regulates the current through the LED but Q2 ensures that the voltage at the base of Q1 is always just two diode drops above ground. It may not be obvious how this is achieved though. Basic transistor behaviour will ensure that the base of Q2 is about 0.6 Volts so the current through the current-setting resistor, R3 is just $I_E = 0.6/4.7 = 128mA$. Ignoring any small base current into Q1, the current through the LED will also be 128mA. If the current were to increase, the voltage across R3 would increase and Q2 would turn on harder, stealing current from the base of Q1 and reducing the emitter current. Similarly, any reduction in the current through R3 would tend to turn off Q2 and raise the base of Q1. This negative feedback keeps the emitter current of Q1 very stable and predictable.
 
 The circuit has two big advantages:
