@@ -25,7 +25,7 @@ It is likely tempting to connect the LED supply directly to the battery to get a
 
 What is needed is a way to keep the current through the LED constant even if the supply voltage changes.
 
-## Constant current
+## Simplest Constant current
 There are many ways to create a constant current drive. Ideally, the current would be completely independent of VDD but, of course there will be some lower limit below which there will not be enough headroom to fully accommodate the forward voltage drop of the LEDs. These circuits vary in their complexity and effectiveness. With space at a premium, builders want a simple solution wherever possible.
 
 ### Simple Solution
@@ -135,7 +135,7 @@ When choosing a transistor for Q5, several types will do the job. Aim for someth
 
 ### Circuit Protection
 
-The resistor R11 is there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. REplacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to at least 150 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to approach 6.5 Volts.
+The resistor R11 is still needed there to ensure that the LED will not be destroyed if the emitter is left on because of a software fault. With the existing value of 100 Ohms and a freshly charged battery at 8.4 Volts, the maximum current that should flow through the LED is around 64mA which is well within the maximum permitted value of 100mA. Replacing the LED with a TLCR5800 will result in a slightly lower fault current of 57mA. This is more than the permitted 50mA and so, in that case, R11 should be increased to at least 150 Ohms. This will reduce the available headroom somewhat and current pulses as high as 320mA will start to droop a few percent as the supply begins to approach 6.5 Volts.
 
 Even so, some practical experiments with two popular emitters - the SFH4550 and TLCR5800 - show that the circuit can produce very stable currents across a wide range of supply voltages even with a robust on-current protection setup. The circuit used for the tests is this. (NOTE that the protection resistor is R6 in this version, not R11 as before):
 

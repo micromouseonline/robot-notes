@@ -83,7 +83,7 @@ To make matters worse, the $V_{GS}$ voltage needed by many MOSFETS to get the va
 
 Another consequence of increasing the sense-resistor drop is a reduction in the total headroom available from the supply so that your ability to work with lower supply voltages is compromised.
 
-What is needed is a way to reduce the headroom loss in the regulating circuit while also removing the dependence on GPIO voltage and transistor characteristics like beta and $V_GS$.
+What is needed is a way to reduce the headroom loss in the regulating circuit while also removing the dependence on GPIO voltage and transistor characteristics like beta and $V_{GS}$.
 
 ### Dual Transistor Regulator
 
