@@ -16,16 +16,6 @@ status:
     This is a draft outline, generated originally by CoPilot, and should not be considered binding. As pages are available, the entries will become highlighted links to those pages. Entries may change or disappear. Do not bookmark links if you see this note on the index page.
 
 
-- :material-check-circle: [Line Sensors](line-sensors.md) 
-- :material-progress-clock: ~~Marker Sensors~~ *(planned)*
-
-- [Pathfinding](pathfinding.md) :material-check-circle:{ .success }
-- Path Planning :material-alert-circle:{ .warning } Draft
-- Path Execution :material-close-circle:{ .danger } Not started
-
-- :material-check-circle:{ .success } Complete
-- :material-progress-clock:{ .warning } Planned
-- :material-close-circle:{ .danger } Not started
 
 
 ## Foundations
