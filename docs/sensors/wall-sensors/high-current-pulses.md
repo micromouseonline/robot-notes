@@ -162,7 +162,7 @@ The problem is caused by the MOSFET characteristic. As set up, the value of $V_{
 The source resistor is replaced with a 2.0 Ohm (measured) part. Now the system stabilises with the source voltage at 2.0 Volts and $V_GS$ is just (3.24 - 2.00) = 1.24 Volts and the source current is just 1 Amp.  The transistor is barely able to operate in the active region because the LED drop is 2.44 Volts. The reservoir capacitor has risen slightly to 4.72 Volts because of the reduced average current so the headroom is (4.72 - 2.44 - 2.00) = 0.28 Volts. We are going to be OK with a fully charged 2 cell LiPo but, as soon as the battery voltage drops below about 7.75 Volts, the LED current will begin fall proportionally.
 
 
-Both types of transistor can work but are likely be at the margins of reliability for this circuit with such high currents. Look at the sections on op-amp feedback in the [Better Current Regulation](./better-current-regulation.md/#op-amp-feedback-for-the-mosfet) page for a more robust and repeatable solution.
+Both types of transistor can work but are likely be at the margins of reliability for this circuit with such high currents. Look at the sections on op-amp feedback in the [Better Current Regulation](./better-current-regulation.md/#op-amp-feedback-regulator) page for a more robust and repeatable solution.
 
 ---
 
