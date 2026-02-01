@@ -96,10 +96,10 @@ Dual Bipolar Current Regulation
 
 |Part    | Value    | Purpose|
 |-----   |-------   |--------|
-|R1      | 100 Ohm  | Limits the current that can flow if the emiter is accidentally left on.|
+|R1      | 100 Ohm  | Limits the current that can flow if the emitter is accidentally left on.|
 |R2      | 1k Ohm   | Limits load on IO. Between 470 Ohm and 2k2 Ohm for most cases |
 |R3      | 4.7 Ohm  | Sets the pulse current. Select as $0.6/I_E$ |
-|D1      | SFH4550  | Emmiter LED. Could also be TLCR5800 or your choice of LED |
+|D1      | SFH4550  | Emitter LED. Could also be TLCR5800 or your choice of LED |
 |C1      | 10 $\mu$F| Provides pulse current. 10uF OK up to 200mA. Increase for higher currents |
 | Q1, Q2 | BC337-40 | Any NPN transistor that can provide the pulse current with $h_{FE} \ge 50$ |
 
@@ -213,3 +213,7 @@ For micromouse wall sensors, so long as you are happy with one of the available 
 The datasheet notes that the current can be increased by connecting two or more AL5809Q devices in parallel. This might be a good way to implement multi-level current control for the sensor emitters.
 
 Before committing to the use of these devices, be aware that the datasheet states that the minimum pulse width should be 500$\mu s$ and the rise-time appears quite slow at 50$\mu s$ or so. Careful testing should be undertaking but they may still be suitable for systems with a relatively low sample rate.
+
+## Power Supply Filtering
+
+You might imagine that the current regulation allows the removal of the safety resistor, R1. Don't do that. While the safety function is no longer needed if you have a good constant current source, the R1+C1 combination provides significant benefits in terms of isolating the main power supply from the current spikes in the emitter. All the charge needed to operate the emitter can come from the storage capacitor and the power supply will only see small variations in the average current. For a 150mA emitter pulsed with a duty cycle of 2.5%, that would only be 3.75mA. There would be no need for high current feed and return paths on the PCB - those currents only flow in the immediate vicinity of the emitter. That will not only reduce any losses, there would be significantly less change of interference with other circuits on the PCB.
