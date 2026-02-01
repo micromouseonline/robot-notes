@@ -17,11 +17,11 @@ $$
 A_{raw} = A_{lit} - A_{dark}
 $$
 
-In a perfect world, $A_{raw}$ would be a single, stable number related to the dstance to the wall. Real sensor systems are very unlikely to behave that well. The whole sensor system has several sources of noise and interference which can be divided into two broad categories:
+In a perfect world, $A_{raw}$ would be a single, stable number related to the distance to the wall. Real sensor systems are very unlikely to behave that well. The whole sensor system has several sources of noise and interference which can be divided into two broad categories:
 
 - **Measurement Noise**
 
-    This is noise in the measured sugnal that is a result of some aspect of the sensor system. It may be the behaviour of the ADC, power supply noise, interference from other circuits on the robot or poor PCB layout.
+    This is noise in the measured signal that is a result of some aspect of the sensor system. It may be the behaviour of the ADC, power supply noise, interference from other circuits on the robot or poor PCB layout.
 
 - **Process Noise**
 
@@ -65,13 +65,13 @@ In this chart you can see that the lit and dark readings are nearly identical so
 
 Note that in a chart like this, the area under the line is the number of readings taken. That means that a signal with a lot of noise will appear to have a wider spread and lower peak compared to one that has very little noise where you would see a narrower, but higher, peak.
 
-Because the lit and dark readings have the same underlying value, subtracting them removes the common part of the signal. The noise itself doesn’t cancel — it adds — but since the mean is zero, the result is a narrow, high peak.
+Because the lit and dark readings have the same underlying value, subtracting them removes the common part of the signal. The noise itself doesn’t cancel - it adds - but since the mean is zero, the result is a narrow, high peak.
 
 Another important observation is that the lit and dark values are almost identical. That tells us that switching the emitter on and off is not disturbing the processor or the ADC in any measurable way.
 
 ### Basic Range Measurement
 
-Now we have some idea about the noise that appears to be intrinsic to the measurement system, and we are confident thatthe emitter pulses are not causing any side effects in the detected signal.
+Now we have some idea about the noise that appears to be intrinsic to the measurement system, and we are confident that the emitter pulses are not causing any side effects in the detected signal.
 
 The next step is to connect the ADC input to the detector and perform a measurement against a fixed wall. For now, the ambient illumination is an LED lamp in the ceiling. This has almost no IR output and so it should not affect the detector owing to the filter on the SFH409-FA. This, and all future runs, capture exactly 50,000 results in the histogram.
 
@@ -82,7 +82,7 @@ Record with LED lighting
 
 It should be clear that the dark readings (red) are still able to pick up some interference from somewhere, even with LED lighting. The variance (spread of values) is larger than we saw with the potential divider and the curve is not very neat. This may be due to some power supply noise since the layout on breadboards is less than ideal. The lit response (blue) has a similar shape though it is not so easy to see in this record because the low ambient illumination  means that the raw value (green) is close to the lit value.
 
-You should notice that the raw reading still has a siilar variance to that seen in the lit value but the shape is much cleaner. Any external or other noise that does not change much between sample intervals (25us) will be cancelled out by the raw reading calculation. The filtered raw values (magenta) are very clean as you might expect.
+You should notice that the raw reading still has a similar variance to that seen in the lit value but the shape is much cleaner. Any external or other noise that does not change much between sample intervals (25us) will be cancelled out by the raw reading calculation. The filtered raw values (magenta) are very clean as you might expect.
 
 The ambient illumination can be increased significantly by lighting the rig with a LED table lamp about 150mm from the wall surface. When the run is repeated under these conditions, this is the result.
 
@@ -104,7 +104,7 @@ The wall is illuminated in this way and another run is made.
 Record with IR illumination from a flashlight.
 ///
 
-The flashlight produces a contant level of illumination and the effect of that is very clear from the result chart. With the flashight dominating the readings, even when the emitter is off, the noise variance returns to the intrinsic measurement nose level. Remember that one minor division on these charts is only about 4mV variation in the reading. The dark readings are all clustered around about the 180 mark and the lit readings are also shifted up by the same amount. The raw reading, being the difference between lit and dark values remains almost exactly the same. Close inspection reveals it to be slightly higher than before because, with this type of sensor, there is a small change in gain with the level of illumination. For this particular example, the change is about 1.5% and the level of IR illumination at the wall is quite significant.
+The flashlight produces a constant level of illumination and the effect of that is very clear from the result chart. With the flashlight dominating the readings, even when the emitter is off, the noise variance returns to the intrinsic measurement nose level. Remember that one minor division on these charts is only about 4mV variation in the reading. The dark readings are all clustered around about the 180 mark and the lit readings are also shifted up by the same amount. The raw reading, being the difference between lit and dark values remains almost exactly the same. Close inspection reveals it to be slightly higher than before because, with this type of sensor, there is a small change in gain with the level of illumination. For this particular example, the change is about 1.5% and the level of IR illumination at the wall is quite significant.
 
 ### Variable Ambient IR illumination
 
@@ -121,9 +121,9 @@ In spite of that, the raw value response is very clean and looks exactly like th
 
 ### Visible Light Sensors
 
-Some builders prefer to use a detector that does not have a visible light filter. These can be more sensitive and are essential if a visible light emitter is used. For comparison then the sensor in the test rig was replaced with a BPW85C. Theload resistor is reduced to just 220 Ohms and the emitter remains as before.
+Some builders prefer to use a detector that does not have a visible light filter. These can be more sensitive and are essential if a visible light emitter is used. For comparison then the sensor in the test rig was replaced with a BPW85C. The load resistor is reduced to just 220 Ohms and the emitter remains as before.
 
-Repeating the basic run with only the room's LED ambient light immediately reveals that the phototransistor has a noticable respose to visible light.
+Repeating the basic run with only the room's LED ambient light immediately reveals that the phototransistor has a noticeable response to visible light.
 
 ![LED Ambient, Visible detector](../../assets/sensors/LED-ambient-BPW85.png)
 /// caption
