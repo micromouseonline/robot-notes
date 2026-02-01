@@ -33,7 +33,7 @@ For the time being, we we'll treat all these as just 'noise'. Later, some of the
 
 Inevitably, any measurement system will have some noise. Some possible sources of that noise have already been listed. An experiment will let us see how significant that might be in a basic micromouse wall sensor.
 
-For simple experiments, a circuit is built on a breadboard so that some of these effects can be examined. A processor module carries the STM32U575 processor, a constant-current source provides the drive for an emitter LED and a phototransistor detector has a load resistor to ground, providing a voltage proportional to the photocurrent. The emitter is a SFH4550 with 100mA pulses and the detector is a SFH409-FA. The -FA suffix indicates that the part has a filter that blocks visible light.
+For simple experiments, a circuit is built on a breadboard so that some of these effects can be examined. A processor module carries the STM32U575 processor, a constant-current source provides the drive for an emitter LED and a phototransistor detector has a load resistor to ground, providing a voltage proportional to the photocurrent. The emitter is a SFH4550 with 100mA pulses and the detector is a SFH309-FA. The -FA suffix indicates that the part has a filter that blocks visible light.
 
 ![Test Rig](../../assets/sensors/test-setup.jpg)
 /// caption
@@ -72,7 +72,7 @@ Another important observation is that the lit and dark values have almost identi
 
 Now we have some idea about the noise that appears to be intrinsic to the measurement system, and we are confident that the emitter pulses are not causing any side effects in the detected signal.
 
-The next step is to connect the ADC input to the detector and perform a measurement against a fixed wall. For now, the ambient illumination is an LED lamp in the ceiling. This has almost no IR output and so it should not affect the detector owing to the filter on the SFH409-FA. This, and all future runs, capture exactly 50,000 results in the histogram.
+The next step is to connect the ADC input to the detector and perform a measurement against a fixed wall. For now, the ambient illumination is an LED lamp in the ceiling. This has almost no IR output and so it should not affect the detector owing to the filter on the SFH309-FA. This, and all future runs, capture exactly 50,000 results in the histogram.
 
 ![LED Ambient](../../assets/sensors/LED-ambient-illumination.png)
 /// caption
@@ -90,7 +90,7 @@ The ambient illumination can be increased significantly by lighting the rig with
 Record with Bright LED lighting
 ///
 
-This result is almost indistinguishable from the previous experiment, and demonstrates the effectiveness of the visible light filtering on the SFH409-FA.
+This result is almost indistinguishable from the previous experiment, and demonstrates the effectiveness of the visible light filtering on the SFH309-FA.
 
 ### Steady Ambient IR illumination
 
@@ -138,7 +138,7 @@ Now see what happens with the incandescent lamp:
 Record with incandescent lighting and the BPW85C detector.
 ///
 
-To get a similar response to the SFH409-FA experiment, the lamp had to be moved back to 36cm, demonstrating how much more the BPW85 is susceptible to ambient interference. without the filter, it is able to respond to a much wider range of wavelengths and they are all being emitted by the incandescent bulb. You should notice that the responses are wider again but that the raw and filtered responses are just as clean as they were before.
+To get a similar response to the SFH309-FA experiment, the lamp had to be moved back to 36cm, demonstrating how much more the BPW85 is susceptible to ambient interference. without the filter, it is able to respond to a much wider range of wavelengths and they are all being emitted by the incandescent bulb. You should notice that the responses are wider again but that the raw and filtered responses are just as clean as they were before.
 
 ## Summary
 
