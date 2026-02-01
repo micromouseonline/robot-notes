@@ -180,6 +180,8 @@ nav:
     - sensors/index.md
     - Micromouse:
       - sensors/wall-sensors/index.md   
+      - Operation: sensors/wall-sensors/wall-sensor-operation.md
+      - Ambient and Noise Cancellation: sensors/wall-sensors/ambient-cancellation-and-noise.md
       - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
       - Extreme Switching: sensors/wall-sensors/extreme-switched-drive.md
