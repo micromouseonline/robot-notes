@@ -11,17 +11,21 @@ icon: octicons/dot-16
 
 # Ambient Illumination and Noise
 
-Measuring the ambient light is essential so that we can eliminate eliminate it from our measurements and isolate only the signal caused by the proximity of the walls. In principle is is very easy to do with two measurements. One measurement is taken with the emitter off (the 'dark' reading, $A_{dark}$) and then another is taken with the emitter on (the 'lit' reading , $A_{lit}$). Now the raw distance reading , $A_{raw}$, is just the difference between them
+The basic micromouse wall sensor determines the distance to nearby walls by measuring the amount of light reflected from them when illuminated by an LED. There are other sources of light that also illuminate the walls and so we need a way to account for that in the measurement and isolate only the signal caused by robot's LED and the proximity of the walls. 
+
+In principle it is very easy to do with two measurements. One measurement is taken with the emitter off (the 'dark' reading, $A_{dark}$) and then another is taken with the emitter on (the 'lit' reading , $A_{lit}$). Now the raw distance reading , $A_{raw}$, is just the difference between them
 
 $$
 A_{raw} = A_{lit} - A_{dark}
 $$
 
+The first reading captures the ambient light and the second cptures the ambient light plus the reflected light. Subtracting one from the other will remove the effect of the ambient light.
+
 In a perfect world, $A_{raw}$ would be a single, stable number related to the distance to the wall. Real sensor systems are very unlikely to behave that well. The whole sensor system has several sources of noise and interference which can be divided into two broad categories:
 
 - **Measurement Noise**
 
-    This is noise in the measured signal that is a result of some aspect of the whole sensor measurement system. It may be the behaviour of the ADC, power supply noise, interference from other circuits on the robot or poor PCB layout.
+    This is noise in the measured signal that is a result of some aspect of the whole sensor measurement system. It may be the behaviour of the ADC, power supply noise, interference from other circuits on the robot or poor PCB layout. 
 
 - **Process Noise**
 
@@ -31,7 +35,7 @@ For the time being, we we'll treat all these as just 'noise'. Later, some of the
 
 ## Noise
 
-Inevitably, any measurement system will have some noise. Some possible sources of that noise have already been listed. An experiment will let us see how significant that might be in a basic micromouse wall sensor.
+Inevitably, any measurement system will have some noise. Noise, for our purposes, is any variation in the measurement that is not caused by the wall distance. Some possible sources of that noise have already been listed. An experiment will let us see how significant that might be in a basic micromouse wall sensor.
 
 For simple experiments, a circuit is built on a breadboard so that some of these effects can be examined. A processor module carries the STM32U575 processor, a constant-current source provides the drive for an emitter LED and a phototransistor detector has a load resistor to ground, providing a voltage proportional to the photocurrent. The emitter is a SFH4550 with 100mA pulses and the detector is a SFH309-FA. The -FA suffix indicates that the part has a filter that blocks visible light.
 
@@ -40,29 +44,40 @@ For simple experiments, a circuit is built on a breadboard so that some of these
 Sensor Test Rig
 ///
 
-The system operates the sensor exactly as it might on a micromouse. The emitter pulses are 25us long and the ADC is sampled before and at the end of the emitter pulse. The dark an lit readings are then printed out to the serial port followed by the raw value and a filtered version of the raw value. Four numbers altogether.
+The system operates the sensor exactly as it might on a micromouse. The emitter pulses are 25us long to allow the detector to reach a steady state, and the ADC is sampled before and at the end of the emitter pulse. The dark an lit readings are then printed out to the serial port followed by the raw value and a filtered version of the raw value. Four numbers altogether.
 
 A Python script reads these numbers and draws a live-updating frequency histogram for each. In the charts below, the x-axis is ADC counts and the converter has a 16 bit resolution. Each count then is worth just 0.2mV and the minor grid lines are 20 counts (4mV) apart. To keep things visible on one chart, the wall is placed 70mm away and the detector load adjusted to give readings in a useable range.
 
-### Noise Baseline
+Here is a typical chart produced after collecting 50,000 samples when the room is lit by daylight and a very small amount of weak sunlight on a wall 4m away. A large number of samples lets us see a statistically meaningful distribution.
 
-To get an idea of how well the processor and its ADC are working, we start by connecting the ADC input to a nearby low impedance voltage divider and recording the results for a minute or two:
-
-![Noise Baseline](../../assets/sensors/potential-divider-baseline.png)
+![Typical Histogram](../../assets/sensors/typical-histogram.png)
 /// caption
-Noise Baseline
+Typical Histogram Plot
 ///
 
-There are actually four lines on the chart though they are drawn one over another so you may not always see them all.
+There are four lines on the chart, drawn one over another so you may not always see them all in other plots.
 
 - Red: the dark reading $A_{dark}$
 - Blue: the lit reading $A_{lit}$
 - Green: the raw reading $A_{raw}$
 - Magenta: the filtered raw reading $A_{filt}$
 
-In this chart you can see that the lit and dark readings are nearly identical, so the raw and filtered readings are (pretty much) zero. There is some noise as evidenced by the spread in the lit and dark readings. This appears to be purely random (Gaussian) noise. Because this noise is not identical for the lit and dark values there is also some small spread in the raw value.
+The background illimination (red) is not very strong and shows a fair amount of spread. This spread represents noise. Note that the area under each line is the same - it is the total number of samples. A signal with a lot of noise will display as a lower, wider plot and a signal with very little noise will be taller and narrower. Here, both the dark and lit (blue) readings produce much the same shape plots with the lit readings shifted right by an amount proportional to the amount of light from the emitter that is reflected by the wall.
 
-Note that in a chart like this, the area under the line is the number of readings taken. That means that a signal with a lot of noise will appear to have a wider spread and lower peak compared to one that has very little noise where you would see a narrower, but higher, peak.
+As described before, the raw reading (green) is just the lit reading minus the dark reading. Also plotted on the chart is a filtered copy (magenta) of the raw reading. A simple low-pass filter is applied to the raw reading to get a very clean, esimate of distance. The filtering is defined in a separate page.
+
+If the only light falling on the wall when the emitter is off is that from the environment then you might wonder why there is so much apparent noise (the wide spread of values). After all, the sunlight will only vary slowly as clouds pass in front of it.
+
+### Noise Baseline
+
+To get an idea of how well the processor and its ADC are working, we start by connecting the ADC input to a nearby low impedance voltage divider made with 4700 Ohm and 220 Ohm resistors to give a constant voltage of about 190mV, and recording the results for a minute or two:
+
+![Noise Baseline](../../assets/sensors/potential-divider-baseline.png)
+/// caption
+Noise Baseline
+///
+
+In this chart you can see that the lit and dark readings are nearly identical (there is only the tiniest hint of the dark readings peeping out behind the lit readings), so the raw and filtered readings are (pretty much) zero. There is obviously some noise as evidenced by the spread in the lit and dark readings. This appears to be purely random (Gaussian) noise. Because this noise is not identical for the lit and dark values there is also some small spread in the raw value.
 
 Because the lit and dark readings have the same underlying value, subtracting them removes the common part of the signal - that would be the ambient illumination and any other constant offset voltage. The noise itself doesn’t cancel - it adds - but since the mean is zero, the result is a narrow, high peak.
 
@@ -72,18 +87,34 @@ Another important observation is that the lit and dark values have almost identi
 
 Now we have some idea about the noise that appears to be intrinsic to the measurement system, and we are confident that the emitter pulses are not causing any side effects in the detected signal.
 
-The next step is to connect the ADC input to the detector and perform a measurement against a fixed wall. For now, the ambient illumination is an LED lamp in the ceiling. This has almost no IR output and so it should not affect the detector owing to the filter on the SFH309-FA. This, and all future runs, capture exactly 50,000 results in the histogram.
+The next step is to connect the ADC input to the detector and perform a measurement against a fixed wall. The ambient illumination in this plot is diffuse daylight in a not-very-well-lit room.
+
+![LED Ambient](../../assets/sensors/diffuse-daylight-response.png)
+/// caption
+Diffuse Daylight Response
+///
+
+The low level of ambient illumination is clear and the noise component, as evidenced by the spread, is a little bigger. Part of that spread will be due to the effect of clouds passing by and changing the overall amount of light in the room. Even taking that into account, there is still more random noise in these signals. The most likely reason for that is the circuit construction on breadboard being less than ideal.
+
+Normally, I work on this at night with only the LED room lighting available so that I can guarantee reproducible results. This is the same experiment with only artificial LED lighting:
 
 ![LED Ambient](../../assets/sensors/LED-ambient-illumination.png)
 /// caption
 Record with LED lighting
 ///
 
-It should be clear that the dark readings (red) are still able to pick up some interference from somewhere, even with LED lighting. The variance (spread of values) is larger than we saw with the potential divider and the curve is not very neat. This may be due to some power supply noise since the layout on breadboards is less than ideal. The lit response (blue) has a similar shape though it is not so easy to see in this record because the low ambient illumination  means that the raw value (green) is close to the lit value.
-
 You should notice that the raw reading still has a similar variance to that seen in the lit value but the shape is much cleaner. Any external or other noise that does not change much between sample intervals (25us) will be cancelled out by the raw reading calculation. The filtered raw values (magenta) are very clean as you might expect.
 
-The ambient illumination can be increased significantly by lighting the rig with a LED table lamp about 15cm from the wall surface. When the run is repeated under these conditions, this is the result.
+All the remaining experiments are run under the same artificial light.
+
+The ambient illumination can be increased significantly by lighting the rig with a LED table lamp about 15cm from the wall surface. 
+
+![LED Table Lamp Added](../../assets/sensors/LED-lamp-illumination.png)
+/// caption
+Brighter LED Illumination
+///
+
+When the run is repeated under these conditions, this is the result.
 
 ![Bright LED Ambient](../../assets/sensors/LED-ambient-illumination-bright.png)
 /// caption
@@ -94,7 +125,12 @@ This result is almost indistinguishable from the previous experiment, and demons
 
 ### Steady Ambient IR illumination
 
-Modern LED interior lighting often produces little IR radiation and so it can be easy to underestimate the effect of sunlight and other lighting types that do emit IR. It would be very optimistic to expect a sensor like this to operate reliably in direct sunlight but there may be indirect, or partially occluded, sunlight falling on the walls of a contest maze. An easy way to simulate this is with an old-fashioned flashlight containing an incandescent bulb. 
+Modern LED interior lighting clearly produces little IR radiation and so it can be easy to underestimate the effect of sunlight and other lighting types that do emit IR. It would be very optimistic to expect a sensor like this to operate reliably in direct sunlight but there may be indirect, or partially occluded, sunlight falling on the walls of a contest maze. An easy way to simulate this is with an old-fashioned, battery-powered flashlight containing an incandescent bulb. 
+
+![Flashlight simulates daylight](../../assets/sensors/simulating-daylight.png)
+/// caption
+Simulating daylight with a flashlight
+///
 
 The wall is illuminated in this way and another run is made.
 
@@ -103,7 +139,7 @@ The wall is illuminated in this way and another run is made.
 Record with IR illumination from a flashlight.
 ///
 
-The flashlight produces a almost constant level of illumination and the effect of that is very clear from the result chart. With the flashlight dominating the readings, even when the emitter is off, the noise variance returns to the intrinsic measurement noise level seen earlier. Remember that one minor division on these charts is only about 4mV variation in the reading. The dark readings are all clustered around about the 180 mark and the lit readings are also shifted up by the same amount. Since both the dark and the lit readings have been shifted by the same amount, the raw reading, being the difference between them remains almost exactly the same. Close inspection reveals it to be slightly higher than before because, with this type of sensor, there is a small change in gain with the level of illumination. For this particular example, the change is about 1.5% and the level of IR illumination at the wall is quite significant.
+The flashlight produces a almost constant level of illumination and the effect of that is very clear from the result chart. The results look a lot like those recorded with only natural daylight available. With the flashlight dominating the readings, even when the emitter is off, the noise variance returns to the intrinsic measurement noise level seen earlier. Remember that one minor division on these charts is only about 4mV variation in the reading. The dark readings are all clustered around about the 180 mark and the lit readings are also shifted up by the same amount. Since both the dark and the lit readings have been shifted by the same amount, the raw reading, being the difference between them remains almost exactly the same. Close inspection reveals it to be slightly higher than before because, with this type of sensor, there is a small change in gain with the level of illumination. For this particular example, the change is about 1.5% and the level of IR illumination at the wall is quite significant.
 
 ### Variable Ambient IR illumination
 
@@ -116,7 +152,9 @@ Record with IR illumination from an incandescent bulb.
 
 Notice how both the dark and lit responses are much more spread out. Each has two peaks because more samples correspond to the brighter portions of each cycle than the darker portions that correspond to the current through the lamp passing through zero. The filament does not cool down enough to stop glowing, it just puts out a little less light.
 
-In spite of that spreading, the raw value response is very clean and looks exactly like that for the steady IR illumination from the flashlight. Although the table lamp is clearly varying a lot in intensity, those changes are very slow compared to the 25us interval between readings that the sensors can manage.
+In spite of that spreading, the raw value response is very clean and looks exactly like that for the steady IR illumination from the flashlight. Although the table lamp is clearly varying a lot in intensity, those changes are very slow compared to the 25us interval between readings that the sensors can manage. Overall, ambient cancellation only works if the ambient illumination changes slowly compared to the measurement interval.
+
+Becase the ambient does change only slowly, the dark and lit readings experience almost the same ambient level and so the subtraction cancels it.
 
 ### Visible Light Sensors
 
