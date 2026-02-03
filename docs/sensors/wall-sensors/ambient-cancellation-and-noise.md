@@ -178,6 +178,10 @@ Record with incandescent lighting and the BPW85C detector.
 
 To get a similar response to the SFH309-FA experiment, the lamp had to be moved back to 36cm, demonstrating how much more the BPW85 is susceptible to ambient interference. without the filter, it is able to respond to a much wider range of wavelengths and they are all being emitted by the incandescent bulb. You should notice that the responses are wider again but that the raw and filtered responses are just as clean as they were before.
 
+### Dimmable and COlour Change Lighting
+
+It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, there are types may flash on and off at the mains frequency. The variation in light output for these will me much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is a an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
+
 ## Summary
 
 It should be clear that the ambient cancellation technique is very good at reducing, or eliminating the effects of ambient illumination (process noise) but it cannot eliminate measurement noise that is an intrinsic part of the sensor system. However, the measurement noise can be significantly reduced by filtering so long as we are prepared to accept a delay in the response.
