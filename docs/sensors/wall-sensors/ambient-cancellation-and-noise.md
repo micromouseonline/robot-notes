@@ -19,7 +19,7 @@ $$
 A_{raw} = A_{lit} - A_{dark}
 $$
 
-The first reading captures the ambient light and the second cptures the ambient light plus the reflected light. Subtracting one from the other will remove the effect of the ambient light.
+The first reading captures the ambient light and the second captures the ambient light plus the reflected light. Subtracting one from the other will remove the effect of the ambient light.
 
 In a perfect world, $A_{raw}$ would be a single, stable number related to the distance to the wall. Real sensor systems are very unlikely to behave that well. The whole sensor system has several sources of noise and interference which can be divided into two broad categories:
 
@@ -62,9 +62,9 @@ There are four lines on the chart, drawn one over another so you may not always 
 - Green: the raw reading $A_{raw}$
 - Magenta: the filtered raw reading $A_{filt}$
 
-The background illimination (red) is not very strong and shows a fair amount of spread. This spread represents noise. Note that the area under each line is the same - it is the total number of samples. A signal with a lot of noise will display as a lower, wider plot and a signal with very little noise will be taller and narrower. Here, both the dark and lit (blue) readings produce much the same shape plots with the lit readings shifted right by an amount proportional to the amount of light from the emitter that is reflected by the wall.
+The background illumination (red) is not very strong and shows a fair amount of spread. This spread represents noise. Note that the area under each line is the same - it is the total number of samples. A signal with a lot of noise will display as a lower, wider plot and a signal with very little noise will be taller and narrower. Here, both the dark and lit (blue) readings produce much the same shape plots with the lit readings shifted right by an amount proportional to the amount of light from the emitter that is reflected by the wall.
 
-As described before, the raw reading (green) is just the lit reading minus the dark reading. Also plotted on the chart is a filtered copy (magenta) of the raw reading. A simple low-pass filter is applied to the raw reading to get a very clean, esimate of distance. The filtering is defined in a separate page.
+As described before, the raw reading (green) is just the lit reading minus the dark reading. Also plotted on the chart is a filtered copy (magenta) of the raw reading. A simple low-pass filter is applied to the raw reading to get a very clean, estimate of distance. The filtering is defined in a separate page.
 
 If the only light falling on the wall when the emitter is off is that from the environment then you might wonder why there is so much apparent noise (the wide spread of values). After all, the sunlight will only vary slowly as clouds pass in front of it.
 
@@ -154,11 +154,11 @@ Notice how both the dark and lit responses are much more spread out. Each has tw
 
 In spite of that spreading, the raw value response is very clean and looks exactly like that for the steady IR illumination from the flashlight. Although the table lamp is clearly varying a lot in intensity, those changes are very slow compared to the 25us interval between readings that the sensors can manage. Overall, ambient cancellation only works if the ambient illumination changes slowly compared to the measurement interval.
 
-Becase the ambient does change only slowly, the dark and lit readings experience almost the same ambient level and so the subtraction cancels it.
+Because the ambient does change only slowly, the dark and lit readings experience almost the same ambient level and so the subtraction cancels it.
 
 ### Visible Light Sensors
 
-Some builders prefer to use a detector that does not have a visible light filter. These can be more sensitive and are essential if a visible light emitter is used. For comparison then, the sensor in the test rig was replaced with a BPW85C. The load resistor is reduced to just 220 Ohms because of the increased sensitivity of theis phototransistor. The emitter device current remains as before.
+Some builders prefer to use a detector that does not have a visible light filter. These can be more sensitive and are essential if a visible light emitter is used. For comparison then, the sensor in the test rig was replaced with a BPW85C. The load resistor is reduced to just 220 Ohms because of the increased sensitivity of this phototransistor. The emitter device current remains as before.
 
 Repeating the basic run with only the room's LED ambient light immediately reveals that the phototransistor has a noticeable response to visible light.
 
@@ -180,7 +180,7 @@ To get a similar response to the SFH309-FA experiment, the lamp had to be moved 
 
 ### Dimmable Lighting
 
-It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, there are types may flash on and off at the mains frequency. The variation in light output for these will me much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is a an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
+It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, there are types may flash on and off at the mains frequency. The variation in light output for these will be much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is a an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
 
 ## Summary
 

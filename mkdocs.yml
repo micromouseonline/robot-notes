@@ -1,6 +1,6 @@
 site_name: Robot Builders Notes
 site_description: >-
-  Notes for builders of micromouse, line foller and other small robots
+  Notes for builders of micromouse, line follower and other small robots
 
 # Copyright
 copyright: Copyright &copy; 2025 - 2026 Peter Harrison
@@ -247,7 +247,7 @@ nav:
     - Release Notes: release-notes.md
 
 extra_javascript: 
-    # without this, matjax does not render
+    # without this, mathjax does not render
     - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML
     
 markdown_extensions:

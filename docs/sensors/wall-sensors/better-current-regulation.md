@@ -21,7 +21,7 @@ The simplest current regulator is show in the [Basic Constant Current](./basic-c
 
 One of the improvements for the basic switched emitter control was to replace the bipolar transistor with a MOSFET. It might then be reasonable to suppose that a MOSFET might help here.
 
-For modest currents of 300mA or less, the short answer is, probabaly, no.
+For modest currents of 300mA or less, the short answer is, probably, no.
 
 ### MOSFET Issues
 In the basic constant current circuit, the MOSFET can also be simply swapped with the BJT - the source goes to the current sense resistor, the gate to the GPIO and the Drain to the LED cathode. This illustration is for a high-current emitter drive. More commonly the sense resistor, R8, would be larger.
@@ -111,12 +111,12 @@ The circuit has two big advantages:
 
 - Because the base of Q1 is held at around 1.3 Volts, the collector can come all the way down to less than 2 Volts (possibly 1.5 Volts) and still provide good regulation. That greatly increases the compliance voltage range of the circuit.
 
-Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you can sustain 128mA pulses all the way down to 3 Volt power supply levels. That would make it quite useable on a single-cell half size mouse. With 330mA pulses, the minimum useable supply voltage was 4 Volts. For PCB layout convenience, you can get dual NPN bipilar devices in a single package. For example, the EMX18T2R  contains a pair of 2SC5585 NPN transistors in a tiny package.
+Current regulation is very good. In a breadboard build, with R3 = 4.7 Ohms, you can sustain 128mA pulses all the way down to 3 Volt power supply levels. That would make it quite useable on a single-cell half size mouse. With 330mA pulses, the minimum useable supply voltage was 4 Volts. For PCB layout convenience, you can get dual NPN bipolar devices in a single package. For example, the EMX18T2R  contains a pair of 2SC5585 NPN transistors in a tiny package.
 
 - [EMX18T2R datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/emx18t2r-e.pdf){target="_blank"}
 - [2SC5585 datasheet](https://fscdn.rohm.com/en/products/databook/datasheet/discrete/transistor/bipolar/2sc5585tl-e.pdf){target="_blank"}
 
-Alternatively, consider the PBSS4160DS, also available in a TSOP/6SOT457 package. It can handle 1 Amp and has beta >= 400 @ 400mA. Onbe of the nice things about these dual transistor packages is that they are symmetrical and can be put either way round.
+Alternatively, consider the PBSS4160DS, also available in a TSOP/6SOT457 package. It can handle 1 Amp and has beta >= 400 @ 400mA. One of the nice things about these dual transistor packages is that they are symmetrical and can be put either way round.
 
 - [PBSS4160DS datasheet](https://assets.nexperia.com/documents/data-sheet/PBSS4160DS.pdf){target="_blank"}
 
@@ -133,7 +133,7 @@ You may come across similar circuits using a pair of diodes to provide the bias 
 
 ### Op-amp Feedback Regulator
 
-The dual transistor regulator uses negative feedback to ensure good regulation of the current during apulse. What else is good at negative feedback? An operational amplifier.
+The dual transistor regulator uses negative feedback to ensure good regulation of the current during a pulse. What else is good at negative feedback? An operational amplifier.
 
 A more robust approach then might be to use an op-amp in the feedback path. The op-amp compares the voltage across the sense resistor with a reference voltage on its other input. Since the op-amp inputs draw essentially no current, the reference voltage can be set to any convenient value, independent of the value of $V_{IO}$. The op-amp can then drive the transistor, of either type, with whatever is needed (within its supply limits) to achieve the desired current. For MOSFETS in particular, the circuit no longer depends on the exact shape of the $I_D - V_{GS}$ relationship and you get consistent, reliable results even if the GPIO voltage is too low to drive the transistor directly.
 
