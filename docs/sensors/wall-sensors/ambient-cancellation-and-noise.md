@@ -123,7 +123,7 @@ Record with Bright LED lighting
 
 This result is almost indistinguishable from the previous experiment, and demonstrates the effectiveness of the visible light filtering on the SFH309-FA.
 
-### Steady Ambient IR illumination
+### Steady IR illumination
 
 Modern LED interior lighting clearly produces little IR radiation and so it can be easy to underestimate the effect of sunlight and other lighting types that do emit IR. It would be very optimistic to expect a sensor like this to operate reliably in direct sunlight but there may be indirect, or partially occluded, sunlight falling on the walls of a contest maze. An easy way to simulate this is with an old-fashioned, battery-powered flashlight containing an incandescent bulb. 
 
@@ -141,7 +141,7 @@ Record with IR illumination from a flashlight.
 
 The flashlight produces a almost constant level of illumination and the effect of that is very clear from the result chart. The results look a lot like those recorded with only natural daylight available. With the flashlight dominating the readings, even when the emitter is off, the noise variance returns to the intrinsic measurement noise level seen earlier. Remember that one minor division on these charts is only about 4mV variation in the reading. The dark readings are all clustered around about the 180 mark and the lit readings are also shifted up by the same amount. Since both the dark and the lit readings have been shifted by the same amount, the raw reading, being the difference between them remains almost exactly the same. Close inspection reveals it to be slightly higher than before because, with this type of sensor, there is a small change in gain with the level of illumination. For this particular example, the change is about 1.5% and the level of IR illumination at the wall is quite significant.
 
-### Variable Ambient IR illumination
+### Variable IR illumination
 
 Suppose now that the contest illumination is not LEDs but some other type that does emit significant IR. Incandescent bulbs are very rare now but may still be present in older values or houses. These types of bulb actually flash on and off at 100Hz as the 50Hz AC mains flows back and forth through the filament, producing light pulses in each half cycle. Now lets use a small (15W) incandescent bulb in a table lamp about 20cm away from the wall in an attempt to get similar average levels of illumination as those seen with the flashlight.
 
@@ -178,7 +178,7 @@ Record with incandescent lighting and the BPW85C detector.
 
 To get a similar response to the SFH309-FA experiment, the lamp had to be moved back to 36cm, demonstrating how much more the BPW85 is susceptible to ambient interference. without the filter, it is able to respond to a much wider range of wavelengths and they are all being emitted by the incandescent bulb. You should notice that the responses are wider again but that the raw and filtered responses are just as clean as they were before.
 
-### Dimmable and COlour Change Lighting
+### Dimmable Lighting
 
 It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, there are types may flash on and off at the mains frequency. The variation in light output for these will me much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is a an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
 
