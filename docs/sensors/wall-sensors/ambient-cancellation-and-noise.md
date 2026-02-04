@@ -182,6 +182,48 @@ To get a similar response to the SFH309-FA experiment, the lamp had to be moved 
 
 It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, there are types may flash on and off at the mains frequency. The variation in light output for these will be much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is a an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
 
+## Phototransistor Gain Shift
+
+A characteristic of phototransistors is that the gain, beta ($\beta$), is dependent upon the collector current. This is the same behaviour as will be found in any bipolar transistor but is is generally not shown in the data sheet. We can infer the behaviour from observation of results and the characteristics of a general purpose NPN transistor like the BC337. In the [BC337 datasheet](https://www.farnell.com/datasheets/1789499.pdf), figure 3 shows the relationship between DC current gain, $\beta$, and Collector current, $I_C$.
+
+![BC337 Gain vs Collector Current](../../assets/sensors/BC337-gain-vs-collector-current.png)
+/// caption
+BC337 Gain vs Collector Current
+///
+
+You can see that, at low collector currents, the gain is quite small, and that it rises to some peak at higher currents before falling off once more. This behaviour is fundamental to the physics of transistor operation. While no such graph exists for the SFH309 phototransistor used in these experiments, you can assume it has a similar shape. Phototransistors are rarely used for this type of analogue application - they are more likely to be used as switches.
+
+Constant ambient illumination of the sensor causes a steady DC current to flow through the phototransistor. The shape of the gain curve means very low ambient illumination levels will result in a smaller response to the same emitter pulses. Higher ambient levels increase the phototransistor current and therefore the gain. Thus, the same emitter pulse will result in a larger response. Note that this behaviour is completely absent in a photodiode over a very wide range of currents.
+
+A simple experiment will show how significant the effect can be. We use a setup just like those already seen except that more realistic values are chosen for the phototransistor load resistor. The ADC readings are divided by 16 before use to eliminate a lot of the measurement noise, giving a full-scale response of 0-1023 counts. First, a recording is made with no appreciable ambient IR. Then, without clearing the results, a second recording is made with the wall illuminated by an incandescent flashlight.
+
+![Effect of changing Ambient](../../assets/sensors/ambient-level-affects-gain.png)
+/// caption
+Effect of Increased Ambient Illumination
+///
+
+With the two recordings overlaid on the same chart, it is very clear that the brighter ambient illumination results in an increase in the measured emitter pulse strength. With no ambient illumination in the first run, the DC collector current is nearly zero. In the second run, we can estimate the collector current to still only be 0.25mA which is pretty small for a bipolar transistor. The collector current can be estimated from the sensor reading, $N$, the ADC maximum reading , 1023, the load resistor, $R_L$, and the ADC supply voltage, $V_{CC}$.:
+
+$$
+I_C = \frac{{V_{CC} \times \frac {N}{1023}}}{R_L}
+$$
+
+A secondary effect makes things even worse in that the emitter pulse increases the collector current to 1.13mA where the gain will be higher still.
+
+To make the experiment more clear, the change in illumination has been made unusually large. It would be extraordinary if such a change were encountered during a contest. It is possible though, in some venues, for there to be a large change in illumination. You might, for instance, run tests and calibration in the evening only to find the daytime event has a lot of sunlight shining through windows brightening up the contest maze. Again, direct sunlight on the maze would break pretty well everything so that would not be a practical concern.
+
+The actual increase in this experiment was around 10%. I have no way to determining how the experimental level of illumination mimics the actual level that might be found in a live contest but before you throw up your hands in despair, be aware of a few important observations:
+
+ - At a working distance of 40mm, 10% is just 4mm. It is very likely that having the robot offset by up to 4mm is unlikely to prove fatal.
+ - At longer ranges, such as when detecting a wall in the cell ahead, the effect is much smaller because the ambient illumination iis a smaller component of the reflected signal
+ - The walls in a typical maze can be observed to have as much as 10% variation in reflectivity in any case.
+ - A change in angle of only a couple of degrees will produce much larger changes.
+ - Nobody seems to have any trouble operating reliably with sensors behaving like this. So long as the response is monotonic and the behaviour around the operating point does not change wildly, everything will be fine.
+
+If there is a key takeaway form this experiment and it results, it is that you should always try to do sensor calibration in the actual contest maze and not rely only on calibrations performed at home under ideal conditions. Conditions at home are unlikely to match those in the contest. 
+
+Yes, a photodiode-based sensor would do away with all these problems at the expense of slightly more complex circuitry. You can decide the tradeoff between circuit complexity and precision.
+
 ## Summary
 
 It should be clear that the ambient cancellation technique is very good at reducing, or eliminating the effects of ambient illumination (process noise) but it cannot eliminate measurement noise that is an intrinsic part of the sensor system. However, the measurement noise can be significantly reduced by filtering so long as we are prepared to accept a delay in the response.
