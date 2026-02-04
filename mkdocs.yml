@@ -1,7 +1,7 @@
 site_name: Robot Builders Notes
 site_description: >-
   Notes for builders of micromouse, line follower and other small robots
-
+# cSpell:disable
 # Copyright
 copyright: Copyright &copy; 2025 - 2026 Peter Harrison
 
