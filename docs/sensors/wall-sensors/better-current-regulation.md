@@ -168,7 +168,7 @@ Running this circuit through the ngspice simulator in KiCAD, you get the followi
 Op-amp Feedback Simulated Output
 ///
 
-The supply voltage for this run was only 6 Volts. You can clearly see that the reservoir capacitor gets charged to around 5.5 Volts, leaving plenty of headroom for the LED and proper current regulation. The current pulses are at 243mA which is exactly what you would expect. ($1.65/6.8 = 0.243).
+The supply voltage for this run was only 6 Volts. You can clearly see that the reservoir capacitor gets charged to around 5.5 Volts, leaving plenty of headroom for the LED and proper current regulation. The current pulses are at 243mA which is exactly what you would expect. ($1.65/6.8 = 0.243$).
 
 A closer look at a single pulse shows one of the possible drawbacks of this approach.
 
