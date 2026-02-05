@@ -11,6 +11,13 @@ icon: octicons/dot-16
 
 # Ambient Illumination and Noise
 
+!!! note ""
+
+    Wall sensors do not operate in a controlled, sterile, laboratory environment. Instead, they must deal with interference from other light sources as well as noise in the measurement system itself.
+
+    This page will look into those aspects of typical wall sensors.
+
+
 The basic micromouse wall sensor determines the distance to nearby walls by measuring the amount of light reflected from them when illuminated by an LED. There are other sources of light that also illuminate the walls and so we need a way to account for that in the measurement and isolate only the signal caused by robot's LED and the proximity of the walls. 
 
 In principle it is very easy to do with two separate measurements. One measurement is taken with the emitter off (the 'dark' reading, $A_{dark}$) and then another is taken with the emitter on (the 'lit' reading , $A_{lit}$). Now the raw distance reading , $A_{raw}$, is just the difference between them
