@@ -24,7 +24,7 @@ Duncanplexer Circuit Arrangement
 
 The circuit effectively decouples the sensor signal from any DC light level, such as sunlight, that might be present  - blocking it with the capacitor C1. The AC reading due to the emitter pulse is passed through the capacitor to the processor IO pin.
 
-You will see that the photodiode is taken not to 3.3 Volts but some unspecified $V__{CC}$. One of the limitations of many sensor circuits is that they suffer from limited dynamic range. Not only are they connected to the same 3.3Volt supply used by the processor, as the response start to get close to that voltage, the sensor becomes non-linear. Phototransistors are particularly prone to this but photodiodes also need some headroom for correct operation in a circuit like this. Also, if you care about every last nanosecond of response time, the rise-time of a photodiode detector will change with the reverse bias, and that will change with the size of the response. With a little care, $V_{CCC}$ could be the battery voltage or any other suitable voltage in the system. 
+You will see that the photodiode is taken not to 3.3 Volts but some unspecified $V__{CC}$. One of the limitations of many sensor circuits is that they suffer from limited dynamic range. Not only are they connected to the same 3.3Volt supply used by the processor, as the response start to get close to that voltage, the sensor becomes non-linear. Phototransistors are particularly prone to this but photodiodes also need some headroom for correct operation in a circuit like this. Also, if you care about every last nanosecond of response time, the rise-time of a photodiode detector will change with the reverse bias, and that will change with the size of the response. With a little care, $V_{CC}$ could be the battery voltage or any other suitable voltage in the system. 
 
 By taking the photodiode cathode to some higher voltage, that headroom can be maintained over a wider range of responses. In particular, even very high levels of steady ambient lighting will just produce a fixed offset that will be blocked by the coupling capacitor. Within reason, the higher the value of $V_{CC}$, the greater will be the level of ambient that can be rejected. Photodiodes are linear over very wide ranges of ambient illumination and can produce essentially identical pulse responses across nearly all that range .
 
@@ -80,7 +80,7 @@ $V_{IO} = 3.3 * R1 / (R1 + R2) = 0.58 Volts$
 
 :   Now that the ADC conversion is complete, store the result in a variable, $A_2$.
 
-    Finally, the pin is re-configured as an output and set to zero to discharge the capacitor, C1, completely. the pin will stay in this state until the next cycle.
+    Finally, the pin is re-configured as an output and set to zero to discharge the capacitor, C1, completely. The pin will stay in this state until the next cycle.
 
 ### The Results
 
