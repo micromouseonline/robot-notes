@@ -184,6 +184,7 @@ nav:
       - Operation: sensors/wall-sensors/wall-sensor-operation.md
       - Timing and Sequencing: sensors/wall-sensors/wall-sensor-timing-sequencing.md
       - Ambient and Noise Cancellation: sensors/wall-sensors/ambient-cancellation-and-noise.md
+      - Duncanplexer: sensors/wall-sensors/duncanplexer.md
       - Filtered Data: sensors/wall-sensors/wall-sensor-filtered-data.md
       - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
