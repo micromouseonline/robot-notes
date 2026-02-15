@@ -183,9 +183,10 @@ nav:
       - Geometry: sensors/wall-sensors/wall-sensor-geometry.md
       - Operation: sensors/wall-sensors/wall-sensor-operation.md
       - Timing and Sequencing: sensors/wall-sensors/wall-sensor-timing-sequencing.md
-      - Ambient and Noise Cancellation: sensors/wall-sensors/ambient-cancellation-and-noise.md
+      - Interference Cancellation: sensors/wall-sensors/ambient-cancellation-and-noise.md
+      - Software Methods: sensors/wall-sensors/software-methods.md
+      - Filtering: sensors/wall-sensors/wall-sensor-filtered-data.md
       - Duncanplexer: sensors/wall-sensors/duncanplexer.md
-      - Filtered Data: sensors/wall-sensors/wall-sensor-filtered-data.md
       - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
       - Extreme Switching: sensors/wall-sensors/extreme-switched-drive.md
