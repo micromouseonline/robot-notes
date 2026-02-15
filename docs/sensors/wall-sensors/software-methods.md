@@ -34,7 +34,7 @@ For simple experiments, a circuit is built on a breadboard so that some of these
 Sensor Test Rig
 ///
 
-The system operates the sensor exactly as it might on a micromouse. The emitter pulses are 25us long to allow the detector to reach a steady state, and the ADC is sampled before and at the end of the emitter pulse. The dark an lit readings are then printed out to the serial port followed by the raw value and a filtered version of the raw value. Four numbers altogether.
+The system operates the sensor exactly as it might on a micromouse. The emitter pulses are 25us long to allow the detector to reach a steady state, and the ADC is sampled before and at the end of the emitter pulse. The dark and lit readings are then printed out to the serial port followed by the raw value and a filtered version of the raw value. Four numbers altogether.
 
 A Python script reads these numbers and draws a live-updating frequency histogram for each. In the charts below, the x-axis is ADC counts and the converter has a 16 bit resolution. Each count then is worth just 0.2mV and the minor grid lines are 20 counts (4mV) apart. To keep things visible on one chart, the wall is placed 70mm away and the detector load adjusted to give readings in a useable range.
 
@@ -133,7 +133,7 @@ The flashlight produces a almost constant level of illumination and the effect o
 
 ### Variable IR illumination
 
-Suppose now that the contest illumination is not LEDs but some other type that does emit significant IR. Incandescent bulbs are very rare now but may still be present in older values or houses. These types of bulb actually flash on and off at 100Hz as the 50Hz AC mains flows back and forth through the filament, producing light pulses in each half cycle. Now lets use a small (15W) incandescent bulb in a table lamp about 20cm away from the wall in an attempt to get similar average levels of illumination as those seen with the flashlight.
+Suppose now that the contest illumination is not LEDs but some other type that does emit significant IR. Incandescent bulbs are very rare now but may still be present in older venues or houses. These types of bulb actually flash on and off at 100Hz as the 50Hz AC mains flows back and forth through the filament, producing light pulses in each half cycle. Now let's use a small (15W) incandescent bulb in a table lamp about 20cm away from the wall in an attempt to get similar average levels of illumination as those seen with the flashlight.
 
 ![Incandescent Ambient](../../assets/sensors/incandescent-ambient-illumination.png)
 /// caption
@@ -170,7 +170,7 @@ To get a similar response to the SFH309-FA experiment, the lamp had to be moved 
 
 ### Dimmable Lighting
 
-It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, there are types may flash on and off at the mains frequency. The variation in light output for these will be much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is a an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
+It is worth noting that some types of artificial lighting may contain significant artifacts from the way they operate. Most modern LED lights are likely to have a constant illumination. However, some types may flash on and off at the mains frequency. The variation in light output for these will be much greater than that of incandescent bulbs as the LEDs turn fully on and off at twice the mains frequency. This is most likely for dimmable types. Some dimmable and colour changing lights may use much higher frequencies to operate their Pulse Width Modulation schemes. A 1kHz frequency is an easy choice for the designer of both room lighting and micromouse circuits and there is a lot of potential for interference.
 
 
 ## Summary
