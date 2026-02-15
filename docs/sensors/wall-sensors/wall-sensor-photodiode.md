@@ -51,7 +51,7 @@ Alternatively, the photodiode can be used in photovoltaic mode where there is no
 
 Attempting to measure the output in this way is unlikely to be reliable as the source impedance is very high.
 
-In photovoltaic mode, the photodiode must be held at (approximately) zero volts  across its junction and a transimpedance amplifier is normally used to convert the photocurrent into a low impedance voltage that the processor can easily convert through its ADC. An operational amplifier has its non-inverting input connected to ground and a feedback resistor connected between the output and the inverting input. The photodiode is connected with its anode to ground and the cathode to the inverting input. Since the (ideal) op-amp takes no current at its inputs, the photocurrent must also pass through the feedback resistor, The op-amp output voltage then will increase to ensure that current can flow. Feedback resistors are selected to provide a suitable range of output voltages.
+In photovoltaic mode, the photodiode is operated with approximately zero volts across its junction. A transimpedance amplifier is commonly used to convert the photocurrent into a voltage. The op‑amp’s non‑inverting input is grounded, and the photodiode is connected with its anode at ground and its cathode at the inverting input. Although the device is operating in photovoltaic mode, it is the _current_ that is being used. The voltage across the diode remains near zero because the op‑amp, through negative feedback, forces the inverting input to match the grounded non‑inverting input. A feedback resistor connects the op‑amp output to the inverting input. Because the op‑amp input draws negligible current, all photocurrent flows through the feedback resistor. The op‑amp output adjusts as needed to maintain the inverting input at virtual ground, producing an output voltage proportional to the photocurrent. The value of the feedback resistor sets the transimpedance gain and therefore the output voltage range.
 
 ![Photovoltaic Mode Detector](../../assets/sensors/photovoltaic-tia.png)
 /// caption
@@ -62,7 +62,9 @@ The output voltage will now be linearly proportional to the illumination, up to 
 
 A small capacitor is added in parallel with the feedback resistor to ensure stability at high frequencies.
 
-This method is probably the simplest way to use a photodiode get a positive-going voltage that is linearly proportional to illumination. The output will have a low impedance, suitable for measurement by an ADC and cannot exceed the supply voltage so should be safe for the processor pin.
+This method is probably the simplest way to use a photodiode with an operational amplifier to get a positive-going voltage that is linearly proportional to illumination. The output will have a low impedance, suitable for measurement by an ADC and cannot exceed the supply voltage so should be safe for the processor pin.
+
+Similar looking circuits can provide a reverse bias to the photodiode and operate it in photoconductive mode. Typically, they produce a negative going response to increased illumination.
 
 ## Advantages
 
