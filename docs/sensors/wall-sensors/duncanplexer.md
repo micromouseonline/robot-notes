@@ -33,9 +33,16 @@ While it is not a good idea to design a circuit that might normally exceed the i
 
 ### The Response
 
-The operation of the circuit relies upon the user code changing the mode of the IO pin when sampling. Here is a typical output recorded at the IO pin during one cycle of the sensor operation. In this example, the events have been arranged at regular 5 microsecond intervals, triggered by a timer, to keep the code and explanation a little more clear. Actual operation may use variable timing and simple wait loops to perform the ADC sampling.
+The operation of the circuit relies upon the user code changing the mode of the IO pin when sampling. An annotated simulation in LTspice predicts this response:
 
 ![Duncanplexer Signal](../../assets/sensors/sensors-duncanplexer-signal-annotated.png)
+/// caption
+Duncanplexer Signal
+///
+
+And here is a typical output recorded at the IO pin during one cycle of the sensor operation. In this example, the events have been arranged at regular 5 microsecond intervals, triggered by a timer, to keep the code and explanation a little more clear. Actual operation may use variable timing and simple wait loops to perform the ADC sampling.
+
+![Duncanplexer Signal](../../assets/sensors/sensors-duncanplexer-signal-actual.png)
 /// caption
 Duncanplexer Signal
 ///
