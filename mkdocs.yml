@@ -186,6 +186,7 @@ nav:
       - Interference Cancellation: sensors/wall-sensors/ambient-cancellation-and-noise.md
       - Filtering: sensors/wall-sensors/wall-sensor-filtered-data.md
       - Software Methods: sensors/wall-sensors/software-methods.md
+      - AC coupling: sensors/wall-sensors/classic-ac-coupling.md
       - Duncanplexer: sensors/wall-sensors/duncanplexer.md
       - Emitters: sensors/wall-sensors/wall-sensor-emitters.md
       - Switched Emitters: sensors/wall-sensors/switched-emitter-drive.md
