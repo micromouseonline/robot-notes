@@ -14,30 +14,35 @@ status:
 
 # Wall Sensor Detector Types
 
-For the kinds of reflected-light sensors described her, there are two basic choices, each with their own pros and cons. By far the most common choice is a phototransistor with a single load resistor. Less frequently, you might find photodiodes used in place of phototransistors. They can be used with a single load resistor but may benefit from adding a simple amplifier.
 
-## Phototransistors
+There are many options for sensing the walls in a micromouse. They are not (yet) describe here but include:
 
+ - time-of-flight optical sensors
+ - ultrasonic transceivers
+ - 2D and 1D cameras
+ - geometric optical sensors
 
+On these pages though we consider only reflected light optical methods using an LED to illuminate the wall and a device to measure the reflected light power.
 
-## Photodiodes
+For the kinds of reflected-light sensors described here, there are two basic choices for the detector, each with their own pros and cons. By far the most common choice is a phototransistor with a single load resistor. Less frequently, you might find photodiodes used in place of phototransistors. They can be used with a single load resistor but may benefit from adding a simple amplifier.
 
-
+- [Phototransistors](./wall-sensor-phototransistor.md)
+- [Photodiodes](./wall-sensor-photodiode.md)
 
 ## Summary
 
 Phototransistor give larger signals and simplified circuits at the expense of slower responses, reduced dynamic range, and poorer linearity.
 Photodiodes offer higher speeds, larger dynamic range, and greater linearity at the expense of weaker outputs and higher impedance.
 
-| Feature | Phototransistor | Photodiode |
-|--------|------------------|------------|
-| Basic mechanism | Bipolar transistor with light‑sensitive base–collector junction; photocurrent is amplified by transistor gain | PN junction diode with exposed junction; photocurrent flows directly with no internal gain |
-| Typical photocurrent | Tens to hundreds of µA (after gain) | Tens of µA (no gain) |
-| Output resistor range | ~470 Ω to 2.2 kΩ | ~15 kΩ to 100 kΩ |
-| Output impedance | Low (fast ADC sampling) | High (slower ADC sampling, more noise) |
-| Linearity | Moderate; degrades near saturation and at high illumination | Excellent; maintains linearity over a wide illumination range |
-| Dynamic range | Limited by saturation and gain collapse near supply voltage | High; output can approach supply voltage without distortion |
-| Speed | Slower (tens of µs typical) | Very fast (ns–µs range) |
-| Circuit simplicity | Very simple; emitter‑follower gives intuitive “more light → higher voltage” | Simple but requires larger resistors and attention to ADC impedance |
-| Best use cases | When signal strength is more important than speed or linearity | When speed, linearity, or wide dynamic range matter |
-| Common micromouse usage | Very common due to strong signal and easy ADC interfacing | Less common but useful for high‑performance or high‑speed sensing |
+### Comparison: Photodiode and Phototransistor Configurations
+
+| Feature | Phototransistor | Photodiode (Load Resistor) | Photodiode (TIA Mode) |
+| :------ | :-------------- | :------------------------- | :-------------------- |
+| **Response Speed** | **Relatively Slow** (µs). Limits sample rate. | **Fast** (ns to µs). Speed limited by RC constant. | **Excellent** (ns to µs). Best balance of speed/gain. |
+| **Linearity** | **Fair.** Non-linear gain at all light levels. | **Excellent.** Very linear current-to-light ratio. | **Excellent.** Maintains linearity via virtual ground. |
+| **Circuit Type** | Simple Emitter-Follower    | Simple Voltage Divider      | Op-Amp Feedback Loop         |
+| **Resistor Range** | 470 Ω to 2.2 kΩ            | 10 kΩ to 100 kΩ             | 10 kΩ to 100 kΩ+               |
+| **Output Level** | **High.** Easy to read with a simple resistor. | **Very Low.** Requires very large resistors for usable voltage. | **Adjustable.** $R_f$ allows for high gain/voltage. |
+| **Source Impedance** | **Medium.** Depends on the load resistor. | **High.** High impedance makes it prone to noise. | **Low.** Active output is ideal for driving ADCs. |
+| **Complexity** | **Low.** Simple voltage divider. | **Low.** Simple voltage divider. | **Medium.** Requires Op-Amp and stability capacitor. |
+| **Micromouse usage** | **Very common** due to strong signal and easy ADC interfacing | **Less common** but useful for high‑performance or high‑speed sensing | **Rare** due to additional circuit complexity |
