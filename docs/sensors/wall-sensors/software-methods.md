@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Software Methods
+title: Ambient Removal in Software
 parent: Sensors
 # icon: octicons/dot-fill-16
 icon: octicons/dot-16
