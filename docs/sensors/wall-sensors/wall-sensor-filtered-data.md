@@ -90,6 +90,13 @@ Bandwidth
 Use the power of the processor to improve signal quality
 Noise reduction
 Ambient cancellation
+moving average
+exponential moving average (EMA)
+dynamic filtering
+ - different for wall detection - esp front
+ - strong when stationary
+ - lighter when moving fast
+ - degedetection conveniently uses slow and fast EMS filters
 Slope and Edge detection
 Normalisation
 Linearisation
