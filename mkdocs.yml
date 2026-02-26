@@ -141,6 +141,8 @@ nav:
   - Mechanics:
     - mechanics/index.md
     - Suction Fan: mechanics/suction-fan/fan-design.md
+    - Design Example: mechanics/suction-fan/design-example.md
+    - Increasing Downforce: mechanics/suction-fan/increasing-downforce.md
       
   #   - Motors
   #     - DC motors
