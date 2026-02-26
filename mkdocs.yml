@@ -140,6 +140,8 @@ nav:
 
   - Mechanics:
     - mechanics/index.md
+    - Suction Fan: mechanics/suction-fan/fan-design.md
+      
   #   - Motors
   #     - DC motors
   #     - Stepper motors
