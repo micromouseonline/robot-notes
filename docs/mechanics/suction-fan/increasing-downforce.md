@@ -16,6 +16,14 @@ status:
 
 ## Ways to Increase Downforce
 
+
+!!! warning
+
+    Summarised responses from CoPilot
+
+    These notes are unverified and not tested
+
+
 If you’re basically capped on **speed** and **area**, the game becomes: **get more usable ΔP for the same power** and **turn more of that ΔP into effective hold‑down**.
 
 ### 1. Reduce Leakage

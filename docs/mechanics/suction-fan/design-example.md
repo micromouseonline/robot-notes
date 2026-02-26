@@ -14,6 +14,14 @@ status:
 
 ## Example Impeller Geometry for a 32 mm Centrifugal Fan
 
+
+!!! warning
+
+    Summarised responses from CoPilot
+
+    These notes are unverified and not tested
+
+
 ### 1. Core Dimensions
 - **Outer diameter (Do):** 32 mm → **outer radius (ro):** 16 mm  
 - **Eye diameter (De):** 14 mm → **inner radius (ri):** 7 mm  

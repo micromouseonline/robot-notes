@@ -13,9 +13,10 @@ status:
 # Centrifugal Fan Design Summary for a Vacuum Downforce Robot
 
 
-!!! note
+!!! warning
 
     Summarised responses from CoPilot
+
     These notes are unverified and not tested
 
 
